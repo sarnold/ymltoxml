@@ -16,15 +16,7 @@ import sys
 from optparse import OptionParser  # pylint: disable=W0402
 from pathlib import Path
 
-try:
-    from importlib_metadata import version
-except ImportError:
-    from importlib.metadata import version
-try:
-    from importlib_resources import files
-except ImportError:
-    from importlib.resources import files  # type: ignore
-
+import pkg_resources
 import xmltodict
 import yaml as yaml_loader
 from munch import Munch
@@ -62,7 +54,7 @@ def load_config(file_encoding='utf-8'):
     """
     cfgfile = Path('.ymltoxml.yaml')
     if not cfgfile.exists():
-        cfgfile = files('ymltoxml.data').joinpath('ymltoxml.yaml')
+        cfgfile = Path(pkg_resources.resource_filename(__name__, 'data/ymltoxml.yaml'))
     cfgobj = Munch.fromYAML(cfgfile.read_text(encoding=file_encoding))
 
     return cfgobj, cfgfile
@@ -257,7 +249,7 @@ def main(argv=None):
             process_inputs(filearg, popts, debug=debug)
 
 
-VERSION = version("ymltoxml")
+VERSION = pkg_resources.get_distribution('ymltoxml').version
 
 if __name__ == '__main__':
     main()

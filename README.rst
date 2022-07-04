@@ -202,9 +202,9 @@ See the following pages for more information on gitchangelog and pre-commit.
 * pre-commit-config_
 * pre-commit-usage_
 
-.. _generate-changelog:  docs/dev/generate-changelog.rst
-.. _pre-commit-config: docs/dev/pre-commit-config.rst
-.. _pre-commit-usage: docs/dev/pre-commit-usage.rst
+.. _generate-changelog:  docs/source/dev/generate-changelog.rst
+.. _pre-commit-config: docs/source/dev/pre-commit-config.rst
+.. _pre-commit-usage: docs/source/dev/pre-commit-usage.rst
 .. inclusion-marker-2
 
 You will need to install pre-commit before contributing any changes;
