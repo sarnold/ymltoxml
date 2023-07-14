@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.1.1.dev2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ymltoxml" href="api/modules.html" />
+    <link rel="prev" title="Welcome to the ymltoxml documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ymltoxml
+          </a>
+              <div class="version">
+                0.1.1.dev2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ymltoxml (and xmltoyml)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#install-with-pip">Install with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#features-and-limitations">Features and limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#local-workflow">Local workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-commit">Pre-commit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/modules.html">ymltoxml</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ymltoxml</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ymltoxml (and xmltoyml)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ymltoxml-and-xmltoyml">
+<h1>ymltoxml (and xmltoyml)<a class="headerlink" href="#ymltoxml-and-xmltoyml" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/ci.yml"><img alt="CI Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/wheels.yml"><img alt="Wheel Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/wheels.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/release.yml"><img alt="Release Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/release.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml"><img alt="Pylint Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml/badge.svg" /></a></p>
+<p><a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml"><img alt="Pylint score" src="https://raw.githubusercontent.com/sarnold/ymltoxml/badges/main/pylint-score.svg" /></a></p>
+<p><a class="reference external" href="https://github.com/sarnold/ymltoxml/releases"><img alt="GitHub tag" src="https://img.shields.io/github/v/tag/sarnold/ymltoxml?color=green&amp;include_prereleases&amp;label=latest%20release" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sarnold/ymltoxml" /></a> <a class="reference external" href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/python-3.6+-blue.svg" /></a></p>
+<p>A Python command line tool to convert between <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Markup_Language">XML</a> files and <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a> files,
+preserving attributes and comments (with minor corrections).  The default
+file encoding for both types is UTF-8 without a BOM.  The main intent is
+to support YAML-based development of custom <a class="reference external" href="https://mavlink.io/en/messages/common.html">mavlink</a> dialects.</p>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<section id="install-with-pip">
+<h3>Install with pip<a class="headerlink" href="#install-with-pip" title="Permalink to this heading"></a></h3>
+<p>This package is <em>not</em> yet published on PyPI, thus use one of the
+following to install the latest ymltoxml on any platform:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U -f https://github.com/sarnold/ymltoxml/releases/ ymltoxml
+</pre></div>
+</div>
+<p>or use this command to install a specific version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/sarnold/ymltoxml.git@0.1.0
+</pre></div>
+</div>
+<p>The full package provides the <code class="docutils literal notranslate"><span class="pre">ymltoxml.py</span></code> executable as well as
+a reference configuration file that provides defaults for all values.</p>
+<p>If you’d rather work from the source repository, it supports the common
+idiom to install it on your system in a virtual env after cloning:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m venv env
+$ source env/bin/activate
+$ pip install .
+$ ymltoxml --version
+$ ymltoxml --dump-config
+$ deactivate
+</pre></div>
+</div>
+<p>The alternative to python venv is the <code class="docutils literal notranslate"><span class="pre">tox</span></code> test driver.  If you have it
+installed already, see the example tox commands below.</p>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>The current version reads very minimal command options, and the only
+required command arguments are one or more files of a single type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ymltoxml
+Transform YAML to XML and XML to YAML.
+
+Usage:
+    ymltoxml file1.yaml file2.yaml ...
+    ymltoxml file1.xml file2.xml ...
+
+Each output file is named for the corresponding input file using
+the output extension (more options coming soon).
+</pre></div>
+</div>
+<p>The main processing tweaks for yml/xml output formatting are specified
+in the default configuration file; if you need to change something, you
+can use your own config file in the working directory; note the local
+copy must be named <code class="docutils literal notranslate"><span class="pre">.ymltoxml.yaml</span></code>.  To get a copy of the default
+configuration file, do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd path/to/work/dir/
+$ ymltoxml --dump-config &gt; .ymltoxml.yaml
+$ $EDITOR .ymltoxml.yaml
+</pre></div>
+</div>
+</section>
+<section id="features-and-limitations">
+<h3>Features and limitations<a class="headerlink" href="#features-and-limitations" title="Permalink to this heading"></a></h3>
+<p>We only test on mavlink XML message definitions, so it probably <em>will not</em>
+work at all on arbitrarily complex XML files with namespaces, etc.  The
+current round-trip is not exact, due to the following:</p>
+<ul class="simple">
+<li><p>missing encoding is added to version tag</p></li>
+<li><p>leading/trailing whitespace in text elements and comments is not preserved</p></li>
+<li><p>elements with self-closing tags are converted to full closing tags</p></li>
+<li><p>empty elements on more than one line are not preserved</p></li>
+</ul>
+<p>For the files tested (eg, mavlink) the end result is cleaner/shinier XML.</p>
+</section>
+</section>
+<section id="local-workflow">
+<h2>Local workflow<a class="headerlink" href="#local-workflow" title="Permalink to this heading"></a></h2>
+<p>This tool is intended to be part of larger workflow, ie, developing a
+custom mavlink message dialect and generating/deploying the resulting
+mavlink language interfaces.  To be more specific, for this example we
+use a mavlink-compatible component running on a micro-controller, thus
+the target language bindings are C and C++.</p>
+<p>Tool requirements for the full mavlink workflow:</p>
+<ul class="simple">
+<li><p>initially just recent pymavlink, Python, and <a class="reference external" href="https://github.com/tox-dev/tox">Tox</a></p></li>
+</ul>
+<p>Both mavlink and pymavlink require a (host) GCC toolchain for full builds,
+however, the basic workflow to generate mavlink library headers requires
+only Git, Python, and Tox.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This project uses <a class="reference external" href="https://github.com/jwodder/versioningit">versioningit</a> to generate and maintain the
+version file, which only gets included in the sdist/wheel
+packages. In a fresh clone, running any of the <a class="reference external" href="https://github.com/tox-dev/tox">tox</a> commands
+should generate the current version file.</p>
+</div>
+<section id="in-repo-workflow-with-tox">
+<h3>In-repo workflow with Tox<a class="headerlink" href="#in-repo-workflow-with-tox" title="Permalink to this heading"></a></h3>
+<p>As long as you have git and at least Python 3.6, then the “easy” dev
+workflow is to clone this repository and install Tox via your system
+package manager, eg:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo apt-get update
+$ sudo apt-get install tox
+</pre></div>
+</div>
+<p>After cloning this repository, you can run the repo checks with the
+<code class="docutils literal notranslate"><span class="pre">tox</span></code> command.  It will build a virtual python environment with
+all the dependencies and run the specified commands, eg:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sarnold/ymltoxml
+$ cd ymltoxml/
+$ tox -e py
+</pre></div>
+</div>
+<p>There are no actual unittests yet, but the above will run the base <code class="docutils literal notranslate"><span class="pre">tox</span></code>
+command against one of the mavlink dialect files. Note this will run the
+round-trip test command using the your (default) system Python; to specify
+the Python version and host OS type, run something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e py39-linux
+</pre></div>
+</div>
+<p>Full list of additional <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">style</span></code> will run flake8 style checks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">lint</span></code> will run pylint (somewhat less permissive than PEP8/flake8 checks)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">mypy</span></code> will run mypy import and type checking</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">isort</span></code> will run isort import checks</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">clean</span></code> will remove temporary test files</p></li>
+</ul>
+<p>To build/lint the api docs, use the following tox commands:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">docs</span></code> build the documentation using sphinx and the api-doc plugin</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">docs-lint</span></code> build the docs and run the sphinx link checking</p></li>
+</ul>
+</section>
+<section id="pre-commit">
+<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Permalink to this heading"></a></h3>
+<p>This repo is now <a class="reference external" href="https://pre-commit.com/index.html">pre-commit</a> enabled for python/rst source and file-type
+linting. The checks run automatically on commit and will fail the commit
+(if not clean) and perform simple file corrections.  For example, if the
+mypy check fails on commit, you must first fix any fatal errors for the
+commit to succeed. That said, pre-commit does nothing if you don’t install
+it first (both the program itself and the hooks in your local repository
+copy).</p>
+<p>You will need to install pre-commit before contributing any changes;
+installing it using your system’s package manager is recommended,
+otherwise install with pip into your usual virtual environment using
+something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo emerge pre-commit  --or--
+$ pip install pre-commit
+</pre></div>
+</div>
+<p>then install it into the repo you just cloned:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/sarnold/ymltoxml
+$ cd ymltoxml/
+$ pre-commit install
+</pre></div>
+</div>
+<p>It’s usually a good idea to update the hooks to the latest version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit autoupdate
+</pre></div>
+</div>
+<p>Most (but not all) of the pre-commit checks will make corrections for you,
+however, some will only report errors, so these you will need to correct
+manually.</p>
+<p>Automatic-fix checks include ffffff, isort, autoflake, the yaml/xml format
+checks, and the miscellaneous file fixers. If any of these fail, you can
+review the changes with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> and just add them to your commit and
+continue.</p>
+<p>If any of the mypy, bandit, or rst source checks fail, you will get a report,
+and you must fix any errors before you can continue adding/committing.</p>
+<p>To see a “replay” of any <code class="docutils literal notranslate"><span class="pre">rst</span></code> check errors, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run rst-backticks -a
+$ pre-commit run rst-directive-colons -a
+$ pre-commit run rst-inline-touching-normal -a
+</pre></div>
+</div>
+<p>To run all <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> checks manually, try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run -a
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to the ymltoxml documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api/modules.html" class="btn btn-neutral float-right" title="ymltoxml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
