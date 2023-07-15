@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to the ymltoxml documentation! &mdash; ymltoxml 0.1.1.dev2 documentation</title>
+  <title>Welcome to the ymltoxml documentation! &mdash; ymltoxml 0.1.1.dev17 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ymltoxml (and xmltoyml)" href="README.html" /> 
+    <link rel="next" title="ymltoxml (and xmltoyml)" href="readme_include.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.1.1.dev2
+                0.1.1.dev17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -46,7 +46,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_include.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/generate-changelog.html">Changelog Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-usage.html">Using Pre-Commit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">ymltoxml</a></li>
 </ul>
 
@@ -79,36 +82,49 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">ymltoxml (and xmltoyml)</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.html#quick-start">Quick Start</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#install-with-pip">Install with pip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#features-and-limitations">Features and limitations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme_include.html">ymltoxml (and xmltoyml)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="readme_include.html#quick-start">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="readme_include.html#install-with-pip">Install with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_include.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="readme_include.html#features-and-limitations">Features and limitations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#local-workflow">Local workflow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#pre-commit">Pre-commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme_include.html#local-workflow">Local workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="readme_include.html#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="readme_include.html#making-changes-contributing">Making Changes &amp; Contributing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/generate-changelog.html">Changelog Generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/generate-changelog.html#git-tags">Git Tags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/generate-changelog.html#sections">Sections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/pre-commit-config.html#some-hook-descriptions">Some Hook Descriptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#end-of-file-fixer"><code class="docutils literal notranslate"><span class="pre">end-of-file-fixer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#trailing-whitespace"><code class="docutils literal notranslate"><span class="pre">trailing-whitespace</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#mixed-line-ending"><code class="docutils literal notranslate"><span class="pre">mixed-line-ending</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#check-yaml"><code class="docutils literal notranslate"><span class="pre">check-yaml</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#beautysh"><code class="docutils literal notranslate"><span class="pre">beautysh</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dev/pre-commit-config.html#doc-formatting-rst-files">Doc formatting (.rst files)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-usage.html">Using Pre-Commit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dev/pre-commit-usage.html#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/pre-commit-usage.html#automatic-usage">Automatic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev/pre-commit-usage.html#manual-usage">Manual Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">ymltoxml</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/ymltoxml.html">ymltoxml package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/ymltoxml.html#submodules">Submodules</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="api/ymltoxml.ymltoxml.html">ymltoxml.ymltoxml module</a><ul>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.StrYAML"><code class="docutils literal notranslate"><span class="pre">StrYAML</span></code></a><ul>
-<li class="toctree-l6"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.StrYAML.dump"><code class="docutils literal notranslate"><span class="pre">StrYAML.dump()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.get_input_type"><code class="docutils literal notranslate"><span class="pre">get_input_type()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.load_config"><code class="docutils literal notranslate"><span class="pre">load_config()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.process_inputs"><code class="docutils literal notranslate"><span class="pre">process_inputs()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.restore_xml_comments"><code class="docutils literal notranslate"><span class="pre">restore_xml_comments()</span></code></a></li>
-<li class="toctree-l5"><a class="reference internal" href="api/ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.transform_data"><code class="docutils literal notranslate"><span class="pre">transform_data()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l4"><a class="reference internal" href="api/ymltoxml.utils.html">ymltoxml.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ymltoxml.yasort.html">ymltoxml.yasort module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/ymltoxml.ymltoxml.html">ymltoxml.ymltoxml module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/ymltoxml.html#module-ymltoxml">Module contents</a></li>
@@ -132,7 +148,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="README.html" class="btn btn-neutral float-right" title="ymltoxml (and xmltoyml)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="readme_include.html" class="btn btn-neutral float-right" title="ymltoxml (and xmltoyml)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

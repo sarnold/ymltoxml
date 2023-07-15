@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml &mdash; ymltoxml 0.1.1.dev2 documentation</title>
+  <title>ymltoxml &mdash; ymltoxml 0.1.1.dev17 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -20,7 +20,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ymltoxml package" href="ymltoxml.html" />
-    <link rel="prev" title="ymltoxml (and xmltoyml)" href="../README.html" /> 
+    <link rel="prev" title="Using Pre-Commit" href="../dev/pre-commit-usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.1.1.dev2
+                0.1.1.dev17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,7 +47,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../README.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/generate-changelog.html">Changelog Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ymltoxml</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a></li>
 </ul>
@@ -84,13 +87,23 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="ymltoxml.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ymltoxml.utils.html">ymltoxml.utils module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html#ymltoxml.utils.StrYAML"><code class="docutils literal notranslate"><span class="pre">StrYAML</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html#ymltoxml.utils.load_config"><code class="docutils literal notranslate"><span class="pre">load_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html#ymltoxml.utils.restore_xml_comments"><code class="docutils literal notranslate"><span class="pre">restore_xml_comments()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ymltoxml.yasort.html">ymltoxml.yasort module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html#ymltoxml.yasort.get_input_yaml"><code class="docutils literal notranslate"><span class="pre">get_input_yaml()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html#ymltoxml.yasort.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html#ymltoxml.yasort.process_inputs"><code class="docutils literal notranslate"><span class="pre">process_inputs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html#ymltoxml.yasort.sort_list_data"><code class="docutils literal notranslate"><span class="pre">sort_list_data()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="ymltoxml.ymltoxml.html">ymltoxml.ymltoxml module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.StrYAML"><code class="docutils literal notranslate"><span class="pre">StrYAML</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.get_input_type"><code class="docutils literal notranslate"><span class="pre">get_input_type()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.load_config"><code class="docutils literal notranslate"><span class="pre">load_config()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.process_inputs"><code class="docutils literal notranslate"><span class="pre">process_inputs()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.restore_xml_comments"><code class="docutils literal notranslate"><span class="pre">restore_xml_comments()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html#ymltoxml.ymltoxml.transform_data"><code class="docutils literal notranslate"><span class="pre">transform_data()</span></code></a></li>
 </ul>
 </li>
@@ -107,7 +120,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../README.html" class="btn btn-neutral float-left" title="ymltoxml (and xmltoyml)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dev/pre-commit-usage.html" class="btn btn-neutral float-left" title="Using Pre-Commit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="ymltoxml.html" class="btn btn-neutral float-right" title="ymltoxml package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

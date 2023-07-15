@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.1.1.dev2 documentation</title>
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.1.1.dev17 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ymltoxml" href="api/modules.html" />
+    <link rel="next" title="Changelog Generation" href="dev/generate-changelog.html" />
     <link rel="prev" title="Welcome to the ymltoxml documentation!" href="index.html" /> 
 </head>
 
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.1.1.dev2
+                0.1.1.dev17
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -56,11 +56,14 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#local-workflow">Local workflow</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pre-commit">Pre-commit</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#making-changes-contributing">Making Changes &amp; Contributing</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="dev/generate-changelog.html">Changelog Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-usage.html">Using Pre-Commit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">ymltoxml</a></li>
 </ul>
 
@@ -80,7 +83,7 @@
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">ymltoxml (and xmltoyml)</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/README.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/readme_include.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -101,17 +104,17 @@ to support YAML-based development of custom <a class="reference external" href="
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
 <section id="install-with-pip">
 <h3>Install with pip<a class="headerlink" href="#install-with-pip" title="Permalink to this heading"></a></h3>
-<p>This package is <em>not</em> yet published on PyPI, thus use one of the
-following to install the latest ymltoxml on any platform:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U -f https://github.com/sarnold/ymltoxml/releases/ ymltoxml
+<p>This package is <em>not</em> yet published on PyPI, thus use one of the following
+to install ymltoxml on any platform. Install from the main branch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ https://github.com/sarnold/ymltoxml/archive/refs/heads/main.tar.gz
 </pre></div>
 </div>
-<p>or use this command to install a specific version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/sarnold/ymltoxml.git@0.1.0
+<p>or use this command to install a specific release version:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install https://github.com/sarnold/ymltoxml/releases/download/0.1.0/ymltoxml-0.1.0.tar.gz
 </pre></div>
 </div>
 <p>The full package provides the <code class="docutils literal notranslate"><span class="pre">ymltoxml.py</span></code> executable as well as
-a reference configuration file that provides defaults for all values.</p>
+a reference configuration file with defaults for all values.</p>
 <p>If you’d rather work from the source repository, it supports the common
 idiom to install it on your system in a virtual env after cloning:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python3 -m venv env
@@ -127,19 +130,40 @@ installed already, see the example tox commands below.</p>
 </section>
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
-<p>The current version reads very minimal command options, and the only
-required command arguments are one or more files of a single type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ymltoxml
+<p>The current version supports minimal command options; if no options are
+provided, the only required arguments are one or more files of a single
+type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(py) user@host ymltoxml (main) $ ymltoxml
+Usage: ymltoxml [options] arg1 arg2
+
 Transform YAML to XML and XML to YAML.
 
-Usage:
-    ymltoxml file1.yaml file2.yaml ...
-    ymltoxml file1.xml file2.xml ...
-
-Each output file is named for the corresponding input file using
-the output extension (more options coming soon).
+Options:
+  --version             show program&#39;s version number and exit
+  -h, --help            show this help message and exit
+  -i FILE, --infile=FILE
+                        Path to input file (use with --outfile)
+  -o FILE, --outfile=FILE
+                        Path to output file (use with --infile)
+  -v, --verbose         Display more processing info
+  -d, --dump-config     Dump default configuration file to stdout
 </pre></div>
 </div>
+<ul class="simple">
+<li><p>for processing individual files/paths, use the <code class="docutils literal notranslate"><span class="pre">--infile</span></code> option,
+either with or without the <code class="docutils literal notranslate"><span class="pre">--outfile</span></code> option</p></li>
+<li><p>for processing multiple files, pass all files as arguments (paths
+can be relative or absolute)</p>
+<ul>
+<li><p>when passing input files as arguments, the output file names/paths
+are the same as the input files but with the output extension</p></li>
+</ul>
+</li>
+</ul>
+<p>By default it will process one more input files as command args, typically
+in the current directory, however, the <code class="docutils literal notranslate"><span class="pre">--infile</span></code> option will only
+process a single file path, optionally with an output file path, with no
+extra (file) arguments.</p>
 <p>The main processing tweaks for yml/xml output formatting are specified
 in the default configuration file; if you need to change something, you
 can use your own config file in the working directory; note the local
@@ -163,6 +187,8 @@ current round-trip is not exact, due to the following:</p>
 <li><p>empty elements on more than one line are not preserved</p></li>
 </ul>
 <p>For the files tested (eg, mavlink) the end result is cleaner/shinier XML.</p>
+<p>An additional helper script is now provided for sorting large (YAML) lists.
+The current parent/sort keys are hard-coded for SCAP product files.</p>
 </section>
 </section>
 <section id="local-workflow">
@@ -212,6 +238,7 @@ the Python version and host OS type, run something like:</p>
 </div>
 <p>Full list of additional <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">dev</span></code> pip “developer” install</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">style</span></code> will run flake8 style checks</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">lint</span></code> will run pylint (somewhat less permissive than PEP8/flake8 checks)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">mypy</span></code> will run mypy import and type checking</p></li>
@@ -224,15 +251,21 @@ the Python version and host OS type, run something like:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">docs-lint</span></code> build the docs and run the sphinx link checking</p></li>
 </ul>
 </section>
-<section id="pre-commit">
-<h3>Pre-commit<a class="headerlink" href="#pre-commit" title="Permalink to this heading"></a></h3>
-<p>This repo is now <a class="reference external" href="https://pre-commit.com/index.html">pre-commit</a> enabled for python/rst source and file-type
-linting. The checks run automatically on commit and will fail the commit
-(if not clean) and perform simple file corrections.  For example, if the
-mypy check fails on commit, you must first fix any fatal errors for the
-commit to succeed. That said, pre-commit does nothing if you don’t install
-it first (both the program itself and the hooks in your local repository
-copy).</p>
+</section>
+<section id="making-changes-contributing">
+<h2>Making Changes &amp; Contributing<a class="headerlink" href="#making-changes-contributing" title="Permalink to this heading"></a></h2>
+<p>We use the <a class="reference external" href="https://github.com/sarnold/gitchangelog-action">gitchangelog</a> action to generate our github Release page, as
+well as the gitchangelog message format to help it categorize/filter
+commits for a tidier release page. Please use the appropriate ACTION
+modifiers in any Pull Requests.</p>
+<p>This repo is also <a class="reference external" href="http://pre-commit.com/">pre-commit</a> enabled for various linting and format
+checks.  The checks run automatically on commit and will fail the
+commit (if not clean) with some checks performing simple file corrections.</p>
+<p>If other checks fail on commit, the failure display should explain the error
+types and line numbers. Note you must fix any fatal errors for the
+commit to succeed; some errors should be fixed automatically (use
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> to review any changes).</p>
+<p>See the following pages for more information on gitchangelog and pre-commit.</p>
 <p>You will need to install pre-commit before contributing any changes;
 installing it using your system’s package manager is recommended,
 otherwise install with pip into your usual virtual environment using
@@ -248,29 +281,9 @@ $ pre-commit install
 </pre></div>
 </div>
 <p>It’s usually a good idea to update the hooks to the latest version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit autoupdate
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">autoupdate</span>
 </pre></div>
 </div>
-<p>Most (but not all) of the pre-commit checks will make corrections for you,
-however, some will only report errors, so these you will need to correct
-manually.</p>
-<p>Automatic-fix checks include ffffff, isort, autoflake, the yaml/xml format
-checks, and the miscellaneous file fixers. If any of these fail, you can
-review the changes with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> and just add them to your commit and
-continue.</p>
-<p>If any of the mypy, bandit, or rst source checks fail, you will get a report,
-and you must fix any errors before you can continue adding/committing.</p>
-<p>To see a “replay” of any <code class="docutils literal notranslate"><span class="pre">rst</span></code> check errors, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run rst-backticks -a
-$ pre-commit run rst-directive-colons -a
-$ pre-commit run rst-inline-touching-normal -a
-</pre></div>
-</div>
-<p>To run all <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> checks manually, try:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pre-commit run -a
-</pre></div>
-</div>
-</section>
 </section>
 </section>
 
@@ -279,7 +292,7 @@ $ pre-commit run rst-inline-touching-normal -a
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Welcome to the ymltoxml documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="api/modules.html" class="btn btn-neutral float-right" title="ymltoxml" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="dev/generate-changelog.html" class="btn btn-neutral float-right" title="Changelog Generation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

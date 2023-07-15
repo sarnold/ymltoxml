@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.ymltoxml module &mdash; ymltoxml 0.1.1.dev17 documentation</title>
+  <title>ymltoxml.yasort module &mdash; ymltoxml 0.1.1.dev17 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,7 +19,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="ymltoxml.yasort module" href="ymltoxml.yasort.html" /> 
+    <link rel="next" title="ymltoxml.ymltoxml module" href="ymltoxml.ymltoxml.html" />
+    <link rel="prev" title="ymltoxml.utils module" href="ymltoxml.utils.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -54,8 +55,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="ymltoxml.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html">ymltoxml.utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html">ymltoxml.yasort module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.ymltoxml module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.yasort module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html">ymltoxml.ymltoxml module</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ymltoxml.html#module-ymltoxml">Module contents</a></li>
@@ -81,9 +82,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">ymltoxml</a></li>
           <li class="breadcrumb-item"><a href="ymltoxml.html">ymltoxml package</a></li>
-      <li class="breadcrumb-item active">ymltoxml.ymltoxml module</li>
+      <li class="breadcrumb-item active">ymltoxml.yasort module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/ymltoxml.ymltoxml.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ymltoxml.yasort.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -91,16 +92,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ymltoxml.ymltoxml">
-<span id="ymltoxml-ymltoxml-module"></span><h1>ymltoxml.ymltoxml module<a class="headerlink" href="#module-ymltoxml.ymltoxml" title="Permalink to this heading"></a></h1>
-<p>Transform mavlink-style xml files to/from xml and yaml. Note yaml
-format uses custom markup for XML attributes and comments. See the
-xmltodict docs for details.</p>
+  <section id="module-ymltoxml.yasort">
+<span id="ymltoxml-yasort-module"></span><h1>ymltoxml.yasort module<a class="headerlink" href="#module-ymltoxml.yasort" title="Permalink to this heading"></a></h1>
+<p>Console script for sorting YAML lists.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.ymltoxml.get_input_type">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.ymltoxml.</span></span><span class="sig-name descname"><span class="pre">get_input_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/ymltoxml.html#get_input_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.ymltoxml.get_input_type" title="Permalink to this definition"></a></dt>
-<dd><p>Check filename extension, open and process by file type, return type
-flag and data from appropriate loader.</p>
+<dt class="sig sig-object py" id="ymltoxml.yasort.get_input_yaml">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">get_input_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#get_input_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.get_input_yaml" title="Permalink to this definition"></a></dt>
+<dd><p>Check filename extension, open and munchify contents, return data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -108,56 +106,55 @@ flag and data from appropriate loader.</p>
 <li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return tuple<span class="colon">:</span></dt>
-<dd class="field-even"><p>destination type flag and file data</p>
+<dt class="field-even">Return data_in<span class="colon">:</span></dt>
+<dd class="field-even"><p>file data</p>
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>FileTypeError</strong> – if the input file is not xml or yml</p>
+<dd class="field-odd"><p><strong>FileTypeError</strong> – if the input file is not yaml</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.ymltoxml.main">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.ymltoxml.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/ymltoxml.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.ymltoxml.main" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="ymltoxml.yasort.main">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.main" title="Permalink to this definition"></a></dt>
 <dd><p>Transform YAML to XML and XML to YAML.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.ymltoxml.process_inputs">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.ymltoxml.</span></span><span class="sig-name descname"><span class="pre">process_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/ymltoxml.html#process_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.ymltoxml.process_inputs" title="Permalink to this definition"></a></dt>
-<dd><p>Handle file arguments and process them.</p>
+<dt class="sig sig-object py" id="ymltoxml.yasort.process_inputs">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">process_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#process_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.process_inputs" title="Permalink to this definition"></a></dt>
+<dd><p>Handle file arguments and process them. Write new (sorted) files to
+the ‘sorted-out/’ directory in the current working directory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filepath</strong> – filename as Path obj</p></li>
 <li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
-<li><p><strong>outpath</strong> (<em>str</em>) – output file name/path if provided</p></li>
 <li><p><strong>debug</strong> – enable extra processing info</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return None<span class="colon">:</span></dt>
 <dd class="field-even"><p></p></dd>
-<dt class="field-odd">Handlles FileTypeError<span class="colon">:</span></dt>
-<dd class="field-odd"><p>input file is not xml or yml</p>
+<dt class="field-odd">Handles FileTypeError<span class="colon">:</span></dt>
+<dd class="field-odd"><p>if input file is not yml</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.ymltoxml.transform_data">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.ymltoxml.</span></span><span class="sig-name descname"><span class="pre">transform_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_xml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/ymltoxml.html#transform_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.ymltoxml.transform_data" title="Permalink to this definition"></a></dt>
-<dd><p>Produce output data from dict-ish object using <code class="docutils literal notranslate"><span class="pre">direction</span></code>.</p>
+<dt class="sig sig-object py" id="ymltoxml.yasort.sort_list_data">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">sort_list_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#sort_list_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.sort_list_data" title="Permalink to this definition"></a></dt>
+<dd><p>Produce output data from dict-ish object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>payload</strong> – input from xmltodict or yaml loader.</p></li>
+<li><p><strong>payload</strong> – Munch obj representing YAML input data</p></li>
 <li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
-<li><p><strong>to_xml</strong> (<em>bool</em>) – output direction, ie, if to_xml is True then output is XML.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return res<span class="colon">:</span></dt>
-<dd class="field-even"><p>output file data in specified format.</p>
+<dd class="field-even"><p>yaml dump of sorted input</p>
 </dd>
 </dl>
 </dd></dl>
@@ -168,7 +165,8 @@ flag and data from appropriate loader.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ymltoxml.yasort.html" class="btn btn-neutral float-left" title="ymltoxml.yasort module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ymltoxml.utils.html" class="btn btn-neutral float-left" title="ymltoxml.utils module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ymltoxml.ymltoxml.html" class="btn btn-neutral float-right" title="ymltoxml.ymltoxml module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

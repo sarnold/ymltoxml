@@ -2,10 +2,13 @@ Welcome to the ymltoxml documentation!
 ======================================
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 4
    :caption: Contents:
 
-   README.rst
+   readme_include
+   dev/generate-changelog
+   dev/pre-commit-config
+   dev/pre-commit-usage
    api/modules
 
 
