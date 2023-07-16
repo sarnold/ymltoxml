@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.1.1.dev17 documentation</title>
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.1.dev2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.1.1.dev17
+                0.2.1.dev2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -54,7 +54,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#features-and-limitations">Features and limitations</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#local-workflow">Local workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dev-workflows">Dev workflows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mavlink-support">Mavlink support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scap-support">SCAP support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
 </ul>
 </li>
@@ -110,7 +112,7 @@ to install ymltoxml on any platform. Install from the main branch:</p>
 </pre></div>
 </div>
 <p>or use this command to install a specific release version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install https://github.com/sarnold/ymltoxml/releases/download/0.1.0/ymltoxml-0.1.0.tar.gz
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install https://github.com/sarnold/ymltoxml/releases/download/0.2.0/ymltoxml-0.2.0.tar.gz
 </pre></div>
 </div>
 <p>The full package provides the <code class="docutils literal notranslate"><span class="pre">ymltoxml.py</span></code> executable as well as
@@ -133,7 +135,7 @@ installed already, see the example tox commands below.</p>
 <p>The current version supports minimal command options; if no options are
 provided, the only required arguments are one or more files of a single
 type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(py) user@host ymltoxml (main) $ ymltoxml
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ymltoxml
 Usage: ymltoxml [options] arg1 arg2
 
 Transform YAML to XML and XML to YAML.
@@ -174,6 +176,32 @@ $ ymltoxml --dump-config &gt; .ymltoxml.yaml
 $ $EDITOR .ymltoxml.yaml
 </pre></div>
 </div>
+<p>An additional helper script is now provided for sorting large (YAML) lists.
+The new <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script uses its own configuration file, creatively named
+<code class="docutils literal notranslate"><span class="pre">yasort.yaml</span></code>. The above applies equally to this new config file.</p>
+<dl>
+<dt>::</dt><dd><p>$ yasort -h
+Usage: yasort [options] arg1 arg2</p>
+<p>Sort YAML lists and write new files.</p>
+<dl>
+<dt>Options:</dt><dd><dl class="option-list">
+<dt><kbd><span class="option">--version</span></kbd></dt>
+<dd><p>show program’s version number and exit</p>
+</dd>
+<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
+<dd><p>show this help message and exit</p>
+</dd>
+<dt><kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></dt>
+<dd><p>Display more processing info</p>
+</dd>
+<dt><kbd><span class="option">-d</span>, <span class="option">--dump-config</span></kbd></dt>
+<dd><p>Dump default configuration file to stdout</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 <section id="features-and-limitations">
 <h3>Features and limitations<a class="headerlink" href="#features-and-limitations" title="Permalink to this heading"></a></h3>
@@ -187,14 +215,23 @@ current round-trip is not exact, due to the following:</p>
 <li><p>empty elements on more than one line are not preserved</p></li>
 </ul>
 <p>For the files tested (eg, mavlink) the end result is cleaner/shinier XML.</p>
-<p>An additional helper script is now provided for sorting large (YAML) lists.
-The current parent/sort keys are hard-coded for SCAP product files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This project uses <a class="reference external" href="https://github.com/jwodder/versioningit">versioningit</a> to generate and maintain the
+version file, which only gets included in the sdist/wheel
+packages. In a fresh clone, running any of the <a class="reference external" href="https://github.com/tox-dev/tox">tox</a> commands
+should generate the current version file.</p>
+</div>
 </section>
 </section>
-<section id="local-workflow">
-<h2>Local workflow<a class="headerlink" href="#local-workflow" title="Permalink to this heading"></a></h2>
-<p>This tool is intended to be part of larger workflow, ie, developing a
-custom mavlink message dialect and generating/deploying the resulting
+<section id="dev-workflows">
+<h2>Dev workflows<a class="headerlink" href="#dev-workflows" title="Permalink to this heading"></a></h2>
+<p>The following covers two types of workflows, one for tool usage in other
+(external) projects, and one for (internal) tool development.</p>
+<section id="mavlink-support">
+<h3>Mavlink support<a class="headerlink" href="#mavlink-support" title="Permalink to this heading"></a></h3>
+<p>The ymltoxml tool is intended to be part of larger workflow, ie, developing
+custom mavlink message dialects and generating/deploying the resulting
 mavlink language interfaces.  To be more specific, for this example we
 use a mavlink-compatible component running on a micro-controller, thus
 the target language bindings are C and C++.</p>
@@ -205,13 +242,37 @@ the target language bindings are C and C++.</p>
 <p>Both mavlink and pymavlink require a (host) GCC toolchain for full builds,
 however, the basic workflow to generate mavlink library headers requires
 only Git, Python, and Tox.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This project uses <a class="reference external" href="https://github.com/jwodder/versioningit">versioningit</a> to generate and maintain the
-version file, which only gets included in the sdist/wheel
-packages. In a fresh clone, running any of the <a class="reference external" href="https://github.com/tox-dev/tox">tox</a> commands
-should generate the current version file.</p>
-</div>
+</section>
+<section id="scap-support">
+<h3>SCAP support<a class="headerlink" href="#scap-support" title="Permalink to this heading"></a></h3>
+<p>The yasort tool is also intended to be part of a larger workflow, mainly
+working with SCAP content, ie, the scap-security-guide source files (or
+just <a class="reference external" href="https://complianceascode.readthedocs.io/en/latest/">content</a>). It is currently used to sort profiles with large numbers
+of rules to make it easier to visually diff and spot duplicates, etc.</p>
+<p>The configuration file defaults are based on existing yaml structure, but
+you are free to change them for another use case. To adjust how the sorting
+works, make a local config file (see above) and edit as needed the following
+options:</p>
+<dl class="field-list simple">
+<dt class="field-odd">output_dirname<span class="colon">:</span></dt>
+<dd class="field-odd"><p>directory for output file(s)</p>
+</dd>
+<dt class="field-even">default_parent_key<span class="colon">:</span></dt>
+<dd class="field-even"><p>parent key if sort target is sublist</p>
+</dd>
+<dt class="field-odd">default_sort_key<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the key you want to sort</p>
+</dd>
+<dt class="field-even">has_parent_key<span class="colon">:</span></dt>
+<dd class="field-even"><p>set true if sorting a sublist</p>
+</dd>
+<dt class="field-odd">default_yml_ext<span class="colon">:</span></dt>
+<dd class="field-odd"><p>change the output file extension</p>
+</dd>
+</dl>
+<p>The rest of the options are for YAML formatting/flow style (see the <a class="reference external" href="https://yaml.readthedocs.io/en/latest/">ruamel</a>
+documetation for formatting details)</p>
+</section>
 <section id="in-repo-workflow-with-tox">
 <h3>In-repo workflow with Tox<a class="headerlink" href="#in-repo-workflow-with-tox" title="Permalink to this heading"></a></h3>
 <p>As long as you have git and at least Python 3.6, then the “easy” dev
