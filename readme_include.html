@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.2.dev13+g2c42e21 documentation</title>
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.2.dev16+g0b48ab6 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -13,7 +13,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=c7bf8b25"></script>
+        <script src="_static/documentation_options.js?v=76044039"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -67,6 +67,7 @@
 <li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-usage.html">Using Pre-Commit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">ymltoxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
 </ul>
 
         </div>
@@ -137,19 +138,29 @@ installed already, see the example tox commands below.</p>
 provided, the only required arguments are one or more files of a single
 type:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ymltoxml
-Usage: ymltoxml [options] arg1 arg2
+usage: ymltoxml [-h] [--version] [-v] [-d] [-s] [-i [FILE]] [-o [FILE]]
+                [FILE ...]
 
-Transform YAML to XML and XML to YAML.
+Transform YAML to XML and XML to YAML
 
-Options:
-  --version             show program&#39;s version number and exit
+positional arguments:
+  FILE                  Process input file(s) to target extension (default:
+                        None)
+
+options:
   -h, --help            show this help message and exit
-  -i FILE, --infile=FILE
-                        Path to input file (use with --outfile)
-  -o FILE, --outfile=FILE
-                        Path to output file (use with --infile)
-  -v, --verbose         Display more processing info
-  -d, --dump-config     Dump default configuration file to stdout
+  --version             show program&#39;s version number and exit
+  -v, --verbose         Display more processing info (default: False)
+  -d, --dump-config     Dump default configuration file to stdout (default:
+                        False)
+  -s, --save-config     save active config to default filename (.ymltoxml.yml)
+                        and exit (default: False)
+  -i [FILE], --infile [FILE]
+                        Path to single input file (use with --outfile)
+                        (default: None)
+  -o [FILE], --outfile [FILE]
+                        Path to single output file (use with --infile)
+                        (default: None)
 </pre></div>
 </div>
 <ul class="simple">
@@ -180,29 +191,25 @@ $ $EDITOR .ymltoxml.yaml
 <p>An additional helper script is now provided for sorting large (YAML) lists.
 The new <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script uses its own configuration file, creatively named
 <code class="docutils literal notranslate"><span class="pre">yasort.yaml</span></code>. The above applies equally to this new config file.</p>
-<dl>
-<dt>::</dt><dd><p>$ yasort -h
-Usage: yasort [options] arg1 arg2</p>
-<p>Sort YAML lists and write new files.</p>
-<dl>
-<dt>Options:</dt><dd><dl class="option-list">
-<dt><kbd><span class="option">--version</span></kbd></dt>
-<dd><p>show program’s version number and exit</p>
-</dd>
-<dt><kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></dt>
-<dd><p>show this help message and exit</p>
-</dd>
-<dt><kbd><span class="option">-v</span>, <span class="option">--verbose</span></kbd></dt>
-<dd><p>Display more processing info</p>
-</dd>
-<dt><kbd><span class="option">-d</span>, <span class="option">--dump-config</span></kbd></dt>
-<dd><p>Dump default configuration file to stdout</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yasort
+usage: yasort [-h] [--version] [-v] [-d] [-s] [FILE ...]
+
+Sort YAML lists and write new files.
+
+positional arguments:
+  FILE               Process input file(s) to target directory (default:
+                     None)
+
+options:
+  -h, --help         show this help message and exit
+  --version          show program&#39;s version number and exit
+  -v, --verbose      Display more processing info (default: False)
+  -d, --dump-config  Dump default configuration file to stdout (default:
+                     False)
+  -s, --save-config  save active config to default filename (.yasort.yml) and
+                     exit (default: False)
+</pre></div>
+</div>
 </section>
 <section id="features-and-limitations">
 <h3>Features and limitations<a class="headerlink" href="#features-and-limitations" title="Link to this heading"></a></h3>
@@ -284,15 +291,14 @@ $ cd ymltoxml/
 $ tox -e py
 </pre></div>
 </div>
-<p>There are no actual unittests yet, but the above will run the base <code class="docutils literal notranslate"><span class="pre">tox</span></code>
-command against one of the mavlink dialect files. Note this will run the
-round-trip test command using the your (default) system Python; to specify
-the Python version and host OS type, run something like:</p>
+<p>The above will run the tests using your (default) system Python;
+to specify the Python version and host OS type, run something like:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ tox -e py39-linux
 </pre></div>
 </div>
-<p>Full list of additional <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands:</p>
+<p>Additional <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">conv</span></code> round-trip conversion test on mavlink dialect</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">dev</span></code> pip “developer” install</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">style</span></code> will run flake8 style checks</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">lint</span></code> will run pylint (somewhat less permissive than PEP8/flake8 checks)</p></li>
