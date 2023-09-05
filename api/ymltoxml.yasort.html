@@ -4,18 +4,18 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.yasort module &mdash; ymltoxml 0.2.1.dev3 documentation</title>
+  <title>ymltoxml.yasort module &mdash; ymltoxml 0.2.2.dev12+ga95b52b documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=823b7d79"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.2.1.dev3
+                0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -93,12 +93,14 @@
            <div itemprop="articleBody">
              
   <section id="module-ymltoxml.yasort">
-<span id="ymltoxml-yasort-module"></span><h1>ymltoxml.yasort module<a class="headerlink" href="#module-ymltoxml.yasort" title="Permalink to this heading"></a></h1>
+<span id="ymltoxml-yasort-module"></span><h1>ymltoxml.yasort module<a class="headerlink" href="#module-ymltoxml.yasort" title="Link to this heading"></a></h1>
 <p>Console script for sorting YAML lists.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.yasort.get_input_yaml">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">get_input_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#get_input_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.get_input_yaml" title="Permalink to this definition"></a></dt>
-<dd><p>Check filename extension, open and munchify contents, return data.</p>
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">get_input_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#get_input_yaml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.get_input_yaml" title="Link to this definition"></a></dt>
+<dd><p>Check filename extension, open and munge the contents, return data
+(where in this context we “munge” the curly braces to make it valid
+YAML).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -117,13 +119,13 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.yasort.main">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.main" title="Permalink to this definition"></a></dt>
-<dd><p>Read/write SSG YAML files with sorted rules.</p>
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.main" title="Link to this definition"></a></dt>
+<dd><p>Read/write YAML files with sorted list(s).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.yasort.process_inputs">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">process_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#process_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.process_inputs" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">process_inputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#process_inputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.process_inputs" title="Link to this definition"></a></dt>
 <dd><p>Handle file arguments and process them. Write new (sorted) files to
 the ‘sorted-out/’ directory in the current working directory.</p>
 <dl class="field-list simple">
@@ -144,13 +146,13 @@ the ‘sorted-out/’ directory in the current working directory.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.yasort.sort_list_data">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">sort_list_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#sort_list_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.sort_list_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.yasort.</span></span><span class="sig-name descname"><span class="pre">sort_list_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/yasort.html#sort_list_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.yasort.sort_list_data" title="Link to this definition"></a></dt>
 <dd><p>Set YAML formatting and sort keys from config, produce output data
 from input dict-ish object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>payload</strong> – Munch obj representing YAML input data</p></li>
+<li><p><strong>payload</strong> – Dict obj representing YAML input data</p></li>
 <li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
 </ul>
 </dd>
@@ -173,7 +175,7 @@ from input dict-ish object.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

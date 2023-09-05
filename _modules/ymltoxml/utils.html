@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.utils &mdash; ymltoxml 0.2.1.dev3 documentation</title>
+  <title>ymltoxml.utils &mdash; ymltoxml 0.2.2.dev12+ga95b52b documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=823b7d79"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -32,7 +32,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.2.1.dev3
+                0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -76,10 +76,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for ymltoxml.utils</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Shared utility code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
@@ -87,10 +87,17 @@
 <span class="kn">from</span> <span class="nn">ruamel.yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
 <span class="kn">from</span> <span class="nn">ruamel.yaml.compat</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">importlib_metadata</span> <span class="kn">import</span> <span class="n">version</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">version</span>
+
 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">importlib_resources</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
+
+<span class="n">VERSION</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s1">&#39;ymltoxml&#39;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">FileTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -99,19 +106,27 @@
     <span class="vm">__module__</span> <span class="o">=</span> <span class="ne">Exception</span><span class="o">.</span><span class="vm">__module__</span>
 
 
-<div class="viewcode-block" id="StrYAML"><a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML">[docs]</a><span class="k">class</span> <span class="nc">StrYAML</span><span class="p">(</span><span class="n">YAML</span><span class="p">):</span>
+<div class="viewcode-block" id="StrYAML">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML">[docs]</a>
+<span class="k">class</span> <span class="nc">StrYAML</span><span class="p">(</span><span class="n">YAML</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    New API likes dumping straight to file/stdout, so we subclass and</span>
 <span class="sd">    create &#39;inefficient&#39; custom string dumper.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="StrYAML.dump"><a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+<div class="viewcode-block" id="StrYAML.dump">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML.dump">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
         <span class="n">YAML</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div></div>
+        <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
+</div>
 
 
-<div class="viewcode-block" id="load_config"><a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.load_config">[docs]</a><span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">yasort</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="load_config">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.load_config">[docs]</a>
+<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">yasort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load yaml configuration file and munchify the data. If local file is</span>
 <span class="sd">    not found in current directory, the default will be loaded.</span>
@@ -124,16 +139,44 @@
     <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;ymltoxml&#39;</span>
     <span class="k">if</span> <span class="n">yasort</span><span class="p">:</span>
         <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;yasort&#39;</span>
+    <span class="n">defconfig</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yml&#39;</span><span class="p">)</span>
 
-    <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
+    <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">defconfig</span> <span class="k">if</span> <span class="n">defconfig</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">cfgfile</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;ymltoxml.data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using config: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">cfgfile</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">cfgobj</span> <span class="o">=</span> <span class="n">Munch</span><span class="o">.</span><span class="n">fromYAML</span><span class="p">(</span><span class="n">cfgfile</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">file_encoding</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">cfgobj</span><span class="p">,</span> <span class="n">cfgfile</span></div>
 
 
-<div class="viewcode-block" id="restore_xml_comments"><a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.restore_xml_comments">[docs]</a><span class="k">def</span> <span class="nf">restore_xml_comments</span><span class="p">(</span><span class="n">xmls</span><span class="p">):</span>
+
+<div class="viewcode-block" id="replace_angles">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.replace_angles">[docs]</a>
+<span class="k">def</span> <span class="nf">replace_angles</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace angle bracket with original curly brace.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s&lt;{{\s&#39;</span><span class="p">,</span> <span class="s1">&#39; {{{ &#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\}}&gt;\s&#39;</span><span class="p">,</span> <span class="s1">&#39;}}} &#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="replace_curlys">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.replace_curlys">[docs]</a>
+<span class="k">def</span> <span class="nf">replace_curlys</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace original outside curly brace with angle bracket.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\s{{{\s&#39;</span><span class="p">,</span> <span class="s1">&#39; &lt;{{ &#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\}}}\s&#39;</span><span class="p">,</span> <span class="s1">&#39;}}&gt; &#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="restore_xml_comments">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.restore_xml_comments">[docs]</a>
+<span class="k">def</span> <span class="nf">restore_xml_comments</span><span class="p">(</span><span class="n">xmls</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn tagged comment elements back into xml comments.</span>
 
@@ -145,6 +188,34 @@
     <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="p">((</span><span class="s2">&quot;&lt;#comment&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;!-- &quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;&lt;/#comment&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot; --&gt;&quot;</span><span class="p">)):</span>
         <span class="n">xmls</span> <span class="o">=</span> <span class="n">xmls</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="o">*</span><span class="n">rep</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">xmls</span></div>
+
+
+
+<div class="viewcode-block" id="sort_from_parent">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.sort_from_parent">[docs]</a>
+<span class="k">def</span> <span class="nf">sort_from_parent</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Sort a list based on whether the target sort key has a parent key.</span>
+
+<span class="sd">    :param input_data: Dict obj representing YAML input data</span>
+<span class="sd">    :param prog_opts: configuration options</span>
+<span class="sd">    :type prog_opts: dict</span>
+<span class="sd">    :return input_data: sorted input</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># this should work for list/sublist structure</span>
+    <span class="n">is_sublist</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;has_parent_key&#39;</span><span class="p">]</span>
+    <span class="n">pkey_name</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_parent_key&#39;</span><span class="p">]</span>
+    <span class="n">skey_name</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_sort_key&#39;</span><span class="p">]</span>
+    <span class="n">pkey_list</span> <span class="o">=</span> <span class="n">input_data</span><span class="p">[</span><span class="n">pkey_name</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">is_sublist</span><span class="p">:</span>  <span class="c1"># sort one or more sublists</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pkey_list</span><span class="p">)):</span>
+            <span class="n">input_data</span><span class="p">[</span><span class="n">pkey_name</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">skey_name</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># one top-level list</span>
+        <span class="n">input_data</span><span class="p">[</span><span class="n">skey_name</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">input_data</span></div>
+
 </pre></div>
 
            </div>
@@ -154,7 +225,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

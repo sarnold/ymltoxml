@@ -4,18 +4,18 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Using Pre-Commit &mdash; ymltoxml 0.2.1.dev3 documentation</title>
+  <title>Using Pre-Commit &mdash; ymltoxml 0.2.2.dev12+ga95b52b documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=823b7d79"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.2.1.dev3
+                0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -84,13 +84,13 @@
            <div itemprop="articleBody">
              
   <section id="using-pre-commit">
-<h1>Using Pre-Commit<a class="headerlink" href="#using-pre-commit" title="Permalink to this heading"></a></h1>
+<h1>Using Pre-Commit<a class="headerlink" href="#using-pre-commit" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://pre-commit.com">pre-commit</a> is a program used to configure and run Git hooks. These
 hooks can be triggered in different Git stages, though typically we use
 them in only commit and push stages.</p>
 <p>Each of the hooks will run in its own small virtual environment.</p>
 <section id="setup">
-<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
 <p>The program must be installed and the hooks must be configured. The
 program should be installed in your usual virtual environment, for
 example, “venv” (this could also be a conda environment).</p>
@@ -103,7 +103,7 @@ example, “venv” (this could also be a conda environment).</p>
 </div>
 </section>
 <section id="automatic-usage">
-<h2>Automatic Usage<a class="headerlink" href="#automatic-usage" title="Permalink to this heading"></a></h2>
+<h2>Automatic Usage<a class="headerlink" href="#automatic-usage" title="Link to this heading"></a></h2>
 <p>In normal usage, <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> will trigger with every <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code>
 and every <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>. The hooks that trigger in each stage can be
 configured by editing the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file. The files
@@ -112,7 +112,7 @@ operation completes. If one of the hooks exits with a non-zero
 exit-code, then the commit (or push) will fail.</p>
 </section>
 <section id="manual-usage">
-<h2>Manual Usage<a class="headerlink" href="#manual-usage" title="Permalink to this heading"></a></h2>
+<h2>Manual Usage<a class="headerlink" href="#manual-usage" title="Link to this heading"></a></h2>
 <p>To manually trigger <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> to run all hooks on CHANGED files:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>venv<span class="o">)</span><span class="w"> </span>$<span class="w"> </span>pre-commit<span class="w"> </span>run
 </pre></div>
@@ -148,7 +148,7 @@ regardless if they are changed or not:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

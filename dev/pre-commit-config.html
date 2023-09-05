@@ -4,18 +4,18 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contents of the .pre-commit-config.yaml file &mdash; ymltoxml 0.2.1.dev3 documentation</title>
+  <title>Contents of the .pre-commit-config.yaml file &mdash; ymltoxml 0.2.2.dev12+ga95b52b documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=823b7d79"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,7 +35,7 @@
             ymltoxml
           </a>
               <div class="version">
-                0.2.1.dev3
+                0.2
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -90,7 +90,7 @@
            <div itemprop="articleBody">
              
   <section id="contents-of-the-pre-commit-config-yaml-file">
-<h1>Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file<a class="headerlink" href="#contents-of-the-pre-commit-config-yaml-file" title="Permalink to this heading"></a></h1>
+<h1>Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file<a class="headerlink" href="#contents-of-the-pre-commit-config-yaml-file" title="Link to this heading"></a></h1>
 <p>The file <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> is used to configure the program
 <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>, which controls the setup and execution of <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git hooks</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file has a list of git repos, each repo may
@@ -98,7 +98,7 @@ define one or more hooks.</p>
 <p>In this document we will review the various hooks. Some of the hooks will
 modify files, some will not.</p>
 <section id="some-hook-descriptions">
-<h2>Some Hook Descriptions<a class="headerlink" href="#some-hook-descriptions" title="Permalink to this heading"></a></h2>
+<h2>Some Hook Descriptions<a class="headerlink" href="#some-hook-descriptions" title="Link to this heading"></a></h2>
 <p>Basic warning checks include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">check-added-large-files</span></code></p></li>
@@ -109,22 +109,22 @@ modify files, some will not.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">detect-private-key</span></code></p></li>
 </ul>
 <section id="end-of-file-fixer">
-<h3><code class="docutils literal notranslate"><span class="pre">end-of-file-fixer</span></code><a class="headerlink" href="#end-of-file-fixer" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">end-of-file-fixer</span></code><a class="headerlink" href="#end-of-file-fixer" title="Link to this heading"></a></h3>
 <p>This will modify files by making sure that each file ends in a blank line.</p>
 <p>If a commit fails due to this hook, just commit again.</p>
 </section>
 <section id="trailing-whitespace">
-<h3><code class="docutils literal notranslate"><span class="pre">trailing-whitespace</span></code><a class="headerlink" href="#trailing-whitespace" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">trailing-whitespace</span></code><a class="headerlink" href="#trailing-whitespace" title="Link to this heading"></a></h3>
 <p>This will modify files by ensuring there is no trailing whitespace on any line.</p>
 <p>If a commit fails due to this hook, just commit again.</p>
 </section>
 <section id="mixed-line-ending">
-<h3><code class="docutils literal notranslate"><span class="pre">mixed-line-ending</span></code><a class="headerlink" href="#mixed-line-ending" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">mixed-line-ending</span></code><a class="headerlink" href="#mixed-line-ending" title="Link to this heading"></a></h3>
 <p>This will modify files by ensuring there are no mixed line endings in any file.</p>
 <p>If a commit fails due to this hook, just commit again.</p>
 </section>
 <section id="check-yaml">
-<h3><code class="docutils literal notranslate"><span class="pre">check-yaml</span></code><a class="headerlink" href="#check-yaml" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">check-yaml</span></code><a class="headerlink" href="#check-yaml" title="Link to this heading"></a></h3>
 <p>This will NOT modify files. It will examine YAML files and report any
 issues. The rules for its configuration are defined in
 <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> in the <code class="docutils literal notranslate"><span class="pre">exclude</span></code> section.</p>
@@ -132,7 +132,7 @@ issues. The rules for its configuration are defined in
 fixed before committing again.</p>
 </section>
 <section id="beautysh">
-<h3><code class="docutils literal notranslate"><span class="pre">beautysh</span></code><a class="headerlink" href="#beautysh" title="Permalink to this heading"></a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">beautysh</span></code><a class="headerlink" href="#beautysh" title="Link to this heading"></a></h3>
 <p>If enabled, this will modify files. It will examine shell files and fix
 some formatting issues. The rules for its configuration are defined in
 <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> in the <code class="docutils literal notranslate"><span class="pre">args</span></code> section.</p>
@@ -140,7 +140,7 @@ some formatting issues. The rules for its configuration are defined in
 console, and check the files using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">&lt;file1&gt;</span> <span class="pre">&lt;file2&gt;</span> <span class="pre">...</span></code></p>
 </section>
 <section id="doc-formatting-rst-files">
-<h3>Doc formatting (.rst files)<a class="headerlink" href="#doc-formatting-rst-files" title="Permalink to this heading"></a></h3>
+<h3>Doc formatting (.rst files)<a class="headerlink" href="#doc-formatting-rst-files" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>doc8</p></li>
 <li><p>pygrep</p>
@@ -170,7 +170,7 @@ manually fixed before committing again.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
