@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.2.dev16+g0b48ab6 documentation</title>
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.2.dev17+g511577b documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -13,7 +13,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=76044039"></script>
+        <script src="_static/documentation_options.js?v=555e63a9"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -298,6 +298,7 @@ to specify the Python version and host OS type, run something like:</p>
 </div>
 <p>Additional <code class="docutils literal notranslate"><span class="pre">tox</span></code> commands:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">changes</span></code> (re)generate the changelog file</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">conv</span></code> round-trip conversion test on mavlink dialect</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">dev</span></code> pip “developer” install</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tox</span> <span class="pre">-e</span> <span class="pre">style</span></code> will run flake8 style checks</p></li>
@@ -315,10 +316,10 @@ to specify the Python version and host OS type, run something like:</p>
 </section>
 <section id="making-changes-contributing">
 <h2>Making Changes &amp; Contributing<a class="headerlink" href="#making-changes-contributing" title="Link to this heading"></a></h2>
-<p>We use the <a class="reference external" href="https://github.com/sarnold/gitchangelog-action">gitchangelog</a> action to generate our github Release page, as
-well as the gitchangelog message format to help it categorize/filter
-commits for a tidier release page. Please use the appropriate ACTION
-modifiers in any Pull Requests.</p>
+<p>We use the <a class="reference external" href="https://github.com/sarnold/gitchangelog-action">gitchangelog</a> action to generate our changelog and GH Release
+page, as well as the gitchangelog message format to help it categorize/filter
+commits for a tidier changelog. Please use the appropriate ACTION modifiers
+in any Pull Requests.</p>
 <p>This repo is also <a class="reference external" href="http://pre-commit.com/">pre-commit</a> enabled for various linting and format
 checks.  The checks run automatically on commit and will fail the
 commit (if not clean) with some checks performing simple file corrections.</p>

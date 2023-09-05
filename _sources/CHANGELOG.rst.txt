@@ -1,12 +1,18 @@
 Changelog
 =========
 
+0.2.2 (2023-09-05)
+------------------
 
-(unreleased)
-------------
+New
+~~~
+- Add a changelog file and gitchangelog cfg, add to docs build. [Stephen
+  L Arnold]
 
 Changes
 ~~~~~~~
+- Bump changelog for release, add tox cmd to (re)generate changes.
+  [Stephen L Arnold]
 - Cleanup docstrings and readme usage. [Stephen L Arnold]
 - Still more readme cleanup. [Stephen L Arnold]
 
@@ -16,6 +22,9 @@ Fixes
 
 Other
 ~~~~~
+- Merge pull request #11 from sarnold/docs-cleanup. [Steve Arnold]
+
+  Docs cleanup
 - Merge pull request #10 from sarnold/comments. [Steve Arnold]
 
   Refactor libs, add tests, preserve comments in sorted list
