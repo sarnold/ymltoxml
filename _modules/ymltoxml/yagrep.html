@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.yasort &mdash; ymltoxml 0.2.3.dev12+g526ad3a documentation</title>
+  <title>ymltoxml.yagrep &mdash; ymltoxml 0.2.3.dev12+g526ad3a documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ymltoxml.yasort</li>
+      <li class="breadcrumb-item active">ymltoxml.yagrep</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,140 +78,99 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ymltoxml.yasort</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Console script for sorting YAML lists.&quot;&quot;&quot;</span>
+  <h1>Source code for ymltoxml.yagrep</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Console script for searching YAML or XML files.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
+<span class="kn">import</span> <span class="nn">dpath</span>
 <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">Munch</span>
-<span class="kn">from</span> <span class="nn">ruamel.yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
+<span class="kn">from</span> <span class="nn">nested_lookup</span> <span class="kn">import</span> <span class="n">nested_lookup</span>
 
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">VERSION</span> <span class="k">as</span> <span class="n">__version__</span>
-<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">FileTypeError</span><span class="p">,</span>
-    <span class="n">StrYAML</span><span class="p">,</span>
-    <span class="n">load_config</span><span class="p">,</span>
-    <span class="n">replace_angles</span><span class="p">,</span>
-    <span class="n">replace_curlys</span><span class="p">,</span>
-    <span class="n">sort_from_parent</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">FileTypeError</span><span class="p">,</span> <span class="n">load_config</span>
+<span class="kn">from</span> <span class="nn">.ymltoxml</span> <span class="kn">import</span> <span class="n">get_input_type</span>
 
 <span class="c1"># pylint: disable=R0801</span>
 
 
-<div class="viewcode-block" id="get_input_yaml">
-<a class="viewcode-back" href="../../api/ymltoxml.yasort.html#ymltoxml.yasort.get_input_yaml">[docs]</a>
-<span class="k">def</span> <span class="nf">get_input_yaml</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check filename extension, open and munge the contents, return data</span>
-<span class="sd">    (where in this context we &quot;munge&quot; the curly braces to make it valid</span>
-<span class="sd">    YAML).</span>
-
-<span class="sd">    :param filepath: filename as Path obj</span>
-<span class="sd">    :param prog_opts: configuration options</span>
-<span class="sd">    :type prog_opts: dict</span>
-<span class="sd">    :return data_in: file data</span>
-<span class="sd">    :raises FileTypeError: if the input file is not yaml</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">data_in</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="n">filepath</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.yml&#39;</span><span class="p">,</span> <span class="s1">&#39;.yaml&#39;</span><span class="p">)):</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;file_encoding&#39;</span><span class="p">])</span> <span class="k">as</span> <span class="n">f_path</span><span class="p">:</span>
-            <span class="n">file_data</span> <span class="o">=</span> <span class="n">f_path</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">munged_data</span> <span class="o">=</span> <span class="n">replace_curlys</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file_data</span><span class="p">))</span>
-        <span class="n">data_in</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">munged_data</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">FileTypeError</span><span class="p">(</span><span class="s2">&quot;FileTypeError: unknown input file extension&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">data_in</span></div>
-
-
-
-<div class="viewcode-block" id="sort_list_data">
-<a class="viewcode-back" href="../../api/ymltoxml.yasort.html#ymltoxml.yasort.sort_list_data">[docs]</a>
-<span class="k">def</span> <span class="nf">sort_list_data</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Set YAML formatting and sort keys from config, produce output data</span>
-<span class="sd">    from input dict-ish object.</span>
-
-<span class="sd">    :param payload: Dict obj representing YAML input data</span>
-<span class="sd">    :param prog_opts: configuration options</span>
-<span class="sd">    :type prog_opts: dict</span>
-<span class="sd">    :return res: yaml dump of sorted input</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">yaml</span> <span class="o">=</span> <span class="n">StrYAML</span><span class="p">()</span>
-    <span class="n">yaml</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span>
-        <span class="n">mapping</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">],</span>
-        <span class="n">sequence</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">],</span>
-        <span class="n">offset</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
-    <span class="p">)</span>
-    <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;preserve_quotes&#39;</span><span class="p">]</span>
-
-    <span class="n">payload_sorted</span> <span class="o">=</span> <span class="n">sort_from_parent</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">payload_sorted</span><span class="p">)</span></div>
-
-
-
 <div class="viewcode-block" id="process_inputs">
-<a class="viewcode-back" href="../../api/ymltoxml.yasort.html#ymltoxml.yasort.process_inputs">[docs]</a>
-<span class="k">def</span> <span class="nf">process_inputs</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<a class="viewcode-back" href="../../api/ymltoxml.yagrep.html#ymltoxml.yagrep.process_inputs">[docs]</a>
+<span class="k">def</span> <span class="nf">process_inputs</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">grep_args</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Handle file arguments and process them. Write new (sorted) files to</span>
-<span class="sd">    the &#39;sorted-out/&#39; directory in the current working directory.</span>
+<span class="sd">    Handle file arguments and process them. Return any input data for use</span>
+<span class="sd">    with ``dpath`` search.</span>
 
 <span class="sd">    :param filepath: filename as Path obj</span>
 <span class="sd">    :param prog_opts: configuration options</span>
 <span class="sd">    :type prog_opts: dict</span>
 <span class="sd">    :param debug: enable extra processing info</span>
-<span class="sd">    :return None:</span>
-<span class="sd">    :handles FileTypeError: if input file is not yml</span>
+<span class="sd">    :return: data and source type boolean or None</span>
+<span class="sd">    :handles FileTypeError: if input file is not yaml or xml</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">def</span> <span class="nf">glob_filter</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Basic search glob to use with dpath.* functions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">grep_args</span><span class="o">.</span><span class="n">text</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
     <span class="n">fpath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-    <span class="n">outdir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;output_dirname&#39;</span><span class="p">])</span>
-    <span class="n">opath</span> <span class="o">=</span> <span class="n">outdir</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">fpath</span><span class="o">.</span><span class="n">stem</span><span class="p">)</span>
+    <span class="n">path_sep</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_separator&#39;</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">fpath</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Input file </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s1"> not found! Skipping...&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Processing data from </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Searching in </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s1">...&#39;</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">indata</span> <span class="o">=</span> <span class="n">get_input_yaml</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">)</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">indata</span> <span class="o">=</span> <span class="n">get_input_type</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">FileTypeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s1"> =&gt; </span><span class="si">{</span><span class="n">fpath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
+            <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">indata</span><span class="p">)</span>
 
-        <span class="n">outdata</span> <span class="o">=</span> <span class="n">sort_list_data</span><span class="p">(</span><span class="n">indata</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">grep_args</span><span class="o">.</span><span class="n">filter</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dpath</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">indata</span><span class="p">,</span> <span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="n">afilter</span><span class="o">=</span><span class="n">glob_filter</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">path_sep</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">grep_args</span><span class="o">.</span><span class="n">lookup</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">nested_lookup</span><span class="p">(</span><span class="n">grep_args</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">indata</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">dpath</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="n">indata</span><span class="p">,</span> <span class="n">grep_args</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">path_sep</span><span class="p">)</span>
 
-        <span class="n">restored_data</span> <span class="o">=</span> <span class="n">replace_angles</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
-
-        <span class="n">new_opath</span> <span class="o">=</span> <span class="n">opath</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_yml_ext&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Writing processed data to </span><span class="si">{</span><span class="n">new_opath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">new_opath</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">restored_data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;file_encoding&#39;</span><span class="p">])</span></div>
+        <span class="n">out</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../api/ymltoxml.yasort.html#ymltoxml.yasort.main">[docs]</a>
+<a class="viewcode-back" href="../../api/ymltoxml.yagrep.html#ymltoxml.yagrep.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Read/write YAML files with sorted list(s).</span>
+<span class="sd">    Process args and execute search.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">debug</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">argv</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
+
+    <span class="n">cfg</span><span class="p">,</span> <span class="n">pfile</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">yagrep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">popts</span> <span class="o">=</span> <span class="n">Munch</span><span class="o">.</span><span class="n">toDict</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentDefaultsHelpFormatter</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Sort YAML lists and write new files.&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;Search in YAML files for keys and values.</span>
+<span class="s1">            The default search with no options is path-based, thus it</span>
+<span class="s1">            may return empty results without a path or wildcard. Use</span>
+<span class="s1">            the filter argument to find the path(s) to a substring.&#39;&#39;&#39;</span><span class="p">,</span>
+        <span class="n">usage</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(prog)s</span><span class="s1"> [-h] [--version] [-v] [-d] [-s] [-f | -l] TEXT FILE [FILE ...]&#39;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--version&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;version&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;%(prog)s </span><span class="si">{</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
@@ -232,25 +191,41 @@
         <span class="s1">&#39;--save-config&#39;</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;save&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;save active config to default filename (.yasort.yml) and exit&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;save active config to default filename (.yagrep.yml) and exit&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">()</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-f&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--filter&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Filter out data not matching input string (no paths)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-l&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--lookup&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Lookup by key and return list of values for any matches&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;text&#39;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TEXT&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Text string to look for (one-only, required)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s1">&#39;file&#39;</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
         <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Process input file(s) to target directory&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Look in file(s) for text string (at least one, required)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-    <span class="n">cfg</span><span class="p">,</span> <span class="n">pfile</span> <span class="o">=</span> <span class="n">load_config</span><span class="p">(</span><span class="n">yasort</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">popts</span> <span class="o">=</span> <span class="n">Munch</span><span class="o">.</span><span class="n">toDict</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
-    <span class="n">outdir</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;output_dirname&#39;</span><span class="p">]</span>
-
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
         <span class="n">cfg_data</span> <span class="o">=</span> <span class="n">pfile</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">()</span>
-        <span class="n">def_config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.yasort.yml&#39;</span><span class="p">)</span>
+        <span class="n">def_config</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.yagrep.yml&#39;</span><span class="p">)</span>
         <span class="n">def_config</span><span class="o">.</span><span class="n">write_bytes</span><span class="p">(</span><span class="n">cfg_data</span><span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">dump</span><span class="p">:</span>
@@ -258,14 +233,19 @@
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
         <span class="n">debug</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">print_help</span><span class="p">()</span>
+    <span class="c1"># we need to help argparse here, since it has trouble parsing the 2</span>
+    <span class="c1"># postional args as required when both are missing, even with help from</span>
+    <span class="c1"># nargs behavior (we also need customized usage msg above to replace the</span>
+    <span class="c1"># default error text with the following print() statement)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">file</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">print_usage</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;yagrep: error: both of the following arguments are required: TEXT *and* FILE&quot;</span>
+        <span class="p">)</span>
         <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Creating output directory </span><span class="si">{</span><span class="n">outdir</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">Path</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">filearg</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
-        <span class="n">process_inputs</span><span class="p">(</span><span class="n">filearg</span><span class="p">,</span> <span class="n">popts</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">)</span></div>
+        <span class="n">process_inputs</span><span class="p">(</span><span class="n">filearg</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">popts</span><span class="p">,</span> <span class="n">debug</span><span class="p">)</span></div>
 
 
 

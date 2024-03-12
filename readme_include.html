@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.2.dev17+g511577b documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.2.3.dev12+g526ad3a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=555e63a9"></script>
+        <script src="_static/documentation_options.js?v=1ec3ab5f"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -50,7 +52,9 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">ymltoxml (and xmltoyml)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-with-pip">Install with pip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ymltoxml">ymltoxml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#yagrep">yagrep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#yasort">yasort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#features-and-limitations">Features and limitations</a></li>
 </ul>
 </li>
@@ -101,9 +105,9 @@
 <p><a class="reference external" href="https://github.com/sarnold/ymltoxml/releases"><img alt="GitHub tag" src="https://img.shields.io/github/v/tag/sarnold/ymltoxml?color=green&amp;include_prereleases&amp;label=latest%20release" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sarnold/ymltoxml" /></a> <a class="reference external" href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/python-3.6+-blue.svg" /></a></p>
 <p>Python command line tools to convert between <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Markup_Language">XML</a> files and <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a> files,
 preserving attributes and comments (with minor corrections).  The default
-file encoding for both types is UTF-8 without a BOM. Includes another
-console entry point to sort large YAML lists (eg, lists of rules found
-in the <a class="reference external" href="https://github.com/ComplianceAsCode/content">SCAP Security Guide</a>).</p>
+file encoding for both types is UTF-8 without a BOM. Now includes more
+console entry points to grep or sort interesting YAML files (eg, lists
+of rules found in the <a class="reference external" href="https://github.com/ComplianceAsCode/content">SCAP Security Guide</a>).</p>
 <section id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <section id="install-with-pip">
@@ -132,8 +136,8 @@ $ deactivate
 <p>The alternative to python venv is the <code class="docutils literal notranslate"><span class="pre">tox</span></code> test driver.  If you have it
 installed already, see the example tox commands below.</p>
 </section>
-<section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h3>
+<section id="ymltoxml">
+<h3>ymltoxml<a class="headerlink" href="#ymltoxml" title="Link to this heading"></a></h3>
 <p>The current version supports minimal command options; if no options are
 provided, the only required arguments are one or more files of a single
 type:</p>
@@ -188,17 +192,71 @@ $ ymltoxml --dump-config &gt; .ymltoxml.yaml
 $ $EDITOR .ymltoxml.yaml
 </pre></div>
 </div>
-<p>An additional helper script is now provided for sorting large (YAML) lists.
-The new <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script uses its own configuration file, creatively named
-<code class="docutils literal notranslate"><span class="pre">yasort.yaml</span></code>. The above applies equally to this new config file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yasort
+</section>
+<section id="yagrep">
+<h3>yagrep<a class="headerlink" href="#yagrep" title="Link to this heading"></a></h3>
+<p>A new helper script is now included for searching keys or values in
+YAML files. The <code class="docutils literal notranslate"><span class="pre">yagrep</span></code> script also has its own built-in config
+file, which can be copied and edited as shown above. In this case the
+script is intended to feel more-or-less like <code class="docutils literal notranslate"><span class="pre">grep</span></code> so the default
+config should Just Work. That said, the script uses the <code class="docutils literal notranslate"><span class="pre">dpath</span></code>
+python library, so you may need to change the default “path” separator
+if your data has keys containing forward slashes (see the <a class="reference external" href="https://github.com/dpath-maintainers/dpath-python">upstream
+docs</a> for details).</p>
+<p>General usage guidelines:</p>
+<ul class="simple">
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">-f</span></code> (filter) arg to search for a value string</p></li>
+<li><p>follow the (json) output from above to find the key name</p></li>
+<li><p>then use the <code class="docutils literal notranslate"><span class="pre">-l</span></code> (lookup) arg to extract the values for the above key</p></li>
+</ul>
+<p>Useful yagrep config file settings:</p>
+<dl class="field-list simple">
+<dt class="field-odd">default_separator<span class="colon">:</span></dt>
+<dd class="field-odd"><p>change the path separator to something like <code class="docutils literal notranslate"><span class="pre">;</span></code> if data
+has forward slashes</p>
+</dd>
+<dt class="field-even">output_format<span class="colon">:</span></dt>
+<dd class="field-even"><p>set the output format to <code class="docutils literal notranslate"><span class="pre">raw</span></code> for unformmated output</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yagrep -h
+usage: yagrep [-h] [--version] [-v] [-d] [-s] [-f | -l] TEXT FILE [FILE ...]
+
+Search in YAML files for keys and values.
+
+positional arguments:
+  TEXT               Text string to look for (one-only, required) (default:
+                     None)
+  FILE               Look in file(s) for text string (at least one, required)
+                     (default: None)
+
+options:
+  -h, --help         show this help message and exit
+  --version          show program&#39;s version number and exit
+  -v, --verbose      Display more processing info (default: False)
+  -d, --dump-config  Dump default configuration file to stdout (default:
+                     False)
+  -s, --save-config  save active config to default filename (.yagrep.yml) and
+                     exit (default: False)
+  -f, --filter       Filter out data not matching input string (no paths)
+                     (default: False)
+  -l, --lookup       Lookup by key and return list of values for any matches
+                     (default: False)
+</pre></div>
+</div>
+</section>
+<section id="yasort">
+<h3>yasort<a class="headerlink" href="#yasort" title="Link to this heading"></a></h3>
+<p>Another helper script is included for sorting large (YAML) lists.
+The <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script also uses its own configuration file, creatively named
+<code class="docutils literal notranslate"><span class="pre">.yasort.yaml</span></code>. The above applies equally to this config file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yasort -h
 usage: yasort [-h] [--version] [-v] [-d] [-s] [FILE ...]
 
 Sort YAML lists and write new files.
 
 positional arguments:
-  FILE               Process input file(s) to target directory (default:
-                     None)
+  FILE               Process input file(s) to target directory (default: None)
 
 options:
   -h, --help         show this help message and exit
@@ -210,17 +268,38 @@ options:
                      exit (default: False)
 </pre></div>
 </div>
+<p>All of the optional arguments for <code class="docutils literal notranslate"><span class="pre">yasort</span></code> are essentially orthogonal to
+sorting, thus the only required argument for normal usage is one or more
+input files. All of the user settings are in the default configuration file
+shown below; use the <code class="docutils literal notranslate"><span class="pre">--save-config</span></code> option to create your own config file.</p>
+<p>Default yasort.yaml:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="c1"># comments should be preserved</span>
+<span class="nt">file_encoding</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;utf-8&#39;</span>
+<span class="nt">default_yml_ext</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;.yaml&#39;</span>
+<span class="nt">output_dirname</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;sorted-out&#39;</span>
+<span class="nt">default_parent_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;controls&#39;</span>
+<span class="nt">default_sort_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;rules&#39;</span>
+<span class="nt">has_parent_key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">preserve_quotes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">process_comments</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">mapping</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="nt">sequence</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="nt">offset</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</pre></div>
+</div>
 </section>
 <section id="features-and-limitations">
 <h3>Features and limitations<a class="headerlink" href="#features-and-limitations" title="Link to this heading"></a></h3>
-<p>We only test on mavlink XML message definitions, so it probably <em>will not</em>
-work at all on arbitrarily complex XML files with namespaces, etc.  The
-current round-trip is not exact, due to the following:</p>
+<p>We mainly test on mavlink XML message definitions and NIST/SSG YAML files,
+so round-trip conversion <em>may not</em> work at all on arbitrarily complex XML
+files with namespaces, etc.  The current round-trip is not exact, due to
+the following:</p>
 <ul class="simple">
 <li><p>missing encoding is added to version tag</p></li>
 <li><p>leading/trailing whitespace in text elements and comments is not preserved</p></li>
-<li><p>elements with self-closing tags are converted to full closing tags</p></li>
-<li><p>empty elements on more than one line are not preserved</p></li>
+<li><p>XML - elements with self-closing tags are converted to full closing tags</p></li>
+<li><p>XML - empty elements on more than one line are not preserved</p></li>
 </ul>
 <p>For the files tested (eg, mavlink) the end result is cleaner/shinier XML.</p>
 </section>
@@ -246,12 +325,12 @@ only Git, Python, and Tox.</p>
 </section>
 <section id="scap-support">
 <h3>SCAP support<a class="headerlink" href="#scap-support" title="Link to this heading"></a></h3>
-<p>The yasort tool is also intended to be part of a larger workflow, mainly
+<p>The yasort/yagrep tools are intended to be part of a larger workflow, mainly
 working with SCAP content, ie, the scap-security-guide source files (or
 just <a class="reference external" href="https://complianceascode.readthedocs.io/en/latest/">content</a>). It is currently used to sort profiles with large numbers
 of rules to make it easier to visually diff and spot duplicates, etc.</p>
-<p>The configuration file defaults are based on existing yaml structure, but
-you are free to change them for another use case. To adjust how the sorting
+<p>The yasort configuration file defaults are based on existing yaml structure,
+but feel free to change them for another use case. To adjust how the sorting
 works, make a local config file (see above) and edit as needed the following
 options:</p>
 <dl class="field-list simple">
@@ -272,7 +351,7 @@ options:</p>
 </dd>
 </dl>
 <p>The rest of the options are for YAML formatting/flow style (see the <a class="reference external" href="https://yaml.readthedocs.io/en/latest/">ruamel</a>
-documetation for formatting details)</p>
+documentation for formatting details)</p>
 </section>
 <section id="in-repo-workflow-with-tox">
 <h3>In-repo workflow with Tox<a class="headerlink" href="#in-repo-workflow-with-tox" title="Link to this heading"></a></h3>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.utils &mdash; ymltoxml 0.2.2.dev17+g511577b documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>ymltoxml.utils &mdash; ymltoxml 0.2.3.dev12+g526ad3a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=555e63a9"></script>
+        <script src="../../_static/documentation_options.js?v=1ec3ab5f"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -80,6 +82,7 @@
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Shared utility code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -99,6 +102,8 @@
     <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
 
 <span class="n">VERSION</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s1">&#39;ymltoxml&#39;</span><span class="p">)</span>
+
+<span class="n">PROFILE_TYPES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> <span class="s1">&#39;MODERATE&#39;</span><span class="p">,</span> <span class="s1">&#39;LOW&#39;</span><span class="p">,</span> <span class="s1">&#39;PRIVACY&#39;</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">FileTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -125,9 +130,93 @@
 
 
 
+<div class="viewcode-block" id="get_filelist">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.get_filelist">[docs]</a>
+<span class="k">def</span> <span class="nf">get_filelist</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">filepattern</span><span class="o">=</span><span class="s1">&#39;*.txt&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get path objects matching ``filepattern`` starting at ``dirpath`` and</span>
+<span class="sd">    return a list of matching paths for any files found.</span>
+
+<span class="sd">    :param dirpath: directory name to start file search</span>
+<span class="sd">    :param filepattern: str of the form ``*.&lt;ext&gt;``</span>
+<span class="sd">    :param debug: increase output verbosity</span>
+<span class="sd">    :return: list of path strings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">filenames</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">dirpath</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="n">filepattern</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">pfile</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
+        <span class="n">file_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pfile</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found file list: </span><span class="si">{</span><span class="n">file_list</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">file_list</span></div>
+
+
+
+<div class="viewcode-block" id="get_profile_sets">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.get_profile_sets">[docs]</a>
+<span class="k">def</span> <span class="nf">get_profile_sets</span><span class="p">(</span><span class="n">dirpath</span><span class="o">=</span><span class="s1">&#39;tests/data&#39;</span><span class="p">,</span> <span class="n">filepattern</span><span class="o">=</span><span class="s1">&#39;*.txt&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the 800-53 oscal ID files and parse them into ID sets, return</span>
+<span class="sd">    a list of sets. There should not be more than one controls file for</span>
+<span class="sd">    each profile type.</span>
+
+<span class="sd">    :Note: The oscal ID files are simply text files with a single &quot;column&quot;</span>
+<span class="sd">           of ID strings extracted from the NIST oscal-content files or a</span>
+<span class="sd">           CSV dump, etc. Samples are contained in the ``tests/data`` folder.</span>
+
+<span class="sd">    :param dirpath: directory name to start file search</span>
+<span class="sd">    :param filepattern: str of the form ``*.&lt;ext&gt;``</span>
+<span class="sd">    :param debug: increase output verbosity</span>
+<span class="sd">    :return: tuple of lists: (profile_sets, profile_types)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">m_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">l_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">p_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">nist_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">get_filelist</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">filepattern</span><span class="p">,</span> <span class="n">debug</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">pfile</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nist_files</span><span class="p">):</span>
+        <span class="n">ptype</span> <span class="o">=</span> <span class="n">get_profile_type</span><span class="p">(</span><span class="n">pfile</span><span class="p">,</span> <span class="n">debug</span><span class="p">)</span>
+        <span class="n">ptype_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">pfile</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+        <span class="n">t_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">ptype_ids</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="s1">&#39;HIGH&#39;</span><span class="p">:</span>
+            <span class="n">h_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="s1">&#39;MODERATE&#39;</span><span class="p">:</span>
+            <span class="n">m_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="s1">&#39;LOW&#39;</span><span class="p">:</span>
+            <span class="n">l_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ptype</span> <span class="o">==</span> <span class="s1">&#39;PRIVACY&#39;</span><span class="p">:</span>
+            <span class="n">p_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">t_set</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ptype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ptype</span><span class="si">}</span><span class="s2"> not found! Skipping...&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">h_set</span><span class="p">,</span> <span class="n">m_set</span><span class="p">,</span> <span class="n">l_set</span><span class="p">,</span> <span class="n">p_set</span><span class="p">],</span> <span class="n">PROFILE_TYPES</span></div>
+
+
+
+<div class="viewcode-block" id="get_profile_type">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.get_profile_type">[docs]</a>
+<span class="k">def</span> <span class="nf">get_profile_type</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get oscal profile type from filename, where profile type is one of the</span>
+<span class="sd">    exported profile names, ie, HIGH, MODERATE, LOW, or PRIVACY.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">any</span><span class="p">((</span><span class="n">match</span> <span class="o">:=</span> <span class="n">substring</span><span class="p">)</span> <span class="ow">in</span> <span class="n">filename</span> <span class="k">for</span> <span class="n">substring</span> <span class="ow">in</span> <span class="n">PROFILE_TYPES</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found profile type: </span><span class="si">{</span><span class="n">match</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">match</span></div>
+
+
+
 <div class="viewcode-block" id="load_config">
 <a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.load_config">[docs]</a>
-<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">yasort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">yasort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">yagrep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load yaml configuration file and munchify the data. If local file is</span>
 <span class="sd">    not found in current directory, the default will be loaded.</span>
@@ -143,6 +232,8 @@
     <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;ymltoxml&#39;</span>
     <span class="k">if</span> <span class="n">yasort</span><span class="p">:</span>
         <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;yasort&#39;</span>
+    <span class="k">if</span> <span class="n">yagrep</span><span class="p">:</span>
+        <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;yagrep&#39;</span>
     <span class="n">defconfig</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yml&#39;</span><span class="p">)</span>
 
     <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">defconfig</span> <span class="k">if</span> <span class="n">defconfig</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
