@@ -224,7 +224,7 @@ def test_load_ymltoxml_config():
 
 
 def test_load_yasort_config():
-    popts, pfile = load_config(yasort=True)
+    popts, pfile = load_config('yasort')
 
     assert isinstance(pfile, Path)
     assert isinstance(popts, Munch)
@@ -233,9 +233,18 @@ def test_load_yasort_config():
 
 
 def test_load_yagrep_config():
-    popts, pfile = load_config(yagrep=True)
+    popts, pfile = load_config('yagrep')
 
     assert isinstance(pfile, Path)
     assert isinstance(popts, Munch)
     assert hasattr(popts, 'default_separator')
     assert pfile.stem == 'yagrep' or '.yagrep'
+
+
+def test_load_oscal_config():
+    popts, pfile = load_config('oscal')
+
+    assert isinstance(pfile, Path)
+    assert isinstance(popts, Munch)
+    assert hasattr(popts, 'default_ssg_path')
+    assert pfile.stem == 'oscal' or '.oscal'

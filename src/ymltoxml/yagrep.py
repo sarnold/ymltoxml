@@ -1,7 +1,6 @@
 """Console script for searching YAML or XML files."""
 
 import argparse
-import json
 import sys
 from pathlib import Path
 
@@ -10,7 +9,12 @@ from munch import Munch
 from nested_lookup import nested_lookup
 
 from .utils import VERSION as __version__
-from .utils import FileTypeError, load_config, text_file_reader
+from .utils import (
+    FileTypeError,
+    load_config,
+    text_data_writer,
+    text_file_reader,
+)
 
 # pylint: disable=R0801
 
@@ -31,7 +35,7 @@ def process_inputs(filepath, grep_args, prog_opts, debug=False):
 
     def glob_filter(x):
         """
-        Basic search glob to use with dpath.* functions.
+        Basic search glob to use with dpath functions.
         """
         if grep_args.text in str(x):
             return True
@@ -61,10 +65,7 @@ def process_inputs(filepath, grep_args, prog_opts, debug=False):
         else:
             result = dpath.values(indata, grep_args.text, separator=path_sep)
 
-        out = repr(result)
-        if prog_opts['output_format'] == 'json':
-            out = json.dumps(result, indent=4, sort_keys=True)
-        sys.stdout.write(str(filepath) + ': ' + out + '\n')
+        text_data_writer(result, prog_opts)
 
 
 def main(argv=None):  # pragma: no cover
@@ -74,7 +75,7 @@ def main(argv=None):  # pragma: no cover
     if argv is None:
         argv = sys.argv
 
-    cfg, pfile = load_config(yagrep=True)
+    cfg, pfile = load_config(Path(__file__).stem)
     popts = Munch.toDict(cfg)
 
     parser = argparse.ArgumentParser(

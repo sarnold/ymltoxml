@@ -30,14 +30,14 @@ def self_test(opts):
             print("FAILED: %s", repr(exc))
 
     try:
-        print(f'Checking if {opts.default_oscal_dir} exists')
+        print(f'Checking if {opts.default_content_path} exists')
         try:
-            ret = Path(opts.default_oscal_dir).resolve(strict=True)
+            ret = Path(opts.default_content_path).resolve(strict=True)
             print(f'  Resolved: {ret}')
         except (FileNotFoundError, RuntimeError) as exc:
             print(f"  {repr(exc)}")
     except (AttributeError, KeyError) as exc:
-        print("Config is missing key 'default_oscal_dir'! ")
+        print("Config is missing key 'default_content_path'! ")
         print(f"  {repr(exc)}")
 
     print("-" * 80)
@@ -50,7 +50,7 @@ def main(argv=None):  # pragma: no cover
     if argv is None:
         argv = sys.argv
 
-    ucfg, _ = load_config(yagrep=True)
+    ucfg, _ = load_config(Path(__file__).stem)
 
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
@@ -103,7 +103,7 @@ def main(argv=None):  # pragma: no cover
         print("oscal: error: the following arguments are required: FILE")
         sys.exit(1)
 
-    nist_path = args.nist if args.nist else ucfg.default_oscal_path
+    nist_path = args.nist if args.nist else ucfg.default_content_path
     if args.verbose:
         print(f"Using path to oscal: {nist_path}")
         if args.file:

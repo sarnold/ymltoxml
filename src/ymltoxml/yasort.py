@@ -152,7 +152,7 @@ def main(argv=None):  # pragma: no cover
 
     args = parser.parse_args()
 
-    cfg, pfile = load_config(yasort=True)
+    cfg, pfile = load_config(Path(__file__).stem)
     popts = Munch.toDict(cfg)
     outdir = popts['output_dirname']
 

@@ -1,6 +1,6 @@
-=========================
- ymltoxml (and xmltoyml)
-=========================
+================================
+ ymltoxml (and more YAML tools)
+================================
 
 |ci| |wheels| |release| |badge| |coverage|
 
@@ -8,12 +8,12 @@
 
 |tag| |license| |python|
 
-Python command line tools to convert between XML_ files and YAML_ files,
+Python command line tools to convert files between XML_ and YAML_,
 preserving attributes and comments (with minor corrections).  The default
 file encoding for both types is UTF-8 without a BOM. Now includes more
 console entry points to grep or sort interesting YAML files (eg, lists
-of rules found in the `SCAP Security Guide`_) and more input file types
-to ingest SSG and other upstream data, eg, NIST oscal-content_.
+of rules found in the `SCAP Security Guide`_) and support for more input
+file types to ingest SSG and other upstream data, eg, NIST oscal-content_.
 
 .. _SCAP Security Guide: https://github.com/ComplianceAsCode/content
 .. _oscal-content: https://github.com/usnistgov/oscal-content.git
@@ -96,9 +96,9 @@ type::
   can be relative or absolute)
 
   + when passing input files as arguments, the output file names/paths
-    are the same as the input files but with the output extension
+    are the same as the input files but with the (new) output extension
 
-By default it will process one more input files as command args, typically
+By default it will process one or more input files as command args, typically
 in the current directory, however, the ``--infile`` option will only
 process a single file path, optionally with an output file path, with no
 extra (file) arguments.
@@ -110,7 +110,7 @@ copy must be named ``.ymltoxml.yaml``.  To get a copy of the default
 configuration file, do::
 
   $ cd path/to/work/dir/
-  $ ymltoxml --dump-config > .ymltoxml.yaml
+  $ ymltoxml --save-config
   $ $EDITOR .ymltoxml.yaml
 
 yagrep
@@ -129,13 +129,13 @@ General usage guidelines:
 
 * use the ``-f`` (filter) arg to search for a value string
 * follow the (json) output from above to find the key name
-* then use the ``-l`` (lookup) arg to extract the values for the above key
+* then use the ``-l`` (lookup) arg to extract the values for the key
 
 Useful yagrep config file settings:
 
 :default_separator: change the path separator to something like ``;`` if data
                     has forward slashes
-:output_format: set the output format to ``raw`` for unformmated output
+:output_format: set the output format to ``raw`` for unformatted output
 
 ::
 
@@ -169,9 +169,9 @@ Useful yagrep config file settings:
 yasort
 ------
 
-Another helper script is included for sorting large (YAML) lists.
-The ``yasort`` script also uses its own configuration file, creatively named
-``.yasort.yaml``. The above applies equally to this config file.
+Yet another helper script is included for sorting large (YAML) lists.
+The ``yasort`` script also uses its own configuration file, creatively
+named ``.yasort.yaml``. The above applies equally to this config file.
 
 ::
 
@@ -237,14 +237,14 @@ Dev workflows
 The following covers two types of workflows, one for tool usage in other
 (external) projects, and one for (internal) tool development.
 
-Mavlink support
----------------
+Mavlink use case
+----------------
 
-The ymltoxml tool is intended to be part of larger workflow, ie, developing
-custom mavlink message dialects and generating/deploying the resulting
-mavlink language interfaces.  To be more specific, for this example we
-use a mavlink-compatible component running on a micro-controller, thus
-the target language bindings are C and C++.
+The ymltoxml tools are intended to be part of a larger workflow, ie,
+developing custom mavlink message dialects and generating/deploying the
+resulting mavlink language interfaces.  To be more specific, for this
+example we use a mavlink-compatible component running on a micro-controller,
+thus the target language bindings are C and C++.
 
 Tool requirements for the full mavlink workflow:
 
@@ -259,13 +259,14 @@ only Git, Python, and Tox.
 .. _XML: https://en.wikipedia.org/wiki/Extensible_Markup_Language
 .. _YAML: https://en.wikipedia.org/wiki/YAML
 
-SCAP support
-------------
+SCAP use case
+-------------
 
-The yasort/yagrep tools are intended to be part of a larger workflow, mainly
-working with SCAP content, ie, the scap-security-guide source files (or
-just content_). It is currently used to sort profiles with large numbers
-of rules to make it easier to visually diff and spot duplicates, etc.
+The yasort/yagrep tools are also intended to be part of a larger
+workflow, mainly working with SCAP content, ie, the scap-security-guide
+source files (or just content_). It is currently used to sort profiles
+with large numbers of rules, as well as create control files and analyze
+existing controls.
 
 The yasort configuration file defaults are based on existing yaml structure,
 but feel free to change them for another use case. To adjust how the sorting

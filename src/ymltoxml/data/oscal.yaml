@@ -2,7 +2,10 @@
 # comments should be preserved
 file_encoding: 'utf-8'
 default_ext: '.yaml'
-default_separator: '/'
+default_content_path: 'ext/oscal-content'
+default_profile_path: 'nist.gov/SP800-53/rev5'
+default_ssg_glob: 'nist_*.yml'
+default_ssg_path: 'ext/content/controls'
 input_format: null
 output_format: 'json'
 preserve_quotes: true

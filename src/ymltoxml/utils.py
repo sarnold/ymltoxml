@@ -78,24 +78,20 @@ def get_filelist(dirpath, filepattern='*.txt', debug=False):
     return file_list
 
 
-def load_config(file_encoding='utf-8', yasort=False, yagrep=False, debug=False):
+def load_config(prog_name='ymltoxml', file_encoding='utf-8', debug=False):
     """
     Load yaml configuration file and munchify the data. If local file is
     not found in current directory, the default will be loaded.
 
+    :param prog_name: filename of calling script (no extension)
     :param file_encoding: file encoding of config file
-    :param yasort: True for yasort config
     :param debug: enable extra processing info
+    :type prog_name: str
     :type file_encoding: str
-    :type yasort: bool
+    :type debug: bool
     :return: Munch cfg obj and cfg file as Path obj
     :rtype: tuple
     """
-    prog_name = 'ymltoxml'
-    if yasort:
-        prog_name = 'yasort'
-    if yagrep:
-        prog_name = 'yagrep'
     defconfig = Path(f'.{prog_name}.yml')
 
     cfgfile = defconfig if defconfig.exists() else Path(f'.{prog_name}.yaml')
