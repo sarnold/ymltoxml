@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.utils module &mdash; ymltoxml 0.3.1.dev11+gadc965b documentation</title>
+  <title>ymltoxml.utils module &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,14 +15,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=daf609d7"></script>
+        <script src="../_static/documentation_options.js?v=967364b7"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ymltoxml.yagrep module" href="ymltoxml.yagrep.html" />
-    <link rel="prev" title="ymltoxml.oscal module" href="ymltoxml.oscal.html" /> 
+    <link rel="prev" title="ymltoxml.templates module" href="ymltoxml.templates.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,6 +57,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="ymltoxml.html#submodules">Submodules</a><ul class="current">
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.oscal.html">ymltoxml.oscal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.templates.html">ymltoxml.templates module</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.yagrep.html">ymltoxml.yagrep module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html">ymltoxml.yasort module</a></li>
@@ -114,6 +115,13 @@ create ‘inefficient’ custom string dumper.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.utils.get_cachedir">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.utils.</span></span><span class="sig-name descname"><span class="pre">get_cachedir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dir_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'yml_cache'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/utils.html#get_cachedir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.utils.get_cachedir" title="Link to this definition"></a></dt>
+<dd><p>Get temp cachedir (create it if needed) and override the dir_name if
+passed.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.utils.get_filelist">
 <span class="sig-prename descclassname"><span class="pre">ymltoxml.utils.</span></span><span class="sig-name descname"><span class="pre">get_filelist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/utils.html#get_filelist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.utils.get_filelist" title="Link to this definition"></a></dt>
 <dd><p>Get path objects matching <code class="docutils literal notranslate"><span class="pre">filepattern</span></code> starting at <code class="docutils literal notranslate"><span class="pre">dirpath</span></code> and
@@ -152,6 +160,12 @@ not found in current directory, the default will be loaded.</p>
 <dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.utils.pystache_render">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.utils.</span></span><span class="sig-name descname"><span class="pre">pystache_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/utils.html#pystache_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.utils.pystache_render" title="Link to this definition"></a></dt>
+<dd><p>Render pystache template with strict mode enabled.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -201,6 +215,13 @@ not found in current directory, the default will be loaded.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.utils.text_data_writer">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.utils.</span></span><span class="sig-name descname"><span class="pre">text_data_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">popts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/utils.html#text_data_writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.utils.text_data_writer" title="Link to this definition"></a></dt>
+<dd><p>Text data output with optional formatting (default is raw); uses config
+setting for output format.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.utils.text_file_reader">
 <span class="sig-prename descclassname"><span class="pre">ymltoxml.utils.</span></span><span class="sig-name descname"><span class="pre">text_file_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/utils.html#text_file_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.utils.text_file_reader" title="Link to this definition"></a></dt>
 <dd><p>Text file reader for specific data types plus raw text. Tries to handle
@@ -229,7 +250,7 @@ all supported types of data, return a list of objects.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ymltoxml.oscal.html" class="btn btn-neutral float-left" title="ymltoxml.oscal module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ymltoxml.templates.html" class="btn btn-neutral float-left" title="ymltoxml.templates module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="ymltoxml.yagrep.html" class="btn btn-neutral float-right" title="ymltoxml.yagrep module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -8,6 +8,7 @@ Submodules
    :maxdepth: 4
 
    ymltoxml.oscal
+   ymltoxml.templates
    ymltoxml.utils
    ymltoxml.yagrep
    ymltoxml.yasort

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.oscal module &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
+  <title>ymltoxml.templates module &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ymltoxml.templates module" href="ymltoxml.templates.html" />
-    <link rel="prev" title="ymltoxml package" href="ymltoxml.html" /> 
+    <link rel="next" title="ymltoxml.utils module" href="ymltoxml.utils.html" />
+    <link rel="prev" title="ymltoxml.oscal module" href="ymltoxml.oscal.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -56,8 +56,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">ymltoxml</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="ymltoxml.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.oscal module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.templates.html">ymltoxml.templates module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ymltoxml.oscal.html">ymltoxml.oscal module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.templates module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html">ymltoxml.utils module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.yagrep.html">ymltoxml.yagrep module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html">ymltoxml.yasort module</a></li>
@@ -88,9 +88,9 @@
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="modules.html">ymltoxml</a></li>
           <li class="breadcrumb-item"><a href="ymltoxml.html">ymltoxml package</a></li>
-      <li class="breadcrumb-item active">ymltoxml.oscal module</li>
+      <li class="breadcrumb-item active">ymltoxml.templates module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/ymltoxml.oscal.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/ymltoxml.templates.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,19 +98,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ymltoxml.oscal">
-<span id="ymltoxml-oscal-module"></span><h1>ymltoxml.oscal module<a class="headerlink" href="#module-ymltoxml.oscal" title="Link to this heading"></a></h1>
-<p>The main init, run, and self-test functions for oscal extract.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.oscal.main">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.main" title="Link to this definition"></a></dt>
-<dd><p>Collect and process command options/arguments and then process data.</p>
+  <section id="module-ymltoxml.templates">
+<span id="ymltoxml-templates-module"></span><h1>ymltoxml.templates module<a class="headerlink" href="#module-ymltoxml.templates" title="Link to this heading"></a></h1>
+<p>Template bits for generating SSG-style controls in YAML.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ymltoxml.templates.Attachable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ymltoxml.templates.</span></span><span class="sig-name descname"><span class="pre">Attachable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/templates.html#Attachable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.templates.Attachable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class that attaches all constructor named parameters as attributes.
+For example–</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span> <span class="o">=</span> <span class="n">Attachable</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;of the universe&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">repr</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="go">&quot;Attachable(foo=42, size=&#39;of the universe&#39;)&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">foo</span>
+<span class="go">42</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">obj</span><span class="o">.</span><span class="n">size</span>
+<span class="go">&#39;of the universe&#39;</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.oscal.self_test">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">self_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#self_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.self_test" title="Link to this definition"></a></dt>
-<dd><p>Basic sanity check using <code class="docutils literal notranslate"><span class="pre">import_module</span></code>.</p>
+<dt class="sig sig-object py" id="ymltoxml.templates.generate_control">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.templates.</span></span><span class="sig-name descname"><span class="pre">generate_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/templates.html#generate_control"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.templates.generate_control" title="Link to this definition"></a></dt>
+<dd><p>Render an ID template string given a context dict.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.templates.xform_id">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.templates.</span></span><span class="sig-name descname"><span class="pre">xform_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/templates.html#xform_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.templates.xform_id" title="Link to this definition"></a></dt>
+<dd><p>Transform control ID string:</p>
+<p>AC-12(2) &lt;==&gt; ac-12.2</p>
 </dd></dl>
 
 </section>
@@ -119,8 +137,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ymltoxml.html" class="btn btn-neutral float-left" title="ymltoxml package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ymltoxml.templates.html" class="btn btn-neutral float-right" title="ymltoxml.templates module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ymltoxml.oscal.html" class="btn btn-neutral float-left" title="ymltoxml.oscal module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ymltoxml.utils.html" class="btn btn-neutral float-right" title="ymltoxml.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

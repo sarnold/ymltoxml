@@ -1,0 +1,7 @@
+ymltoxml.templates module
+=========================
+
+.. automodule:: ymltoxml.templates
+   :members:
+   :undoc-members:
+   :show-inheritance:
