@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.oscal module &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
+  <title>ymltoxml.oscal module &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,8 +15,8 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=967364b7"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -49,7 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">ymltoxml (and more YAML tools)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
@@ -102,14 +102,42 @@
 <span id="ymltoxml-oscal-module"></span><h1>ymltoxml.oscal module<a class="headerlink" href="#module-ymltoxml.oscal" title="Link to this heading"></a></h1>
 <p>The main init, run, and self-test functions for oscal extract.</p>
 <dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.oscal.csv_append_id_data">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">csv_append_id_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#csv_append_id_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.csv_append_id_data" title="Link to this definition"></a></dt>
+<dd><p>Append/update column data using ID sets and write a new csv file using
+the given filename with <code class="docutils literal notranslate"><span class="pre">.modified</span></code> appended to the filename stem.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.oscal.id_set_match">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">id_set_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#id_set_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.id_set_match" title="Link to this definition"></a></dt>
+<dd><p>Quick set match analysis of ID sets.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.oscal.load_input_data">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">load_input_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_ssg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#load_input_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.load_input_data" title="Link to this definition"></a></dt>
+<dd><p>Find and gather the inputs, ie, content file(s) and user control IDs,
+into a tuple of lists (id_list, file_tuple_list). Load up the queues
+and return a tuple of both queues and the list of normalized user IDs
+from <code class="docutils literal notranslate"><span class="pre">filepath</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.oscal.main">
 <span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.main" title="Link to this definition"></a></dt>
 <dd><p>Collect and process command options/arguments and then process data.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="ymltoxml.oscal.process_data">
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">process_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#process_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.process_data" title="Link to this definition"></a></dt>
+<dd><p>Process inputs, print some output.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="ymltoxml.oscal.self_test">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">self_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#self_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.self_test" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">ymltoxml.oscal.</span></span><span class="sig-name descname"><span class="pre">self_test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ucfg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/oscal.html#self_test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.oscal.self_test" title="Link to this definition"></a></dt>
 <dd><p>Basic sanity check using <code class="docutils literal notranslate"><span class="pre">import_module</span></code>.</p>
 </dd></dl>
 

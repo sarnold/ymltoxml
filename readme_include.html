@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml (and xmltoyml) &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
+  <title>ymltoxml (and more YAML tools) &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,8 +15,8 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=967364b7"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/documentation_options.js?v=e34e449b"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -49,7 +49,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">ymltoxml (and xmltoyml)</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ymltoxml (and more YAML tools)</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-start">Quick Start</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#install-with-pip">Install with pip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ymltoxml">ymltoxml</a></li>
@@ -59,8 +59,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dev-workflows">Dev workflows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mavlink-support">Mavlink support</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#scap-support">SCAP support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mavlink-use-case">Mavlink use case</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scap-use-case">SCAP use case</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#in-repo-workflow-with-tox">In-repo workflow with Tox</a></li>
 </ul>
 </li>
@@ -88,7 +88,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">ymltoxml (and xmltoyml)</li>
+      <li class="breadcrumb-item active">ymltoxml (and more YAML tools)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/readme_include.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -98,17 +98,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="ymltoxml-and-xmltoyml">
-<h1>ymltoxml (and xmltoyml)<a class="headerlink" href="#ymltoxml-and-xmltoyml" title="Link to this heading"></a></h1>
+  <section id="ymltoxml-and-more-yaml-tools">
+<h1>ymltoxml (and more YAML tools)<a class="headerlink" href="#ymltoxml-and-more-yaml-tools" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/ci.yml"><img alt="CI Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/ci.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/wheels.yml"><img alt="Wheel Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/wheels.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/release.yml"><img alt="Release Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/release.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml"><img alt="Pylint Status" src="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml/badge.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/coverage.yml"><img alt="Coverage workflow" src="https://github.com/sarnold/ymltoxml/actions/workflows/coverage.yml/badge.svg" /></a></p>
 <p><a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/"><img alt="Test coverage" src="https://raw.githubusercontent.com/sarnold/ymltoxml/badges/main/test-coverage.svg" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/actions/workflows/pylint.yml"><img alt="Pylint score" src="https://raw.githubusercontent.com/sarnold/ymltoxml/badges/main/pylint-score.svg" /></a></p>
 <p><a class="reference external" href="https://github.com/sarnold/ymltoxml/releases"><img alt="GitHub tag" src="https://img.shields.io/github/v/tag/sarnold/ymltoxml?color=green&amp;include_prereleases&amp;label=latest%20release" /></a> <a class="reference external" href="https://github.com/sarnold/ymltoxml/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/sarnold/ymltoxml" /></a> <a class="reference external" href="https://www.python.org/downloads/"><img alt="Python" src="https://img.shields.io/badge/python-3.8+-blue.svg" /></a></p>
-<p>Python command line tools to convert between <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Markup_Language">XML</a> files and <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a> files,
+<p>Python command line tools to convert files between <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Markup_Language">XML</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/YAML">YAML</a>,
 preserving attributes and comments (with minor corrections).  The default
 file encoding for both types is UTF-8 without a BOM. Now includes more
 console entry points to grep or sort interesting YAML files (eg, lists
-of rules found in the <a class="reference external" href="https://github.com/ComplianceAsCode/content">SCAP Security Guide</a>) and more input file types
-to ingest SSG and other upstream data, eg, NIST <a class="reference external" href="https://github.com/usnistgov/oscal-content.git">oscal-content</a>.</p>
+of rules found in the <a class="reference external" href="https://github.com/ComplianceAsCode/content">SCAP Security Guide</a>) and support for more input
+file types to ingest SSG and other upstream data, eg, NIST <a class="reference external" href="https://github.com/usnistgov/oscal-content.git">oscal-content</a>.</p>
 <section id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading"></a></h2>
 <p>Available console commands and scripts:</p>
@@ -183,11 +183,11 @@ either with or without the <code class="docutils literal notranslate"><span clas
 can be relative or absolute)</p>
 <ul>
 <li><p>when passing input files as arguments, the output file names/paths
-are the same as the input files but with the output extension</p></li>
+are the same as the input files but with the (new) output extension</p></li>
 </ul>
 </li>
 </ul>
-<p>By default it will process one more input files as command args, typically
+<p>By default it will process one or more input files as command args, typically
 in the current directory, however, the <code class="docutils literal notranslate"><span class="pre">--infile</span></code> option will only
 process a single file path, optionally with an output file path, with no
 extra (file) arguments.</p>
@@ -197,7 +197,7 @@ can use your own config file in the working directory; note the local
 copy must be named <code class="docutils literal notranslate"><span class="pre">.ymltoxml.yaml</span></code>.  To get a copy of the default
 configuration file, do:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd path/to/work/dir/
-$ ymltoxml --dump-config &gt; .ymltoxml.yaml
+$ ymltoxml --save-config
 $ $EDITOR .ymltoxml.yaml
 </pre></div>
 </div>
@@ -216,7 +216,7 @@ docs</a> for details).</p>
 <ul class="simple">
 <li><p>use the <code class="docutils literal notranslate"><span class="pre">-f</span></code> (filter) arg to search for a value string</p></li>
 <li><p>follow the (json) output from above to find the key name</p></li>
-<li><p>then use the <code class="docutils literal notranslate"><span class="pre">-l</span></code> (lookup) arg to extract the values for the above key</p></li>
+<li><p>then use the <code class="docutils literal notranslate"><span class="pre">-l</span></code> (lookup) arg to extract the values for the key</p></li>
 </ul>
 <p>Useful yagrep config file settings:</p>
 <dl class="field-list simple">
@@ -225,7 +225,7 @@ docs</a> for details).</p>
 has forward slashes</p>
 </dd>
 <dt class="field-even">output_format<span class="colon">:</span></dt>
-<dd class="field-even"><p>set the output format to <code class="docutils literal notranslate"><span class="pre">raw</span></code> for unformmated output</p>
+<dd class="field-even"><p>set the output format to <code class="docutils literal notranslate"><span class="pre">raw</span></code> for unformatted output</p>
 </dd>
 </dl>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yagrep -h
@@ -256,9 +256,9 @@ options:
 </section>
 <section id="yasort">
 <h3>yasort<a class="headerlink" href="#yasort" title="Link to this heading"></a></h3>
-<p>Another helper script is included for sorting large (YAML) lists.
-The <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script also uses its own configuration file, creatively named
-<code class="docutils literal notranslate"><span class="pre">.yasort.yaml</span></code>. The above applies equally to this config file.</p>
+<p>Yet another helper script is included for sorting large (YAML) lists.
+The <code class="docutils literal notranslate"><span class="pre">yasort</span></code> script also uses its own configuration file, creatively
+named <code class="docutils literal notranslate"><span class="pre">.yasort.yaml</span></code>. The above applies equally to this config file.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yasort -h
 usage: yasort [-h] [--version] [-v] [-d] [-s] [FILE ...]
 
@@ -317,13 +317,13 @@ the following:</p>
 <h2>Dev workflows<a class="headerlink" href="#dev-workflows" title="Link to this heading"></a></h2>
 <p>The following covers two types of workflows, one for tool usage in other
 (external) projects, and one for (internal) tool development.</p>
-<section id="mavlink-support">
-<h3>Mavlink support<a class="headerlink" href="#mavlink-support" title="Link to this heading"></a></h3>
-<p>The ymltoxml tool is intended to be part of larger workflow, ie, developing
-custom mavlink message dialects and generating/deploying the resulting
-mavlink language interfaces.  To be more specific, for this example we
-use a mavlink-compatible component running on a micro-controller, thus
-the target language bindings are C and C++.</p>
+<section id="mavlink-use-case">
+<h3>Mavlink use case<a class="headerlink" href="#mavlink-use-case" title="Link to this heading"></a></h3>
+<p>The ymltoxml tools are intended to be part of a larger workflow, ie,
+developing custom mavlink message dialects and generating/deploying the
+resulting mavlink language interfaces.  To be more specific, for this
+example we use a mavlink-compatible component running on a micro-controller,
+thus the target language bindings are C and C++.</p>
 <p>Tool requirements for the full mavlink workflow:</p>
 <ul class="simple">
 <li><p>initially just recent pymavlink, Python, and <a class="reference external" href="https://github.com/tox-dev/tox">Tox</a></p></li>
@@ -332,12 +332,13 @@ the target language bindings are C and C++.</p>
 however, the basic workflow to generate mavlink library headers requires
 only Git, Python, and Tox.</p>
 </section>
-<section id="scap-support">
-<h3>SCAP support<a class="headerlink" href="#scap-support" title="Link to this heading"></a></h3>
-<p>The yasort/yagrep tools are intended to be part of a larger workflow, mainly
-working with SCAP content, ie, the scap-security-guide source files (or
-just <a class="reference external" href="https://complianceascode.readthedocs.io/en/latest/">content</a>). It is currently used to sort profiles with large numbers
-of rules to make it easier to visually diff and spot duplicates, etc.</p>
+<section id="scap-use-case">
+<h3>SCAP use case<a class="headerlink" href="#scap-use-case" title="Link to this heading"></a></h3>
+<p>The yasort/yagrep tools are also intended to be part of a larger
+workflow, mainly working with SCAP content, ie, the scap-security-guide
+source files (or just <a class="reference external" href="https://complianceascode.readthedocs.io/en/latest/">content</a>). It is currently used to sort profiles
+with large numbers of rules, as well as create control files and analyze
+existing controls.</p>
 <p>The yasort configuration file defaults are based on existing yaml structure,
 but feel free to change them for another use case. To adjust how the sorting
 works, make a local config file (see above) and edit as needed the following

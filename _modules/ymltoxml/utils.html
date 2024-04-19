@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.utils &mdash; ymltoxml 0.3.1.dev19+g3e6cbe0 documentation</title>
+  <title>ymltoxml.utils &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,8 +14,8 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=967364b7"></script>
-        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -46,7 +46,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">ymltoxml (and xmltoyml)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">ymltoxml (and more YAML tools)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
@@ -83,12 +83,11 @@
 <span class="sd">Shared utility code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">collections</span>
 <span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span> <span class="nn">pystache</span>
@@ -119,6 +118,42 @@
     <span class="vm">__module__</span> <span class="o">=</span> <span class="ne">Exception</span><span class="o">.</span><span class="vm">__module__</span>
 
 
+<div class="viewcode-block" id="SortedSet">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.SortedSet">[docs]</a>
+<span class="k">class</span> <span class="nc">SortedSet</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Set</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Alternate set implementation favoring space over speed, while not</span>
+<span class="sd">    requiring the set elements to be hashable. We also add a sort method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">=</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+                <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SortedSet.sort">
+<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.SortedSet.sort">[docs]</a>
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">()&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,)</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%r</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
+
+
+
 <div class="viewcode-block" id="StrYAML">
 <a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML">[docs]</a>
 <span class="k">class</span> <span class="nc">StrYAML</span><span class="p">(</span><span class="n">YAML</span><span class="p">):</span>
@@ -134,18 +169,6 @@
         <span class="n">YAML</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">stream</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span></div>
 </div>
-
-
-
-<div class="viewcode-block" id="get_cachedir">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.get_cachedir">[docs]</a>
-<span class="k">def</span> <span class="nf">get_cachedir</span><span class="p">(</span><span class="n">dir_name</span><span class="o">=</span><span class="s1">&#39;yml_cache&#39;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get temp cachedir (create it if needed) and override the dir_name if</span>
-<span class="sd">    passed.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cache_dir</span><span class="p">,</span> <span class="n">dir_name</span><span class="p">)</span></div>
 
 
 
@@ -173,24 +196,20 @@
 
 <div class="viewcode-block" id="load_config">
 <a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.load_config">[docs]</a>
-<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">yasort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">yagrep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">prog_name</span><span class="o">=</span><span class="s1">&#39;ymltoxml&#39;</span><span class="p">,</span> <span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load yaml configuration file and munchify the data. If local file is</span>
 <span class="sd">    not found in current directory, the default will be loaded.</span>
 
+<span class="sd">    :param prog_name: filename of calling script (no extension)</span>
 <span class="sd">    :param file_encoding: file encoding of config file</span>
-<span class="sd">    :param yasort: True for yasort config</span>
 <span class="sd">    :param debug: enable extra processing info</span>
+<span class="sd">    :type prog_name: str</span>
 <span class="sd">    :type file_encoding: str</span>
-<span class="sd">    :type yasort: bool</span>
+<span class="sd">    :type debug: bool</span>
 <span class="sd">    :return: Munch cfg obj and cfg file as Path obj</span>
 <span class="sd">    :rtype: tuple</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;ymltoxml&#39;</span>
-    <span class="k">if</span> <span class="n">yasort</span><span class="p">:</span>
-        <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;yasort&#39;</span>
-    <span class="k">if</span> <span class="n">yagrep</span><span class="p">:</span>
-        <span class="n">prog_name</span> <span class="o">=</span> <span class="s1">&#39;yagrep&#39;</span>
     <span class="n">defconfig</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yml&#39;</span><span class="p">)</span>
 
     <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">defconfig</span> <span class="k">if</span> <span class="n">defconfig</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
@@ -286,25 +305,36 @@
 <span class="k">def</span> <span class="nf">text_data_writer</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">popts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text data output with optional formatting (default is raw); uses config</span>
-<span class="sd">    setting for output format.</span>
+<span class="sd">    setting for output format. Supports the same text file types supported</span>
+<span class="sd">    by the ``text_file_reader()`` input function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">is_seq</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">)</span>
+    <span class="n">csv_hdr</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;default_csv_hdr&#39;</span><span class="p">]</span>
     <span class="n">fmt</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;raw&#39;</span>
 
-    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;yaml&#39;</span><span class="p">:</span>
-        <span class="n">yaml</span> <span class="o">=</span> <span class="n">StrYAML</span><span class="p">()</span>
-        <span class="n">yaml</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span>
-            <span class="n">mapping</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">],</span>
-            <span class="n">sequence</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">],</span>
-            <span class="n">offset</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
-        <span class="p">)</span>
-        <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;preserve_quotes&#39;</span><span class="p">]</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span> <span class="ow">and</span> <span class="n">is_seq</span><span class="p">:</span>
+        <span class="n">field_names</span> <span class="o">=</span> <span class="n">csv_hdr</span> <span class="k">if</span> <span class="n">csv_hdr</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">outdata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">field_names</span><span class="p">)</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
 
-    <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;json&#39;</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;yaml&#39;</span><span class="p">:</span>
+            <span class="n">yaml</span> <span class="o">=</span> <span class="n">StrYAML</span><span class="p">()</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span>
+                <span class="n">mapping</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">],</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">],</span>
+                <span class="n">offset</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;preserve_quotes&#39;</span><span class="p">]</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
+
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 
 
