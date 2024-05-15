@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Changelog &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
+  <title>Changelog &mdash; yaml_tools 0.3.1.dev39+g5645bc1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -15,7 +15,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=07054132"></script>
+        <script src="_static/documentation_options.js?v=b26ae865"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -54,34 +54,45 @@
 <li class="toctree-l1"><a class="reference internal" href="dev/pre-commit-usage.html">Using Pre-Commit</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">yaml_tools</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">0.2.2 (2023-09-05)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">0.4.0 (2024-05-15)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#new">New</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#changes">Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fixes">Fixes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other">Other</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">0.2.1 (2023-07-16)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">0.3.0 (2024-03-12)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id3">New</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Other</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">0.2.0 (2023-07-15)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id6">0.2.2 (2023-09-05)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id7">New</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id8">Changes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id9">Fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">Other</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">0.1.0 (2022-06-22)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id12">New</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">Changes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">Fixes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">Other</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">0.2.1 (2023-07-16)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id11">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">Fixes</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id16">0.0.0 (2022-06-19)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">0.2.0 (2023-07-15)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id14">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">0.1.0 (2022-06-22)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id19">New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id20">Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">Fixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id22">Other</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id23">0.0.0 (2022-06-19)</a></li>
 </ul>
 </li>
 </ul>
@@ -113,16 +124,113 @@
   <section id="changelog">
 <h1>Changelog<a class="headerlink" href="#changelog" title="Link to this heading"></a></h1>
 <section id="id1">
-<h2>0.2.2 (2023-09-05)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<h2>0.4.0 (2024-05-15)<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
 <section id="new">
 <h3>New<a class="headerlink" href="#new" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add ID set analysis to oscal module, update tests and default cfg.
+[Steve Arnold]</p></li>
+<li><p>Add analysis script using SSG nist control files. [Steve Arnold]</p>
+<ul>
+<li><p>update project files for new dependencies</p></li>
+</ul>
+</li>
+<li><p>Add file reader to handle csv, json, yaml, and simple text files.
+[Steve Arnold]</p>
+<ul>
+<li><p>for each type, parse into a list of objects and return the list</p></li>
+<li><p>where simple text files are something like the control IDs
+in tests/data</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="changes">
+<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add more control status reporting, update oscal yaml config. [Steve
+Arnold]</p></li>
+<li><p>Cleanup deps and docstrings, add set compare to demo script. [Steve
+Arnold]</p></li>
+<li><p>Still more readme cleanup. [Steve Arnold]</p></li>
+<li><p>Commit initail name changes; package, imports, readme. [Steve Arnold]</p></li>
+<li><p>Make sure yagrep uses new output func, cleanup readme. [Steve Arnold]</p></li>
+<li><p>Bump tox workflow deps and cleanup/improve readme. [Steve Arnold]</p></li>
+<li><p>Bump all workflow action versions. [Steve Arnold]</p></li>
+<li><p>Add another text_file_reader consumer and cleanup some lint. [Steve
+Arnold]</p></li>
+</ul>
+</section>
+<section id="fixes">
+<h3>Fixes<a class="headerlink" href="#fixes" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Account for longer ID strings, update changelog and repolite cfgs.
+[Steve Arnold]</p>
+<ul>
+<li><p>update tests and older analysis script</p></li>
+<li><p>bump requirements-sync.txt for new repolite release</p></li>
+</ul>
+</li>
+<li><p>Cleanup docstrings after sphinx checks. [Steve Arnold]</p></li>
+</ul>
+</section>
+<section id="other">
+<h3>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Dev: add csv file munge option, cleanup oscal files. [Steve Arnold]</p>
+<ul>
+<li><p>add munge file arg to pass in csv data to compare and append
+a column for id set status, eg, whether ids in the input list
+are present in the csv data, and then mark the new column Y/N</p></li>
+<li><p>short-circuit munge file arg and feed it single column of
+control IDs</p></li>
+</ul>
+</li>
+<li><p>Add small set of test IDs from openembedded profile. [Steve Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>0.3.0 (2024-03-12)<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>New<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Add new console script, update reqs and packaging. [Steve Arnold]</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>Changes<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Cleanup new feature bits and update documentation. [Steve Arnold]</p>
+<ul>
+<li><p>use dpath.values for initial path search, and either dpath or
+nested_lookup for extracting values</p></li>
+<li><p>update readme for new script, update all the usage bits</p></li>
+<li><p>add new tests and update existing tests</p></li>
+<li><p>expand and cleanup tox file</p></li>
+</ul>
+</li>
+<li><p>Add new feature tests, update existing tests. [Steve Arnold]</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>Fixes<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Re-order yasort arg handling, update analyze script. [Steve Arnold]</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>0.2.2 (2023-09-05)<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<section id="id7">
+<h3>New<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add a changelog file and gitchangelog cfg, add to docs build. [Stephen
 L Arnold]</p></li>
 </ul>
 </section>
-<section id="changes">
-<h3>Changes<a class="headerlink" href="#changes" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>Changes<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Bump changelog for release, add tox cmd to (re)generate changes.
 [Stephen L Arnold]</p></li>
@@ -130,28 +238,17 @@ L Arnold]</p></li>
 <li><p>Still more readme cleanup. [Stephen L Arnold]</p></li>
 </ul>
 </section>
-<section id="fixes">
-<h3>Fixes<a class="headerlink" href="#fixes" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>Fixes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Clean up docstrings in utils. [Stephen L Arnold]</p></li>
 </ul>
 </section>
-<section id="other">
-<h3>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h3>
-<ul>
-<li><p>Merge pull request #11 from sarnold/docs-cleanup. [Steve Arnold]</p>
-<p>Docs cleanup</p>
-</li>
-<li><p>Merge pull request #10 from sarnold/comments. [Steve Arnold]</p>
-<p>Refactor libs, add tests, preserve comments in sorted list</p>
-</li>
-</ul>
 </section>
-</section>
-<section id="id2">
-<h2>0.2.1 (2023-07-16)<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<section id="id3">
-<h3>New<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id10">
+<h2>0.2.1 (2023-07-16)<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="id11">
+<h3>New<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Wire up sorting opts, cleanup config file, update readme. [Stephen L
 Arnold]</p>
@@ -161,26 +258,18 @@ Arnold]</p>
 </li>
 </ul>
 </section>
-<section id="id4">
-<h3>Fixes<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="id12">
+<h3>Fixes<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Ci: update artifact conditional. add inspection step. [Stephen L
 Arnold]</p></li>
 </ul>
 </section>
-<section id="id5">
-<h3>Other<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<ul>
-<li><p>Merge pull request #9 from sarnold/sort-opts. [Steve Arnold]</p>
-<p>wire up sorting opts</p>
-</li>
-</ul>
 </section>
-</section>
-<section id="id6">
-<h2>0.2.0 (2023-07-15)<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
-<section id="id7">
-<h3>New<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id13">
+<h2>0.2.0 (2023-07-15)<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<section id="id14">
+<h3>New<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add sorting script and default config, cleanup lint. [Stephen L
 Arnold]</p></li>
@@ -199,8 +288,8 @@ Arnold]</p>
 </li>
 </ul>
 </section>
-<section id="id8">
-<h3>Changes<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>Changes<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Readme cleanup, add note about yasort script. [Stephen L Arnold]</p></li>
 <li><p>Dbg: run tox bare-ass in github runner for workflow debug. [Stephen L
@@ -208,8 +297,8 @@ Arnold]</p></li>
 <li><p>Update readme with new usage output. [Stephen L Arnold]</p></li>
 </ul>
 </section>
-<section id="id9">
-<h3>Fixes<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id16">
+<h3>Fixes<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Use new path to source rst for github readme rendering. [Stephen L
 Arnold]</p></li>
@@ -221,44 +310,35 @@ Arnold]</p></li>
 </li>
 </ul>
 </section>
-<section id="id10">
-<h3>Other<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<ul>
-<li><p>Merge pull request #8 from sarnold/new-refactor. [Steve Arnold]</p>
-<p>code migration and cleanup</p>
-</li>
+<section id="id17">
+<h3>Other<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p>Adjust importlib version cutoff in reqs. [Stephen L Arnold]</p></li>
 <li><p>Move some shared code to separate module, update pre-commit cfg.
 [Stephen L Arnold]</p></li>
-<li><p>Merge pull request #6 from sarnold/cfg-update. [Steve Arnold]</p>
-<p>add config options and munch type stubs</p>
-</li>
-<li><p>Merge pull request #5 from sarnold/option-parse. [Steve Arnold]</p>
-<p>refactor arg handling</p>
-</li>
 </ul>
 </section>
 </section>
-<section id="id11">
-<h2>0.1.0 (2022-06-22)<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
-<section id="id12">
-<h3>New<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="id18">
+<h2>0.1.0 (2022-06-22)<a class="headerlink" href="#id18" title="Link to this heading"></a></h2>
+<section id="id19">
+<h3>New<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Add sphinx api-doc build, update readme and doc strings. [Stephen L
 Arnold]</p></li>
 <li><p>Add arg to dump default config yaml to stdout. [Stephen L Arnold]</p></li>
 </ul>
 </section>
-<section id="id13">
-<h3>Changes<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id20">
+<h3>Changes<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Update readme and usage output. [Stephen L Arnold]</p></li>
 <li><p>Flatten cfg file, use single cfg object, cleanup doc strings. [Stephen
 L Arnold]</p></li>
 </ul>
 </section>
-<section id="id14">
-<h3>Fixes<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id21">
+<h3>Fixes<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Replace old thing/new thing =&gt; use importlib for cfg file. [Stephen L
 Arnold]</p>
@@ -270,31 +350,19 @@ Arnold]</p>
 </li>
 </ul>
 </section>
-<section id="id15">
-<h3>Other<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
-<ul>
-<li><p>Merge pull request #4 from sarnold/pre-commit. [Steve Arnold]</p>
-<p>readme and pre-commit updates</p>
-</li>
-<li><p>Merge pull request #3 from sarnold/doc-updates. [Steve Arnold]</p>
-<p>Add sphinx doc build/workflow</p>
-</li>
+<section id="id22">
+<h3>Other<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p>Add docs workflow, fix broken doc link, update ci workflow. [Stephen L
 Arnold]</p></li>
-<li><p>Merge pull request #2 from sarnold/script-ref. [Steve Arnold]</p>
-<p>Script refactor plus packaging and workflows</p>
-</li>
 <li><p>Cleanup metadata/packaging and workflow files. [Stephen L Arnold]</p></li>
 <li><p>Add more CI workflows for wheels, pylint, release. [Stephen L Arnold]</p></li>
 </ul>
 </section>
 </section>
-<section id="id16">
-<h2>0.0.0 (2022-06-19)<a class="headerlink" href="#id16" title="Link to this heading"></a></h2>
-<ul>
-<li><p>Merge pull request #1 from sarnold/cleanup-poc. [Steve Arnold]</p>
-<p>Cleanup poc</p>
-</li>
+<section id="id23">
+<h2>0.0.0 (2022-06-19)<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
+<ul class="simple">
 <li><p>Initial commit with test scripts and tox driver. [Stephen L Arnold]</p></li>
 <li><p>Initial commit. [Steve Arnold]</p></li>
 </ul>
