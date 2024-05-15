@@ -1,7 +1,7 @@
-ymltoxml
-========
+yaml_tools
+==========
 
 .. toctree::
    :maxdepth: 4
 
-   ymltoxml
+   yaml_tools

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.utils &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
+  <title>yaml_tools.utils &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../../_static/documentation_options.js?v=07054132"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ymltoxml
+            yaml_tools
           </a>
               <div class="version">
                 0.3
@@ -46,11 +46,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">ymltoxml (and more YAML tools)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">yaml-tools (and more for CSV and XML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">ymltoxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">yaml_tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 </ul>
 
@@ -60,7 +60,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ymltoxml</a>
+          <a href="../../index.html">yaml_tools</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ymltoxml.utils</li>
+      <li class="breadcrumb-item active">yaml_tools.utils</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,7 +78,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ymltoxml.utils</h1><div class="highlight"><pre>
+  <h1>Source code for yaml_tools.utils</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Shared utility code.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -93,6 +93,7 @@
 <span class="kn">import</span> <span class="nn">pystache</span>
 <span class="kn">import</span> <span class="nn">yaml</span> <span class="k">as</span> <span class="nn">yaml_loader</span>
 <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">Munch</span>
+<span class="kn">from</span> <span class="nn">natsort</span> <span class="kn">import</span> <span class="n">os_sorted</span>
 <span class="kn">from</span> <span class="nn">ruamel.yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
 <span class="kn">from</span> <span class="nn">ruamel.yaml.compat</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
@@ -107,7 +108,14 @@
     <span class="kn">import</span> <span class="nn">importlib.resources</span> <span class="k">as</span> <span class="nn">importlib_resources</span>
 
 <span class="n">EXTENSIONS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;.json&#39;</span><span class="p">,</span> <span class="s1">&#39;.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;.yaml&#39;</span><span class="p">,</span> <span class="s1">&#39;.yml&#39;</span><span class="p">]</span>
-<span class="n">VERSION</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s1">&#39;ymltoxml&#39;</span><span class="p">)</span>
+<span class="n">PROFILE_ID_FILES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;HIGH-ids.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;MODERATE-ids.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;LOW-ids.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;PRIVACY-ids.txt&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">PROFILE_NAMES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> <span class="s1">&#39;MODERATE&#39;</span><span class="p">,</span> <span class="s1">&#39;LOW&#39;</span><span class="p">,</span> <span class="s1">&#39;PRIVACY&#39;</span><span class="p">]</span>
+<span class="n">VERSION</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s1">&#39;yaml_tools&#39;</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">FileTypeError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -119,7 +127,7 @@
 
 
 <div class="viewcode-block" id="SortedSet">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.SortedSet">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.SortedSet">[docs]</a>
 <span class="k">class</span> <span class="nc">SortedSet</span><span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Set</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Alternate set implementation favoring space over speed, while not</span>
@@ -142,7 +150,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SortedSet.sort">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.SortedSet.sort">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.SortedSet.sort">[docs]</a>
     <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span></div>
 
@@ -155,7 +163,7 @@
 
 
 <div class="viewcode-block" id="StrYAML">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.StrYAML">[docs]</a>
 <span class="k">class</span> <span class="nc">StrYAML</span><span class="p">(</span><span class="n">YAML</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    New API likes dumping straight to file/stdout, so we subclass and</span>
@@ -163,7 +171,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="StrYAML.dump">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.StrYAML.dump">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.StrYAML.dump">[docs]</a>
     <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
         <span class="n">YAML</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
@@ -173,7 +181,7 @@
 
 
 <div class="viewcode-block" id="get_filelist">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.get_filelist">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.get_filelist">[docs]</a>
 <span class="k">def</span> <span class="nf">get_filelist</span><span class="p">(</span><span class="n">dirpath</span><span class="p">,</span> <span class="n">filepattern</span><span class="o">=</span><span class="s1">&#39;*.txt&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get path objects matching ``filepattern`` starting at ``dirpath`` and</span>
@@ -194,8 +202,46 @@
 
 
 
+<div class="viewcode-block" id="get_profile_ids">
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.get_profile_ids">[docs]</a>
+<span class="k">def</span> <span class="nf">get_profile_ids</span><span class="p">(</span><span class="n">prog_opts</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replacement for ``get_filelist()`` when using the NIST profile ID text</span>
+<span class="sd">    files (which are now packaged with the YAML config files).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">id_str_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">id_data</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;yaml_tools&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">PROFILE_ID_FILES</span><span class="p">:</span>
+        <span class="n">ptype</span> <span class="o">=</span> <span class="n">get_profile_type</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">debug</span><span class="p">)</span>
+        <span class="n">pdata</span> <span class="o">=</span> <span class="n">os_sorted</span><span class="p">(</span>
+            <span class="n">id_data</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;file_encoding&#39;</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">id_str_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ptype</span><span class="p">,</span> <span class="n">pdata</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">id_str_data</span></div>
+
+
+
+<div class="viewcode-block" id="get_profile_type">
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.get_profile_type">[docs]</a>
+<span class="k">def</span> <span class="nf">get_profile_type</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get oscal profile type from filename, where profile type is one of the</span>
+<span class="sd">    exported profile names, ie, HIGH, MODERATE, LOW, or PRIVACY.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pmatch</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">PROFILE_NAMES</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="n">pmatch</span> <span class="o">=</span> <span class="n">x</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found profile type: </span><span class="si">{</span><span class="n">pmatch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pmatch</span></div>
+
+
+
 <div class="viewcode-block" id="load_config">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.load_config">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.load_config">[docs]</a>
 <span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">prog_name</span><span class="o">=</span><span class="s1">&#39;ymltoxml&#39;</span><span class="p">,</span> <span class="n">file_encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Load yaml configuration file and munchify the data. If local file is</span>
@@ -214,7 +260,9 @@
 
     <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">defconfig</span> <span class="k">if</span> <span class="n">defconfig</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">else</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;.</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">cfgfile</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;ymltoxml.data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">)</span>
+        <span class="n">cfgfile</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s1">&#39;yaml_tools.data&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prog_name</span><span class="si">}</span><span class="s1">.yaml&#39;</span>
+        <span class="p">)</span>
     <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Using config: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">cfgfile</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">cfgobj</span> <span class="o">=</span> <span class="n">Munch</span><span class="o">.</span><span class="n">fromYAML</span><span class="p">(</span><span class="n">cfgfile</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="n">file_encoding</span><span class="p">))</span>
@@ -224,7 +272,7 @@
 
 
 <div class="viewcode-block" id="pystache_render">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.pystache_render">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.pystache_render">[docs]</a>
 <span class="k">def</span> <span class="nf">pystache_render</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Render pystache template with strict mode enabled.</span>
@@ -235,7 +283,7 @@
 
 
 <div class="viewcode-block" id="replace_angles">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.replace_angles">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.replace_angles">[docs]</a>
 <span class="k">def</span> <span class="nf">replace_angles</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replace angle bracket with original curly brace.</span>
@@ -246,7 +294,7 @@
 
 
 <div class="viewcode-block" id="replace_curlys">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.replace_curlys">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.replace_curlys">[docs]</a>
 <span class="k">def</span> <span class="nf">replace_curlys</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replace original outside curly brace with angle bracket.</span>
@@ -257,7 +305,7 @@
 
 
 <div class="viewcode-block" id="restore_xml_comments">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.restore_xml_comments">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.restore_xml_comments">[docs]</a>
 <span class="k">def</span> <span class="nf">restore_xml_comments</span><span class="p">(</span><span class="n">xmls</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn tagged comment elements back into xml comments.</span>
@@ -274,7 +322,7 @@
 
 
 <div class="viewcode-block" id="sort_from_parent">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.sort_from_parent">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.sort_from_parent">[docs]</a>
 <span class="k">def</span> <span class="nf">sort_from_parent</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sort a list based on whether the target sort key has a parent key.</span>
@@ -301,19 +349,18 @@
 
 
 <div class="viewcode-block" id="text_data_writer">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.text_data_writer">[docs]</a>
-<span class="k">def</span> <span class="nf">text_data_writer</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">popts</span><span class="p">):</span>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.text_data_writer">[docs]</a>
+<span class="k">def</span> <span class="nf">text_data_writer</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text data output with optional formatting (default is raw); uses config</span>
 <span class="sd">    setting for output format. Supports the same text file types supported</span>
 <span class="sd">    by the ``text_file_reader()`` input function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">is_seq</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">)</span>
-    <span class="n">csv_hdr</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;default_csv_hdr&#39;</span><span class="p">]</span>
-    <span class="n">fmt</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;raw&#39;</span>
+    <span class="n">csv_hdr</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_csv_hdr&#39;</span><span class="p">]</span>
+    <span class="n">fmt</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;output_format&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;raw&#39;</span>
 
-    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span> <span class="ow">and</span> <span class="n">is_seq</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">outdata</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">):</span>
         <span class="n">field_names</span> <span class="o">=</span> <span class="n">csv_hdr</span> <span class="k">if</span> <span class="n">csv_hdr</span> <span class="k">else</span> <span class="nb">list</span><span class="p">(</span><span class="n">outdata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="n">w</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">field_names</span><span class="p">)</span>
         <span class="n">w</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
@@ -325,11 +372,11 @@
         <span class="k">elif</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;yaml&#39;</span><span class="p">:</span>
             <span class="n">yaml</span> <span class="o">=</span> <span class="n">StrYAML</span><span class="p">()</span>
             <span class="n">yaml</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span>
-                <span class="n">mapping</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">],</span>
-                <span class="n">sequence</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">],</span>
-                <span class="n">offset</span><span class="o">=</span><span class="n">popts</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
+                <span class="n">mapping</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;mapping&#39;</span><span class="p">],</span>
+                <span class="n">sequence</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;sequence&#39;</span><span class="p">],</span>
+                <span class="n">offset</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">],</span>
             <span class="p">)</span>
-            <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">popts</span><span class="p">[</span><span class="s1">&#39;preserve_quotes&#39;</span><span class="p">]</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;preserve_quotes&#39;</span><span class="p">]</span>
             <span class="n">out</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">out</span> <span class="o">=</span> <span class="nb">repr</span><span class="p">(</span><span class="n">outdata</span><span class="p">)</span>
@@ -339,7 +386,7 @@
 
 
 <div class="viewcode-block" id="text_file_reader">
-<a class="viewcode-back" href="../../api/ymltoxml.utils.html#ymltoxml.utils.text_file_reader">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.utils.html#yaml_tools.utils.text_file_reader">[docs]</a>
 <span class="k">def</span> <span class="nf">text_file_reader</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Text file reader for specific data types plus raw text. Tries to handle</span>
@@ -379,7 +426,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2024, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

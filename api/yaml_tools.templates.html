@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.templates module &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
+  <title>yaml_tools.templates module &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
@@ -15,14 +15,14 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../_static/documentation_options.js?v=07054132"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ymltoxml.utils module" href="ymltoxml.utils.html" />
-    <link rel="prev" title="ymltoxml.oscal module" href="ymltoxml.oscal.html" /> 
+    <link rel="next" title="yaml_tools.utils module" href="yaml_tools.utils.html" />
+    <link rel="prev" title="yaml_tools.oscal module" href="yaml_tools.oscal.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +34,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            ymltoxml
+            yaml_tools
           </a>
               <div class="version">
                 0.3
@@ -49,22 +49,22 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">ymltoxml (and more YAML tools)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">yaml-tools (and more for CSV and XML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ymltoxml</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="ymltoxml.html">ymltoxml package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="ymltoxml.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.oscal.html">ymltoxml.oscal module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">ymltoxml.templates module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.utils.html">ymltoxml.utils module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yagrep.html">ymltoxml.yagrep module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.yasort.html">ymltoxml.yasort module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="ymltoxml.ymltoxml.html">ymltoxml.ymltoxml module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">yaml_tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="yaml_tools.html">yaml_tools package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="yaml_tools.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.oscal.html">yaml_tools.oscal module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">yaml_tools.templates module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.utils.html">yaml_tools.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.yagrep.html">yaml_tools.yagrep module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.yasort.html">yaml_tools.yasort module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.ymltoxml.html">yaml_tools.ymltoxml module</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="ymltoxml.html#module-ymltoxml">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="yaml_tools.html#module-yaml_tools">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +78,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">ymltoxml</a>
+          <a href="../index.html">yaml_tools</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -86,11 +86,11 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">ymltoxml</a></li>
-          <li class="breadcrumb-item"><a href="ymltoxml.html">ymltoxml package</a></li>
-      <li class="breadcrumb-item active">ymltoxml.templates module</li>
+          <li class="breadcrumb-item"><a href="modules.html">yaml_tools</a></li>
+          <li class="breadcrumb-item"><a href="yaml_tools.html">yaml_tools package</a></li>
+      <li class="breadcrumb-item active">yaml_tools.templates module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/ymltoxml.templates.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/yaml_tools.templates.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -98,18 +98,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-ymltoxml.templates">
-<span id="ymltoxml-templates-module"></span><h1>ymltoxml.templates module<a class="headerlink" href="#module-ymltoxml.templates" title="Link to this heading"></a></h1>
+  <section id="module-yaml_tools.templates">
+<span id="yaml-tools-templates-module"></span><h1>yaml_tools.templates module<a class="headerlink" href="#module-yaml_tools.templates" title="Link to this heading"></a></h1>
 <p>Template bits for generating SSG-style controls in YAML.</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.templates.generate_control">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.templates.</span></span><span class="sig-name descname"><span class="pre">generate_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/templates.html#generate_control"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.templates.generate_control" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="yaml_tools.templates.generate_control">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.templates.</span></span><span class="sig-name descname"><span class="pre">generate_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/templates.html#generate_control"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.templates.generate_control" title="Link to this definition"></a></dt>
 <dd><p>Render an ID template string given a context dict.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="ymltoxml.templates.xform_id">
-<span class="sig-prename descclassname"><span class="pre">ymltoxml.templates.</span></span><span class="sig-name descname"><span class="pre">xform_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ymltoxml/templates.html#xform_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ymltoxml.templates.xform_id" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="yaml_tools.templates.xform_id">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.templates.</span></span><span class="sig-name descname"><span class="pre">xform_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/templates.html#xform_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.templates.xform_id" title="Link to this definition"></a></dt>
 <dd><p>Transform control ID string:</p>
 <p>AC-12(2) &lt;==&gt; ac-12.2</p>
 </dd></dl>
@@ -120,14 +120,14 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="ymltoxml.oscal.html" class="btn btn-neutral float-left" title="ymltoxml.oscal module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ymltoxml.utils.html" class="btn btn-neutral float-right" title="ymltoxml.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="yaml_tools.oscal.html" class="btn btn-neutral float-left" title="yaml_tools.oscal module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yaml_tools.utils.html" class="btn btn-neutral float-right" title="yaml_tools.utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2024, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

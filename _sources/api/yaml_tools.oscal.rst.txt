@@ -1,7 +1,7 @@
-ymltoxml.ymltoxml module
+yaml\_tools.oscal module
 ========================
 
-.. automodule:: ymltoxml.ymltoxml
+.. automodule:: yaml_tools.oscal
    :members:
    :undoc-members:
    :show-inheritance:

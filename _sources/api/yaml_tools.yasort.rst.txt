@@ -1,7 +1,7 @@
-ymltoxml.templates module
+yaml\_tools.yasort module
 =========================
 
-.. automodule:: ymltoxml.templates
+.. automodule:: yaml_tools.yasort
    :members:
    :undoc-members:
    :show-inheritance:

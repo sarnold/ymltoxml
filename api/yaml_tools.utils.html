@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>yaml_tools.utils module &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=07054132"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="yaml_tools.yagrep module" href="yaml_tools.yagrep.html" />
+    <link rel="prev" title="yaml_tools.templates module" href="yaml_tools.templates.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            yaml_tools
+          </a>
+              <div class="version">
+                0.3
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme_include.html">yaml-tools (and more for CSV and XML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/generate-changelog.html">Changelog Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">yaml_tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="yaml_tools.html">yaml_tools package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="yaml_tools.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.oscal.html">yaml_tools.oscal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.templates.html">yaml_tools.templates module</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">yaml_tools.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.yagrep.html">yaml_tools.yagrep module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.yasort.html">yaml_tools.yasort module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml_tools.ymltoxml.html">yaml_tools.ymltoxml module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="yaml_tools.html#module-yaml_tools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">yaml_tools</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">yaml_tools</a></li>
+          <li class="breadcrumb-item"><a href="yaml_tools.html">yaml_tools package</a></li>
+      <li class="breadcrumb-item active">yaml_tools.utils module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/yaml_tools.utils.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-yaml_tools.utils">
+<span id="yaml-tools-utils-module"></span><h1>yaml_tools.utils module<a class="headerlink" href="#module-yaml_tools.utils" title="Link to this heading"></a></h1>
+<p>Shared utility code.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="yaml_tools.utils.SortedSet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">SortedSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#SortedSet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.SortedSet" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></p>
+<p>Alternate set implementation favoring space over speed, while not
+requiring the set elements to be hashable. We also add a sort method.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="yaml_tools.utils.SortedSet.sort">
+<span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#SortedSet.sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.SortedSet.sort" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="yaml_tools.utils.StrYAML">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">StrYAML</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Text</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Text</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plug_ins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#StrYAML"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.StrYAML" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">YAML</span></code></p>
+<p>New API likes dumping straight to file/stdout, so we subclass and
+create ‘inefficient’ custom string dumper.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="yaml_tools.utils.StrYAML.dump">
+<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#StrYAML.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.StrYAML.dump" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.get_filelist">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_filelist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filepattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'*.txt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#get_filelist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.get_filelist" title="Link to this definition"></a></dt>
+<dd><p>Get path objects matching <code class="docutils literal notranslate"><span class="pre">filepattern</span></code> starting at <code class="docutils literal notranslate"><span class="pre">dirpath</span></code> and
+return a list of matching paths for any files found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dirpath</strong> – directory name to start file search</p></li>
+<li><p><strong>filepattern</strong> – str of the form <code class="docutils literal notranslate"><span class="pre">*.&lt;ext&gt;</span></code></p></li>
+<li><p><strong>debug</strong> – increase output verbosity</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of path strings</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.get_profile_ids">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_profile_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#get_profile_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.get_profile_ids" title="Link to this definition"></a></dt>
+<dd><p>Replacement for <code class="docutils literal notranslate"><span class="pre">get_filelist()</span></code> when using the NIST profile ID text
+files (which are now packaged with the YAML config files).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.get_profile_type">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">get_profile_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#get_profile_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.get_profile_type" title="Link to this definition"></a></dt>
+<dd><p>Get oscal profile type from filename, where profile type is one of the
+exported profile names, ie, HIGH, MODERATE, LOW, or PRIVACY.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.load_config">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">load_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prog_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ymltoxml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_encoding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'utf-8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#load_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.load_config" title="Link to this definition"></a></dt>
+<dd><p>Load yaml configuration file and munchify the data. If local file is
+not found in current directory, the default will be loaded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prog_name</strong> (<em>str</em>) – filename of calling script (no extension)</p></li>
+<li><p><strong>file_encoding</strong> (<em>str</em>) – file encoding of config file</p></li>
+<li><p><strong>debug</strong> (<em>bool</em>) – enable extra processing info</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Munch cfg obj and cfg file as Path obj</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.pystache_render">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">pystache_render</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#pystache_render"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.pystache_render" title="Link to this definition"></a></dt>
+<dd><p>Render pystache template with strict mode enabled.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.replace_angles">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">replace_angles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#replace_angles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.replace_angles" title="Link to this definition"></a></dt>
+<dd><p>Replace angle bracket with original curly brace.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.replace_curlys">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">replace_curlys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#replace_curlys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.replace_curlys" title="Link to this definition"></a></dt>
+<dd><p>Replace original outside curly brace with angle bracket.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.restore_xml_comments">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">restore_xml_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xmls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#restore_xml_comments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.restore_xml_comments" title="Link to this definition"></a></dt>
+<dd><p>Turn tagged comment elements back into xml comments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>xmls</strong> (<em>str</em>) – xml (file) output from <code class="docutils literal notranslate"><span class="pre">unparse</span></code></p>
+</dd>
+<dt class="field-even">Return xmls<span class="colon">:</span></dt>
+<dd class="field-even"><p>processed xml string</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.sort_from_parent">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">sort_from_parent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#sort_from_parent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.sort_from_parent" title="Link to this definition"></a></dt>
+<dd><p>Sort a list based on whether the target sort key has a parent key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_data</strong> – Dict obj representing YAML input data</p></li>
+<li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return input_data<span class="colon">:</span></dt>
+<dd class="field-even"><p>sorted input</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.text_data_writer">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">text_data_writer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outdata</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#text_data_writer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.text_data_writer" title="Link to this definition"></a></dt>
+<dd><p>Text data output with optional formatting (default is raw); uses config
+setting for output format. Supports the same text file types supported
+by the <code class="docutils literal notranslate"><span class="pre">text_file_reader()</span></code> input function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="yaml_tools.utils.text_file_reader">
+<span class="sig-prename descclassname"><span class="pre">yaml_tools.utils.</span></span><span class="sig-name descname"><span class="pre">text_file_reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prog_opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/yaml_tools/utils.html#text_file_reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#yaml_tools.utils.text_file_reader" title="Link to this definition"></a></dt>
+<dd><p>Text file reader for specific data types plus raw text. Tries to handle
+YAML, JSON, CSV, and plain old text. Read and parse the file data if
+<code class="docutils literal notranslate"><span class="pre">filepath</span></code> is one of the expected types and return data objects. For
+all supported types of data, return a list of objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filepath</strong> – filename/path as str</p></li>
+<li><p><strong>prog_opts</strong> (<em>dict</em>) – configuration options</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return object<span class="colon">:</span></dt>
+<dd class="field-even"><p>file data as list</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>FileTypeError</strong> – if input file extension is not in EXTENSIONS</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="yaml_tools.templates.html" class="btn btn-neutral float-left" title="yaml_tools.templates module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="yaml_tools.yagrep.html" class="btn btn-neutral float-right" title="yaml_tools.yagrep module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Stephen L Arnold.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

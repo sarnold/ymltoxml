@@ -1,0 +1,7 @@
+yaml\_tools.templates module
+============================
+
+.. automodule:: yaml_tools.templates
+   :members:
+   :undoc-members:
+   :show-inheritance:

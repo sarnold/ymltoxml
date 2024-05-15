@@ -1,7 +1,0 @@
-ymltoxml.utils module
-=====================
-
-.. automodule:: ymltoxml.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,7 +1,0 @@
-ymltoxml.yagrep module
-======================
-
-.. automodule:: ymltoxml.yagrep
-   :members:
-   :undoc-members:
-   :show-inheritance:

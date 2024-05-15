@@ -1,5 +1,5 @@
-Welcome to the ymltoxml documentation!
-======================================
+Welcome to the yaml-tools documentation!
+========================================
 
 .. git_commit_detail::
     :branch:

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.oscal &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
+  <title>yaml_tools.oscal &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../../_static/documentation_options.js?v=07054132"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ymltoxml
+            yaml_tools
           </a>
               <div class="version">
                 0.3
@@ -46,11 +46,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">ymltoxml (and more YAML tools)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">yaml-tools (and more for CSV and XML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">ymltoxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">yaml_tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 </ul>
 
@@ -60,7 +60,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ymltoxml</a>
+          <a href="../../index.html">yaml_tools</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ymltoxml.oscal</li>
+      <li class="breadcrumb-item active">yaml_tools.oscal</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,7 +78,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ymltoxml.oscal</h1><div class="highlight"><pre>
+  <h1>Source code for yaml_tools.oscal</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">The main init, run, and self-test functions for oscal extract.</span>
 <span class="sd">&quot;&quot;&quot;</span>
@@ -92,7 +92,6 @@
 
 <span class="kn">from</span> <span class="nn">munch</span> <span class="kn">import</span> <span class="n">Munch</span>
 <span class="kn">from</span> <span class="nn">natsort</span> <span class="kn">import</span> <span class="n">os_sorted</span>
-
 <span class="kn">from</span> <span class="nn">nested_lookup</span> <span class="kn">import</span> <span class="n">nested_lookup</span>
 
 <span class="kn">from</span> <span class="nn">.templates</span> <span class="kn">import</span> <span class="n">xform_id</span>
@@ -109,7 +108,7 @@
 
 
 <div class="viewcode-block" id="csv_append_id_data">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.csv_append_id_data">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.csv_append_id_data">[docs]</a>
 <span class="k">def</span> <span class="nf">csv_append_id_data</span><span class="p">(</span><span class="n">in_ids</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">uargs</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Append/update column data using ID sets and write a new csv file using</span>
@@ -143,7 +142,7 @@
 
 
 <div class="viewcode-block" id="load_input_data">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.load_input_data">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.load_input_data">[docs]</a>
 <span class="k">def</span> <span class="nf">load_input_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">use_ssg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find and gather the inputs, ie, content file(s) and user control IDs,</span>
@@ -209,7 +208,7 @@
 
 
 <div class="viewcode-block" id="process_data">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.process_data">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.process_data">[docs]</a>
 <span class="k">def</span> <span class="nf">process_data</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">uargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Process inputs, print some output.</span>
@@ -218,17 +217,37 @@
         <span class="n">input_ids</span> <span class="o">=</span> <span class="n">text_file_reader</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">)</span>
         <span class="n">csv_append_id_data</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">prog_opts</span><span class="o">=</span><span class="n">prog_opts</span><span class="p">,</span> <span class="n">uargs</span><span class="o">=</span><span class="n">uargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">input_ids</span><span class="p">,</span> <span class="n">id_queue</span><span class="p">,</span> <span class="n">ctls</span> <span class="o">=</span> <span class="n">load_input_data</span><span class="p">(</span>
+        <span class="n">input_ids</span><span class="p">,</span> <span class="n">id_queue</span><span class="p">,</span> <span class="n">ctl_queue</span> <span class="o">=</span> <span class="n">load_input_data</span><span class="p">(</span>
             <span class="n">filepath</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">use_ssg</span><span class="o">=</span><span class="n">uargs</span><span class="o">.</span><span class="n">ssg</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="n">uargs</span><span class="o">.</span><span class="n">verbose</span>
         <span class="p">)</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">id_set_match</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">id_queue</span><span class="p">,</span> <span class="n">uargs</span><span class="o">=</span><span class="n">uargs</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">uargs</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Input control Ids -&gt; </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+        <span class="n">in_list</span><span class="p">,</span> <span class="n">not_in_list</span> <span class="o">=</span> <span class="n">id_set_match</span><span class="p">(</span><span class="n">input_ids</span><span class="p">,</span> <span class="n">id_queue</span><span class="p">,</span> <span class="n">uargs</span><span class="o">=</span><span class="n">uargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Control queue has </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ctl_queue</span><span class="p">)</span><span class="si">}</span><span class="s1"> items&#39;</span><span class="p">)</span>
+        <span class="n">rpt_attr</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_control_attr&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">prog_opts</span><span class="p">[</span><span class="s1">&#39;default_control_attr&#39;</span><span class="p">]</span>
+            <span class="k">else</span> <span class="n">uargs</span><span class="o">.</span><span class="n">attribute</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">uargs</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Checking input IDs: </span><span class="si">{</span><span class="n">in_list</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">ID,</span><span class="si">{</span><span class="n">rpt_attr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ctl</span> <span class="ow">in</span> <span class="n">ctl_queue</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">in_list</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ctl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">ctl</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">rpt_attr</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ssg_ctrl_from_nist">
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.ssg_ctrl_from_nist">[docs]</a>
+<span class="k">def</span> <span class="nf">ssg_ctrl_from_nist</span><span class="p">(</span><span class="n">in_id</span><span class="p">,</span> <span class="n">prog_opts</span><span class="p">,</span> <span class="n">uargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a new control in SSG format using the given ID. Give it some</span>
+<span class="sd">    levels if it exists in the relevant NIST profiles</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 
 <div class="viewcode-block" id="id_set_match">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.id_set_match">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.id_set_match">[docs]</a>
 <span class="k">def</span> <span class="nf">id_set_match</span><span class="p">(</span><span class="n">in_ids</span><span class="p">,</span> <span class="n">id_q</span><span class="p">,</span> <span class="n">uargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Quick set match analysis of ID sets.</span>
@@ -268,12 +287,12 @@
         <span class="k">for</span> <span class="n">ctl</span> <span class="ow">in</span> <span class="n">os_sorted</span><span class="p">(</span><span class="n">sort_out</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">ctl</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">common_set</span><span class="p">,</span> <span class="n">not_in_set</span></div>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">common_set</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">not_in_set</span><span class="p">)</span></div>
 
 
 
 <div class="viewcode-block" id="self_test">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.self_test">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.self_test">[docs]</a>
 <span class="k">def</span> <span class="nf">self_test</span><span class="p">(</span><span class="n">ucfg</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Basic sanity check using ``import_module``.</span>
@@ -281,7 +300,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version:&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
-    <span class="n">modlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ymltoxml.__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;ymltoxml.oscal&#39;</span><span class="p">,</span> <span class="s1">&#39;ymltoxml.utils&#39;</span><span class="p">]</span>
+    <span class="n">modlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;yaml_tools.__init__&#39;</span><span class="p">,</span> <span class="s1">&#39;yaml_tools.oscal&#39;</span><span class="p">,</span> <span class="s1">&#39;yaml_tools.utils&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">modname</span> <span class="ow">in</span> <span class="n">modlist</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Checking module </span><span class="si">{</span><span class="n">modname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -307,7 +326,7 @@
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../api/ymltoxml.oscal.html#ymltoxml.oscal.main">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.oscal.html#yaml_tools.oscal.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Collect and process command options/arguments and then process data.</span>
@@ -336,7 +355,7 @@
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s1">&#39;-s&#39;</span><span class="p">,</span>
         <span class="s1">&#39;--sort-ids&#39;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;output report sorted IDs&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;use sorted IDs in output report&#39;</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -354,6 +373,15 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Data file munge using input control ID sets&quot;</span><span class="p">,</span>
         <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;munge&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;-R&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;--report-attribute&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;ATTR&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Control report output using attribute ATTR&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;attribute&quot;</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;status&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s1">&#39;-D&#39;</span><span class="p">,</span>
@@ -420,7 +448,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2024, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

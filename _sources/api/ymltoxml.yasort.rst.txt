@@ -1,7 +1,0 @@
-ymltoxml.yasort module
-======================
-
-.. automodule:: ymltoxml.yasort
-   :members:
-   :undoc-members:
-   :show-inheritance:

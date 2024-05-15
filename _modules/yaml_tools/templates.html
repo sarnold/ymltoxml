@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ymltoxml.templates &mdash; ymltoxml 0.3.1.dev31+gecdff90 documentation</title>
+  <title>yaml_tools.templates &mdash; yaml_tools 0.3.1.dev38+gdd37d26 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=e34e449b"></script>
+        <script src="../../_static/documentation_options.js?v=07054132"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -31,7 +31,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ymltoxml
+            yaml_tools
           </a>
               <div class="version">
                 0.3
@@ -46,11 +46,11 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">ymltoxml (and more YAML tools)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme_include.html">yaml-tools (and more for CSV and XML)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/generate-changelog.html">Changelog Generation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-config.html">Contents of the <code class="docutils literal notranslate"><span class="pre">.pre-commit-config.yaml</span></code> file</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/pre-commit-usage.html">Using Pre-Commit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">ymltoxml</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/modules.html">yaml_tools</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Changelog</a></li>
 </ul>
 
@@ -60,7 +60,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ymltoxml</a>
+          <a href="../../index.html">yaml_tools</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">ymltoxml.templates</li>
+      <li class="breadcrumb-item active">yaml_tools.templates</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,12 +78,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for ymltoxml.templates</h1><div class="highlight"><pre>
+  <h1>Source code for yaml_tools.templates</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Template bits for generating SSG-style controls in YAML.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">pystache_render</span>
+
+<span class="n">PROFILES</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LOW&#39;</span><span class="p">,</span> <span class="s1">&#39;MODERATE&#39;</span><span class="p">,</span> <span class="s1">&#39;HIGH&#39;</span><span class="p">,</span> <span class="s1">&#39;PRIVACY&#39;</span><span class="p">]</span>
+
+<span class="n">IMPACT_LVLS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;moderate&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">]</span>
+
+<span class="n">CTL_FIELD_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;Control Identifier&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Control (or Control Enhancement) Name&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;notes&#39;</span><span class="p">:</span> <span class="s1">&#39;Discussion&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Control Text&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;pending&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">}</span>
 
 <span class="n">PREAMBLE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">policy: NIST</span>
@@ -95,25 +108,25 @@
 <span class="s1">- id: low</span>
 <span class="s1">- id: moderate</span>
 <span class="s1">- id: high</span>
-<span class="s1">controls:</span>
 <span class="s1">&#39;&#39;&#39;</span>
 
 <span class="n">ID_TEMPLATE</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">- id: {{caps}}</span>
-<span class="s1">  status: {{status}}</span>
-<span class="s1">  notes: |-</span>
-<span class="s1">    {{notes}}</span>
-<span class="s1">  rules: {{rules_list}}</span>
-<span class="s1">  description: |-</span>
-<span class="s1">    {{description}}</span>
-<span class="s1">  title: &gt;-</span>
-<span class="s1">    {{caps}} - {{name}}</span>
-<span class="s1">  levels: {{levels_list}}</span>
+<span class="s1">controls:</span>
+<span class="s1">  - id: {{caps}}</span>
+<span class="s1">    status: {{status}}</span>
+<span class="s1">    notes: |-</span>
+<span class="s1">      {{notes}}</span>
+<span class="s1">    rules: []</span>
+<span class="s1">    description: |-</span>
+<span class="s1">      {{description}}</span>
+<span class="s1">    title: &gt;-</span>
+<span class="s1">      {{caps}} - {{name}}</span>
+<span class="s1">    levels: []</span>
 <span class="s1">&#39;&#39;&#39;</span>
 
 
 <div class="viewcode-block" id="generate_control">
-<a class="viewcode-back" href="../../api/ymltoxml.templates.html#ymltoxml.templates.generate_control">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.templates.html#yaml_tools.templates.generate_control">[docs]</a>
 <span class="k">def</span> <span class="nf">generate_control</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Render an ID template string given a context dict.</span>
@@ -124,7 +137,7 @@
 
 
 <div class="viewcode-block" id="xform_id">
-<a class="viewcode-back" href="../../api/ymltoxml.templates.html#ymltoxml.templates.xform_id">[docs]</a>
+<a class="viewcode-back" href="../../api/yaml_tools.templates.html#yaml_tools.templates.xform_id">[docs]</a>
 <span class="k">def</span> <span class="nf">xform_id</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform control ID string:</span>
@@ -152,7 +165,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2023, Stephen L Arnold.</p>
+    <p>&#169; Copyright 2024, Stephen L Arnold.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
