@@ -20,9 +20,9 @@ from munch import Munch
 from .utils import VERSION as __version__
 from .utils import (
     FileTypeError,
-    StrYAML,
     load_config,
     restore_xml_comments,
+    str_yaml_dumper,
 )
 
 
@@ -73,20 +73,12 @@ def transform_data(payload, prog_opts, to_xml=True):
             pretty=prog_opts['pretty'],
             indent=prog_opts['indent'],
         )
-
+        res = xml
         if prog_opts['process_comments']:
             res = restore_xml_comments(xml)
 
     else:
-        yaml = StrYAML()
-        yaml.indent(
-            mapping=prog_opts['mapping'],
-            sequence=prog_opts['sequence'],
-            offset=prog_opts['offset'],
-        )
-
-        yaml.preserve_quotes = prog_opts['preserve_quotes']
-        res = yaml.dump(payload)
+        res = str_yaml_dumper(payload, prog_opts)
 
     return res
 

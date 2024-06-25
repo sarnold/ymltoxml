@@ -1,4 +1,5 @@
 import pytest
+
 from yaml_tools.utils import StrYAML, sort_from_parent
 from yaml_tools.yasort import sort_list_data
 

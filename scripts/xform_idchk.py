@@ -4,8 +4,8 @@ Simple consumer test.
 
 from natsort import os_sorted
 
-from ymltoxml.templates import xform_id
-from ymltoxml.utils import text_file_reader
+from yaml_tools.templates import xform_id
+from yaml_tools.utils import text_file_reader
 
 OPTS = {
     'file_encoding': 'utf-8',

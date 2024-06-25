@@ -2,7 +2,7 @@
 #   pre-commit install
 # To update the pre-commit hooks run:
 #   pre-commit install-hooks
-exclude: '^(.tox/|docs/|^setup.py$)'
+exclude: '^(.tox/|docs/|^setup.py$|^tests/data/controls.csv$)'
 repos:
   - repo: meta
     hooks:
@@ -58,7 +58,7 @@ repos:
         - --follow-imports=normal
         - --install-types
         - --non-interactive
-      files: src/ymltoxml/
+      files: src/yaml_tools/
 
   - repo: "https://github.com/asottile/blacken-docs"
     rev: "1.16.0"
@@ -89,7 +89,7 @@ repos:
     rev: v2.3.1
     hooks:
       - id: autoflake
-        files: src/ymltoxml/
+        files: src/yaml_tools/
         args:
           - --in-place
           - --remove-all-unused-imports
@@ -100,7 +100,7 @@ repos:
     rev: 7.0.0
     hooks:
       - id: flake8
-        files: src/ymltoxml/
+        files: src/yaml_tools/
         additional_dependencies: ["flake8-bugbear"]
 
   - repo: https://github.com/PyCQA/bandit
@@ -108,7 +108,7 @@ repos:
     hooks:
       - id: bandit
         args: ["-ll", "-q"]
-        files: src/ymltoxml/
+        files: src/yaml_tools/
 
 #  - repo: https://github.com/lovesegfault/beautysh
 #    rev: v6.2.1

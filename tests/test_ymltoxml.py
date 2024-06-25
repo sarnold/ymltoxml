@@ -1,4 +1,5 @@
 import pytest
+
 from yaml_tools.utils import FileTypeError, StrYAML
 from yaml_tools.ymltoxml import get_input_type, process_inputs
 

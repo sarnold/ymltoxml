@@ -34,27 +34,46 @@ def csv_append_id_data(in_ids, prog_opts, uargs):  # pragma: no cover
     mpath = Path(uargs.munge)
     opath = Path('.').joinpath(mpath.stem)
     new_opath = opath.with_suffix('.modified.csv')
+    delim = prog_opts['csv_delimiter'] if prog_opts['csv_delimiter'] else ','
     if uargs.verbose:
         print(f'Writing munged csv data to {new_opath}')
 
-    writer = csv.writer(open(new_opath, 'w', newline='', encoding='utf-8'))
-    reader = csv.reader(open(uargs.munge, 'r', newline='', encoding='utf-8'))
+    writer = csv.writer(
+        open(new_opath, 'w', newline='', encoding='utf-8'),
+        delimiter=delim,
+    )
+    reader = csv.reader(
+        open(uargs.munge, 'r', newline='', encoding='utf-8'),
+        delimiter=delim,
+    )
     headers = next(reader)
     for hdr in prog_opts['new_csv_hdrs']:
         headers.append(hdr)
     writer.writerow(headers)
 
     for ctl in reader:
-        ctl_id = xform_id(ctl[0])
-        sub_ids = [s for s in in_ids if ctl_id in s]
-        if ctl_id in in_ids:
-            ctl.append('Y')
-        elif sub_ids != []:
-            ctl.append(sub_ids[0])
-        else:
-            ctl.append('N')
-        ctl.append(ctl_id)
+        ctl = csv_row_match(in_ids, ctl)
         writer.writerow(ctl)
+
+
+def csv_row_match(in_ids, ctl):
+    """
+    Extracted ctl munging from ``csv_append_id_data`` loop for testing.
+
+    :param: ctl
+    :type ctl: csv row data
+    :return ctl: munged ctl
+    """
+    ctl_id = xform_id(ctl[0])
+    sub_ids = [s for s in in_ids if ctl_id in s]
+    if ctl_id in in_ids:
+        ctl.append('Y')
+    elif sub_ids != []:
+        ctl.append(sub_ids[0])
+    else:
+        ctl.append('N')
+    ctl.append(ctl_id)
+    return ctl
 
 
 def load_input_data(filepath, prog_opts, use_ssg=False, debug=False):
@@ -76,7 +95,8 @@ def load_input_data(filepath, prog_opts, use_ssg=False, debug=False):
     if use_ssg:
         prog_opts['default_content_path'] = prog_opts['default_ssg_path']
         prog_opts['default_profile_glob'] = prog_opts['default_ssg_glob']
-    else:
+
+    if debug:
         print(f"Loading content from: {prog_opts['default_content_path']}")
 
     ctl_files = get_filelist(
@@ -120,30 +140,33 @@ def load_input_data(filepath, prog_opts, use_ssg=False, debug=False):
     return in_ids, id_queue, ctl_queue
 
 
+def munge_file(filepath, prog_opts, uargs):
+    """
+    Munge a CSV file by appending columns.
+    """
+    input_ids = text_file_reader(filepath, prog_opts)
+    csv_append_id_data(input_ids, prog_opts=prog_opts, uargs=uargs)
+
+
 def process_data(filepath, prog_opts, uargs):
     """
     Process inputs, print some output.
     """
-    if uargs.munge:
-        input_ids = text_file_reader(filepath, prog_opts)
-        csv_append_id_data(input_ids, prog_opts=prog_opts, uargs=uargs)
-    else:
-        input_ids, id_queue, ctl_queue = load_input_data(
-            filepath, prog_opts, use_ssg=uargs.ssg, debug=uargs.verbose
-        )
-        in_list, not_in_list = id_set_match(input_ids, id_queue, uargs=uargs)
+    input_ids, id_queue, ctl_queue = load_input_data(
+        filepath, prog_opts, use_ssg=uargs.ssg, debug=uargs.verbose
+    )
+    in_list, not_in_list = id_set_match(input_ids, id_queue, uargs=uargs)
+
+    if not uargs.quiet:
         print(f'\nControl queue has {len(ctl_queue)} items')
-        rpt_attr = (
-            prog_opts['default_control_attr']
-            if prog_opts['default_control_attr']
-            else uargs.attribute
-        )
-        if uargs.verbose:
-            print(f'Checking input IDs: {in_list}')
-        print(f'\nID,{rpt_attr}')
-        for ctl in ctl_queue:
-            if ctl[0] in in_list:
-                print(f'{ctl[0]},{ctl[1][rpt_attr]}')
+
+    rpt_attr = uargs.attribute if uargs.attribute else prog_opts['default_control_attr']
+    if uargs.verbose:
+        print(f'Checking input IDs: {in_list}')
+    print(f'\nID;{rpt_attr}')
+    for ctl in ctl_queue:
+        if ctl[0] in in_list:
+            print(f'{ctl[0]};{ctl[1][rpt_attr]}')
 
 
 def ssg_ctrl_from_nist(in_id, prog_opts, uargs):
@@ -265,6 +288,12 @@ def main(argv=None):  # pragma: no cover
         help='display more processing info',
     )
     parser.add_argument(
+        '-q',
+        '--quiet',
+        action='store_true',
+        help='display less processing info',
+    )
+    parser.add_argument(
         '-m',
         '--munge-file',
         metavar="FILE",
@@ -274,7 +303,7 @@ def main(argv=None):  # pragma: no cover
         default=None,
     )
     parser.add_argument(
-        '-R',
+        '-r',
         '--report-attribute',
         metavar="ATTR",
         type=str,
@@ -324,12 +353,13 @@ def main(argv=None):  # pragma: no cover
     if not Path(infile).exists():
         print(f'Input file {infile} not found!')
         sys.exit(1)
+    if args.munge:
+        munge_file(infile, popts, args)
 
     if args.verbose:
         print(f"Path to content: {cfg.default_content_path}")
         print(f"Content file glob: {cfg.default_profile_glob}")
-        print(f"Input file: {infile}")
-    else:
+    if not args.quiet:
         print(f"Processing input file: {infile}")
 
     process_data(infile, popts, args)

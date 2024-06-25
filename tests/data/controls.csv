@@ -1,0 +1,428 @@
+id,status,notes,rules,description,title,levels
+CM-11,pending,"Section a: A complete control response is planned. Progress can be
+tracked via:
+
+https://issues.redhat.com/browse/CMP-285
+
+Section b: A complete control response is planned. Progress can be
+tracked via:
+
+https://issues.redhat.com/browse/CMP-285
+
+Section c: A complete control response is planned. Progress can be
+tracked via:
+
+https://issues.redhat.com/browse/CMP-285",[],"The organization:
+ a. Establishes [Assignment: organization-defined policies] governing the installation of software by users;
+ b. Enforces software installation policies through [Assignment: organization-defined methods]; and
+ c. Monitors policy compliance at [Assignment: organization-defined frequency].
+
+Supplemental Guidance:  If provided the necessary privileges, users have the ability to install software in organizational information systems. To maintain control over the types of software installed, organizations identify permitted and prohibited actions regarding software installation. Permitted software installations may include, for example, updates and security patches to existing software and downloading applications from organization-approved “app stores.” Prohibited software installations may include, for example, software with unknown or suspect pedigrees or software that organizations consider potentially malicious. The policies organizations select governing user-installed software may be organization-developed or provided by some external entity. Policy enforcement methods include procedural methods (e.g., periodic examination of user accounts), automated methods (e.g., configuration settings implemented on organizational information systems), or both. Related controls: AC-3, CM-2, CM-3, CM-5, CM-6, CM-7, PL-4.
+
+References: None.
+
+CM-11 (c) [Continuously (via CM-7 (5))]",CM-11 - USER-INSTALLED SOFTWARE,"['high', 'moderate', 'low']"
+CM-11(1),not applicable,"A complete control response is planned. Progress can be
+tracked via:
+
+https://issues.redhat.com/browse/CMP-286",[],"The information system alerts [Assignment: organization-defined personnel or roles] when the unauthorized installation of software is detected.
+
+Supplemental Guidance:  Related controls: CA-7, SI-4.",CM-11(1) - USER-INSTALLED SOFTWARE | ALERTS FOR UNAUTHORIZED INSTALLATIONS,['high']
+CM-11(2),not applicable,"A complete control response is planned. Progress can be
+tracked via:
+
+https://issues.redhat.com/browse/CMP-287",[],,,
+CP-10(2),not applicable,"This control reflects organizational procedures/policies, and is not
+applicable to the configuration of OpenShift.",[],"The information system implements transaction recovery for systems that are transaction-based.
+
+Supplemental Guidance:  Transaction-based information systems include, for example, database management systems and transaction processing systems. Mechanisms supporting transaction recovery include, for example, transaction rollback and transaction journaling.",CP-10(2) - INFORMATION SYSTEM RECOVERY AND RECONSTITUTION | TRANSACTION RECOVERY,"['high', 'moderate']"
+CP-10(3),not applicable,This control was withdrawn by NIST.,[],,,
+CP-10(4),not applicable,"This control reflects organizational procedures/policies, and is not
+applicable to the configuration of OpenShift.",[],"The organization provides the capability to restore information system components within [Assignment: organization-defined restoration time-periods] from configuration-controlled and integrity-protected information representing a known, operational state for the components.
+
+Supplemental Guidance:  Restoration of information system components includes, for example, reimaging which restores components to known, operational states. Related control: CM-2.
+
+CP-10 (4) [time period consistent with the restoration time-periods defined in the service provider and organization  SLA]",CP-10(4) - INFORMATION SYSTEM RECOVERY AND RECONSTITUTION | RESTORE WITHIN TIME PERIOD,['high']
+CP-10(5),not applicable,This control was withdrawn by NIST.,[],,,
+CP-10(6),not applicable,"This control reflects organizational procedures/policies, and is not
+applicable to the configuration of OpenShift.",[],,,
+CP-11,pending,"A complete control response is planned. Progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-296",[],,,
+CP-12,pending,"A complete control response is planned. Progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-297",[],,,
+CP-13,pending,"Employment of organization-defined alternative or
+supplemental security mechanisms for satisfying
+organization-defined security functions when the primary
+means of implementing CoreOS security function is
+unavailable or compromised is outside the scope of
+CoreOS configuration guidance.
+
+A complete control response is planned. Progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-298",[],,,
+IA-1,not applicable,"Section a: Developing organization-level identification and authentication
+policy and procedures are outside the scope of CoreOS configuration.
+
+Section b: Review and updating an organizational-level identification and authentication
+policy and procedures are outside the scope of CoreOS configuration.",[],"The organization:
+ a. Develops, documents, and disseminates to [Assignment: organization-defined personnel or roles]:
+   1. An identification and authentication policy that addresses purpose, scope, roles, responsibilities, management commitment, coordination among organizational entities, and compliance; and
+   2. Procedures to facilitate the implementation of the identification and authentication policy and associated identification and authentication controls; and
+ b. Reviews and updates the current:
+   1. Identification and authentication policy [Assignment: organization-defined frequency]; and
+   2. Identification and authentication procedures [Assignment: organization-defined frequency].
+
+Supplemental Guidance:  This control addresses the establishment of policy and procedures for the effective implementation of selected security controls and control enhancements in the IA family. Policy and procedures reflect applicable federal laws, Executive Orders, directives, regulations, policies, standards, and guidance. Security program policies and procedures at the organization level may make the need for system-specific policies and procedures unnecessary. The policy can be included as part of the general information security policy for organizations or conversely, can be represented by multiple policies reflecting the complex nature of certain organizations. The procedures can be established for the security program in general and for particular information systems, if needed. The organizational risk management strategy is a key factor in establishing policy and procedures. Related control: PM-9.
+
+Control Enhancements:  None.
+
+References:  FIPS Publication 201; NIST Special Publications 800-12, 800-63, 800-73, 800-76, 800-78, 800-100.
+
+IA-1 (b) (1) [at least annually] 
+IA-1 (b) (2) [at least annually or whenever a significant change occurs]","IA-1 - IDENTIFICATION AND AUTHENTICATION POLICY AND
+PROCEDURES","['high', 'moderate', 'low']"
+IA-2,automated,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-299","['accounts_no_uid_except_zero', 'require_singleuser_auth', 'no_direct_root_logins']","The information system uniquely identifies and authenticates organizational users (or processes acting on behalf of organizational users).
+
+Supplemental Guidance:  Organizational users include employees or individuals that organizations deem to have equivalent status of employees (e.g., contractors, guest researchers). This control applies to all accesses other than: (i) accesses that are explicitly identified and documented in AC-14; and (ii) accesses that occur through authorized use of group authenticators without individual authentication. Organizations may require unique identification of individuals in group accounts (e.g., shared privilege accounts) or for detailed accountability of individual activity. Organizations employ passwords, tokens, or biometrics to authenticate user identities, or in the case multifactor authentication, or some combination thereof. Access to organizational information systems is defined as either local access or network access. Local access is any access to organizational information systems by users (or processes acting on behalf of users) where such access is
+obtained by direct connections without the use of networks. Network access is access to organizational information systems by users (or processes acting on behalf of users) where such access is obtained through network connections (i.e., nonlocal accesses). Remote access is a type of network access that involves communication through external networks (e.g., the Internet). Internal networks include local area networks and wide area networks. In addition, the use of encrypted virtual private networks (VPNs) for network connections between organization- controlled endpoints and non-organization controlled endpoints may be treated as internal networks from the perspective of protecting the confidentiality and integrity of information traversing the network.
+
+Organizations can satisfy the identification and authentication requirements in this control by complying with the requirements in Homeland Security Presidential Directive 12 consistent with the specific organizational implementation plans. Multifactor authentication requires the use of two or more different factors to achieve authentication. The factors are defined as: (i) something you know (e.g., password, personal identification number [PIN]); (ii) something you have (e.g.,
+cryptographic identification device, token); or (iii) something you are (e.g., biometric). Multifactor solutions that require devices separate from information systems gaining access include, for example, hardware tokens providing time-based or challenge-response authenticators and smart cards such as the U.S. Government Personal Identity Verification card and the DoD common access card. In addition to identifying and authenticating users at the information system level
+(i.e., at logon), organizations also employ identification and authentication mechanisms at the application level, when necessary, to provide increased information security. Identification and authentication requirements for other than organizational users are described in IA-8. Related controls: AC-2, AC-3, AC-14, AC-17, AC-18, IA-4, IA-5, IA-8.
+
+References: HSPD-12; OMB Memoranda 04-04, 06-16, 11-11; FIPS Publication 201; NIST Special Publications 800-63, 800-73, 800-76, 800-78; FICAM Roadmap and Implementation Guidance; Web: http://idmanagement.gov.","IA-2 - IDENTIFICATION AND AUTHENTICATION
+(ORGANIZATIONAL USERS)","['high', 'moderate', 'low']"
+IA-2(1),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-300",[],"The information system implements multifactor authentication for network access to privileged accounts.
+
+Supplemental Guidance:  Related control: AC-6.",IA-2(1) - IDENTIFICATION AND AUTHENTICATION | NETWORK ACCESS TO PRIVILEGED ACCOUNTS,"['high', 'moderate', 'low']"
+IA-2(2),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-301",[],The information system implements multifactor authentication for network access to non- privileged accounts.,IA-2(2) - IDENTIFICATION AND AUTHENTICATION | NETWORK ACCESS TO NON-PRIVILEGED ACCOUNTS,"['high', 'moderate']"
+IA-2(3),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-302",[],"The information system implements multifactor authentication for local access to privileged accounts.
+
+Supplemental Guidance:  Related control: AC-6.",IA-2(3) - IDENTIFICATION AND AUTHENTICATION | LOCAL ACCESS TO PRIVILEGED ACCOUNTS,"['high', 'moderate']"
+IA-2(4),automated,"The only way to access the OpenShift nodes should through '$oc debug', remote SSH should
+be disabled after the Installation",['service_sshd_disabled'],The information system implements multifactor authentication for local access to non-privileged accounts.,IA-2(4) - IDENTIFICATION AND AUTHENTICATION | LOCAL ACCESS TO NON-PRIVILEGED ACCOUNTS,['high']
+IA-2(5),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-314",[],"The organization requires individuals to be authenticated with an individual authenticator when a group authenticator is employed.
+
+Supplemental Guidance:  Requiring individuals to use individual authenticators as a second level of authentication helps organizations to mitigate the risk of using group authenticators.","IA-2(5) - IDENTIFICATION AND AUTHENTICATION (ORGANIZATIONAL USERS) |
+GROUP AUTHENTICATION","['high', 'moderate']"
+IA-2(6),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-315",[],,,
+IA-2(7),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-316",[],,,
+IA-2(8),supported,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-573",[],"The information system implements replay-resistant authentication mechanisms for network access to privileged accounts.
+
+Supplemental Guidance:  Authentication processes resist replay attacks if it is impractical to achieve successful authentications by replaying previous authentication messages. Replay- resistant techniques include, for example, protocols that use nonces or challenges such as Transport Layer Security (TLS) and time synchronous or challenge-response one-time authenticators.",IA-2(8) - IDENTIFICATION AND AUTHENTICATION | NETWORK ACCESS TO PRIVILEGED ACCOUNTS - REPLAY RESISTANT,"['high', 'moderate']"
+IA-2(9),supported,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-574",[],"The information system implements replay-resistant authentication mechanisms for network access to non-privileged accounts.
+
+Supplemental Guidance:  Authentication processes resist replay attacks if it is impractical to achieve successful authentications by recording/replaying previous authentication messages. Replay-resistant techniques include, for example, protocols that use nonces or challenges such as Transport Layer Security (TLS) and time synchronous or challenge-response one-time authenticators.",IA-2(9) - IDENTIFICATION AND AUTHENTICATION | NETWORK ACCESS TO NON-PRIVILEGED ACCOUNTS - REPLAY RESISTANT,['high']
+IA-2(10),supported,A control response for IA-2(10) is planned.,[],,,
+IA-2(11),not applicable,"Implementing a separate device from the system
+gaining access to the information system using multifactor
+authentication for remote access to privileged and non-privileged
+accounts is an organizational control outside the configuration
+guidance of CoreOS.",[],"The information system implements multifactor authentication for remote access to privileged and non-privileged accounts such that one of the factors is provided by a device separate from the system gaining access and the device meets [Assignment: organization-defined strength of mechanism requirements].
+
+Supplemental Guidance:  For remote access to privileged/non-privileged accounts, the purpose of requiring a device that is separate from the information system gaining access for one of the factors during multifactor authentication is to reduce the likelihood of compromising authentication credentials stored on the system. For example, adversaries deploying malicious code on organizational information systems can potentially compromise such credentials resident on the system and subsequently impersonate authorized users. Related control: AC-6.
+
+IA-2 (11) [FIPS 140-2, NIAP Certification, or NSA approval]
+IA-2 (11) Guidance: PIV=separate device. Please refer to NIST SP 800-157 Guidelines for Derived Personal Identity Verification (PIV) Credentials.",IA-2(11) - IDENTIFICATION AND AUTHENTICATION | REMOTE ACCESS - SEPARATE DEVICE,"['high', 'moderate']"
+IA-2(12),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-317",[],"The information system accepts and electronically verifies Personal Identity Verification (PIV)
+credentials.
+
+Supplemental Guidance:  This control enhancement applies to organizations implementing logical access control systems (LACS) and physical access control systems (PACS). Personal Identity Verification (PIV) credentials are those credentials issued by federal agencies that conform to FIPS Publication 201 and supporting guidance documents. OMB Memorandum 11-11 requires federal agencies to continue implementing the requirements specified in HSPD-12 to enable agency-wide use of PIV credentials. Related controls: AU-2, PE-3, SA-4.
+
+IA-2 (12) Guidance: Include Common Access Card (CAC), i.e., the DoD technical implementation of PIV/FIPS 201/HSPD-12.",IA-2(12) - IDENTIFICATION AND AUTHENTICATION | ACCEPTANCE OF PIV CREDENTIALS,"['high', 'moderate', 'low']"
+IA-2(13),not applicable,"Implementing out-of-band authentication methods is an organizational
+control outside the configuration guidance of CoreOS.",[],,,
+IA-3,automated,A control response for IA-3 is planned.,"['package_usbguard_installed', 'service_usbguard_enabled', 'configure_usbguard_auditbackend', 'usbguard_allow_hid_and_hub']","The information system uniquely identifies and authenticates [Assignment: organization- defined specific and/or types of devices] before establishing a [Selection (one or more): local; remote; network] connection.
+
+Supplemental Guidance: Organizational devices requiring unique device-to-device identification and authentication may be defined by type, by device, or by a combination of type/device. Information systems typically use either shared known information (e.g., Media Access Control [MAC] or Transmission Control Protocol/Internet Protocol [TCP/IP] addresses) for device identification or organizational authentication solutions (e.g., IEEE 802.1x and Extensible Authentication Protocol [EAP], Radius server with EAP-Transport Layer Security [TLS] authentication, Kerberos) to identify/authenticate devices on local and/or wide area networks. Organizations determine the required strength of authentication mechanisms by the security categories of information systems. Because of the challenges of applying this control on large scale, organizations are encouraged to only apply the control to those limited number (and type) of devices that truly need to support this capability. Related controls: AC-17, AC-18, AC-19, CA-3, IA-4, IA-5.
+
+References: None.",IA-3 - DEVICE IDENTIFICATION AND AUTHENTICATION,"['high', 'moderate']"
+IA-3(1),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-318",[],,,
+IA-3(2),not applicable,This control was withdrawn by NIST.,[],,,
+IA-3(3),pending,"Section a: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-319
+
+Section b: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-319",[],,,
+IA-3(4),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-320",[],,,
+IA-4,automated,"Section a: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section b: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section c: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section d: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-321
+
+Section e: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-321",['accounts_no_uid_except_zero'],"The organization manages information system identifiers by:
+ a. Receiving authorization from [Assignment: organization-defined personnel or roles] to assign an individual, group, role, or device identifier;
+ b. Selecting an identifier that identifies an individual, group, role, or device;
+ c. Assigning the identifier to the intended individual, group, role, or device;
+ d. Preventing reuse of identifiers for [Assignment: organization-defined time period]; and
+ e. Disabling the identifier after [Assignment: organization-defined time period of inactivity].
+
+Supplemental Guidance:  Common device identifiers include, for example, media access control (MAC), Internet protocol (IP) addresses, or device-unique token identifiers. Management of individual identifiers is not applicable to shared information system accounts (e.g., guest and anonymous accounts). Typically, individual identifiers are the user names of the information system accounts assigned to those individuals. In such instances, the account management activities of AC-2 use account names provided by IA-4. This control also addresses individual identifiers not necessarily associated with information system accounts (e.g., identifiers used in physical security control databases accessed by badge reader systems for access to information systems). Preventing reuse of identifiers implies preventing the assignment of previously used individual, group, role, or device identifiers to different individuals, groups, roles, or devices. Related controls: AC-2, IA-2, IA-3, IA-5, IA-8, SC-37.
+
+References: FIPS Publication 201; NIST Special Publications 800-73, 800-76, 800-78.
+IA-4(a) [at a minimum, the ISSO (or similar role within the organization)]  
+IA-4 (d) [at least two (2) years]
+IA-4 (e) [thirty-five (35) days] (See additional requirements and guidance.)
+IA-4 (e) Requirement: The service provider defines the time period of inactivity for device identifiers.
+Guidance: For DoD clouds, see DoD cloud website for specific DoD requirements that go above and beyond FedRAMP http://iase.disa.mil/cloud_security/Pages/index.aspx.",IA-4 - IDENTIFIER MANAGEMENT,"['high', 'moderate', 'low']"
+IA-4(1),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-323",[],,,
+IA-4(2),not applicable,"This is an organizational procedural requirement
+outside the scope of CoreOS configuration.",[],,,
+IA-4(3),not applicable,"This is an organizational procedural requirement
+outside the scope of CoreOS configuration.",[],,,
+IA-4(4),not applicable,"This is an organizational procedural requirement
+outside the scope of CoreOS configuration.",[],"The organization manages individual identifiers by uniquely identifying each individual as
+[Assignment: organization-defined characteristic identifying individual status].
+
+Supplemental Guidance:  Characteristics identifying the status of individuals include, for example, contractors and foreign nationals. Identifying the status of individuals by specific characteristics provides additional information about the people with whom organizational personnel are communicating. For example, it might be useful for a government employee to know that one of the individuals on an email message is a contractor. Related control: AT-2.
+
+IA-4 (4) [contractors; foreign nationals]",IA-4(4) - IDENTIFIER MANAGEMENT | IDENTIFY USER STATUS,"['high', 'moderate']"
+IA-4(5),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-324",[],,,
+IA-4(6),not applicable,"Coordination with organization-defined external
+organizations for cross-organization management
+of identifiers is outside the scope of CoreOS
+configuration.",[],,,
+IA-4(7),not applicable,"Organizational requirements that the user registration
+process to receive an individual identifier be conducted
+in person before a designated registration authority
+is outside the scope of CoreOS configuration.",[],,,
+IA-5,automated,"Section a: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section b: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section c: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section d: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section e: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section f: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section g: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section h: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-325
+
+Section i: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section j: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.","['no_netrc_files', 'no_empty_passwords']","The organization manages information system authenticators by:
+  a. Verifying, as part of the initial authenticator distribution, the identity of the individual, group, role, or device receiving the authenticator;
+  b. Establishing initial authenticator content for authenticators defined by the organization;
+  c. Ensuring that authenticators have sufficient strength of mechanism for their intended use;
+  d. Establishing and implementing administrative procedures for initial authenticator distribution, for lost/compromised or damaged authenticators, and for revoking authenticators;
+  e. Changing default content of authenticators prior to information system installation;
+  f. Establishing minimum and maximum lifetime restrictions and reuse conditions for authenticators;
+  g. Changing/refreshing authenticators [Assignment: organization-defined time period by authenticator type];
+  h. Protecting authenticator content from unauthorized disclosure and modification;
+  i. Requiring individuals to take, and having devices implement, specific security safeguards to protect authenticators; and
+  j. Changing authenticators for group/role accounts when membership to those accounts changes.
+
+Supplemental Guidance: Individual authenticators include, for example, passwords, tokens, biometrics, PKI certificates, and key cards. Initial authenticator content is the actual content (e.g., the initial password) as opposed to requirements about authenticator content (e.g., minimum password length). In many cases, developers ship information system components with factory default authentication credentials to allow for initial installation and configuration. Default authentication credentials are often well known, easily discoverable, and present a significant security risk. The requirement to protect individual authenticators may be implemented via control PL-4 or PS-6 for authenticators in the possession of individuals and by controls AC-3, AC-6, and SC-28 for authenticators stored within organizational information systems (e.g., passwords stored in hashed or encrypted formats, files containing encrypted or hashed passwords accessible with administrator privileges). Information systems support individual authenticator management by organization-defined settings and restrictions for various authenticator characteristics including, for example, minimum password length, password composition, validation time window for time synchronous one-time tokens, and number of allowed rejections during the verification stage of biometric authentication. Specific actions that can be taken to safeguard authenticators include, for example, maintaining possession of individual authenticators, not loaning or sharing individual authenticators with others, and reporting lost, stolen, or compromised authenticators immediately. Authenticator management includes issuing and revoking, when no longer needed, authenticators for temporary access such as that required for remote maintenance. Device authenticators include, for example, certificates and passwords. Related controls: AC-2, AC-3, AC-6, CM-6, IA-2, IA-4, IA-8, PL-4, PS-5, PS-6, SC-12, SC-13, SC-17, SC-28.
+
+References: OMB Memoranda 04-04, 11-11; FIPS Publication 201; NIST Special Publications 800-73, 800-63, 800-76, 800-78; FICAM Roadmap and Implementation Guidance
+
+
+
+IA-5 Requirement: Authenticators must be compliant with NIST SP 800-63-3 Digital Identity Guidelines IAL, AAL, FAL level 3. Link https://pages.nist.gov/800-63-3",IA-5 - AUTHENTICATOR MANAGEMENT,"['high', 'moderate', 'low']"
+IA-5(1),automated,"Section a: This is an organizational procedural requirement
+outside the scope of CoreOS configuration.
+
+Section b: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-326
+
+Section c: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-326
+
+Section d: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-326
+
+Section e: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-326
+
+Section f: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-326","['no_netrc_files', 'no_empty_passwords']","The information system, for password-based authentication:
+ (a)   Enforces minimum password complexity of [Assignment: organization-defined requirements for case sensitivity, number of characters, mix of upper-case letters, lower-case letters, numbers, and special characters, including minimum requirements for each type];
+ (b)   Enforces at least the following number of changed characters when new passwords are created: [Assignment: organization-defined number];
+ (c)   Stores and transmits only encrypted representations of passwords;
+ (d)   Enforces password minimum and maximum lifetime restrictions of [Assignment: organization- defined numbers for lifetime minimum, lifetime maximum];
+ (e)   Prohibits password reuse for [Assignment: organization-defined number] generations; and
+ (f) Allows the use of a temporary password for system logons with an immediate change to a permanent password.
+
+Supplemental Guidance:  This control enhancement applies to single-factor authentication of individuals using passwords as individual or group authenticators, and in a similar manner, when passwords are part of multifactor authenticators. This control enhancement does not apply when passwords are used to unlock hardware authenticators (e.g., Personal Identity Verification cards). The implementation of such password mechanisms may not meet all of the requirements in the enhancement. Encrypted representations of passwords include, for example, encrypted versions of passwords and one-way cryptographic hashes of passwords. The number of changed characters refers to the number of changes required with respect to the total number of positions in the current password. Password lifetime restrictions do not apply to temporary passwords. Related control: IA-6.
+
+IA-5 (1) (b) [at least fifty percent (50%)]
+IA-5 (1) (e) [twenty four (24)]
+IA-5 (1) (a), and (d) Additional FedRAMP Requirements and Guidance:
+Guidance: If password policies are compliant with NIST SP 800-63B Memorized Secret (Section 5.1.1) Guidance, the control may be considered compliant",IA-5(1) - AUTHENTICATOR MANAGEMENT | PASSWORD-BASED AUTHENTICATION,"['high', 'moderate', 'low']"
+IA-5(2),pending,"Section a: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-327
+
+Section b: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-327
+
+Section c: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-327
+
+Section d: A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-327",[],"The information system, for PKI-based authentication:
+ (a)   Validates certifications by constructing and verifying a certification path to an accepted trust anchor including checking certificate status information;
+ (b)   Enforces authorized access to the corresponding private key;
+ (c)   Maps the authenticated identity to the account of the individual or group; and
+ (d)   Implements a local cache of revocation data to support path discovery and validation in case of inability to access revocation information via the network.
+
+Supplemental Guidance:  Status information for certification paths includes, for example, certificate revocation lists or certificate status protocol responses. For PIV cards, validation of certifications involves the construction and verification of a certification path to the Common Policy Root trust anchor including certificate policy processing. Related control: IA-6.",IA-5(2) - AUTHENTICATOR MANAGEMENT | PKI-BASED AUTHENTICATION,"['high', 'moderate']"
+IA-5(3),not applicable,"Organizational requirements that the registration process to
+receive organization-defined types of and/or specific authenticators
+be conducted either in person and/or by a trusted third party before
+organization-defined registration authority with authorization by
+organization-defined personnel or roles is outside the scope of
+CoreOS configuration.",[],"The organization requires that the registration process to receive [Assignment: organization- defined types of and/or specific authenticators] be conducted [Selection: in person; by a trusted third party] before [Assignment: organization-defined registration authority] with authorization by [Assignment: organization-defined personnel or roles].
+
+IA-5 (3)-1 [All hardware/biometric (multifactor authenticators] 
+IA-5 (3)-2 [in person]",IA-5(3) - AUTHENTICATOR MANAGEMENT | IN-PERSON OR TRUSTED THIRD-PARTY REGISTRATION,"['high', 'moderate']"
+IA-5(4),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-328",[],"The organization employs automated tools to determine if password authenticators are sufficiently strong to satisfy [Assignment: organization-defined requirements].
+
+Supplemental Guidance:  This control enhancement focuses on the creation of strong passwords and the characteristics of such passwords (e.g., complexity) prior to use, the enforcement of which is carried out by organizational information systems in IA-5 (1). Related controls: CA-2, CA-7, RA-5.
+
+IA-5 (4) [complexity as identified in IA-5 (1) Control Enhancement Part (a)]
+IA-5 (4) Guidance: If automated mechanisms which enforce password authenticator strength at creation are not used, automated mechanisms must be used to audit strength of created password authenticators.",IA-5(4) - AUTHENTICATOR MANAGEMENT | AUTOMATED SUPPORT FOR PASSWORD STRENGTH DETERMINATION,"['high', 'moderate']"
+IA-5(5),not applicable,"This is an organizational procedural requirement
+outside the scope of CoreOS configuration.",[],,,
+IA-5(6),not applicable,"This is an organizational procedural requirement
+outside the scope of CoreOS configuration.",[],"The organization protects authenticators commensurate with the security category of the information to which use of the authenticator permits access.
+
+Supplemental Guidance:  For information systems containing multiple security categories of information without reliable physical or logical separation between categories, authenticators used to grant access to the systems are protected commensurate with the highest security category of information on the systems.",IA-5(6) - AUTHENTICATOR MANAGEMENT | PROTECTION OF AUTHENTICATORS,"['high', 'moderate']"
+IA-5(7),automated,A control response for IA-5(7) is planned.,['no_netrc_files'],"The organization ensures that unencrypted static authenticators are not embedded in applications or access scripts or stored on function keys.
+
+Supplemental Guidance:  Organizations exercise caution in determining whether embedded or stored authenticators are in encrypted or unencrypted form. If authenticators are used in the manner stored, then those representations are considered unencrypted authenticators. This is irrespective of whether that representation is perhaps an encrypted version of something else (e.g., a password).",IA-5(7) - AUTHENTICATOR MANAGEMENT | NO EMBEDDED UNENCRYPTED STATIC AUTHENTICATORS,"['high', 'moderate']"
+IA-5(8),not applicable,"Organizational implementation of organization-defined security
+safeguards to manage the risk of compromise due to individuals having
+accounts on multiple information systems is outside the scope of
+CoreOS configuration.",[],"The organization implements [Assignment: organization-defined security safeguards] to manage the risk of compromise due to individuals having accounts on multiple information systems.
+
+Supplemental Guidance:  When individuals have accounts on multiple information systems, there is the risk that the compromise of one account may lead to the compromise of other accounts if individuals use the same authenticators. Possible alternatives include, for example: (i) having different authenticators on all systems; (ii) employing some form of single sign-on mechanism; or (iii) including some form of one-time passwords on all systems.
+
+IA-5 (8) [different authenticators on different systems]",IA-5(8) - AUTHENTICATOR MANAGEMENT | MULTIPLE INFORMATION SYSTEM ACCOUNTS,['high']
+IA-5(9),not applicable,"Organizational coordination with organization-defined
+external organizations for cross-organization management
+of credentials is outside the scope of CoreOS configuration.",[],,,
+IA-5(10),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-330",[],,,
+IA-5(11),not applicable,"Employment of mechanisms that satisfy organization-defined
+token quality requirements is outside the scope of
+CoreOS configuration.",[],"The information system, for hardware token-based authentication, employs mechanisms that satisfy [Assignment: organization-defined token quality requirements].
+
+Supplemental Guidance:  Hardware token-based authentication typically refers to the use of PKI-based tokens, such as the U.S. Government Personal Identity Verification (PIV) card. Organizations define specific requirements for tokens, such as working with a particular PKI.",IA-5(11) - AUTHENTICATOR MANAGEMENT | HARDWARE TOKEN-BASED AUTHENTICATION,"['high', 'moderate', 'low']"
+IA-5(12),not applicable,"Employment of mechanisms that satisfy organization-defined
+biometric quality requirements is outside the scope of
+CoreOS configuration.",[],,,
+IA-5(13),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-331",[],The information system prohibits the use of cached authenticators after [Assignment: organization-defined time period].,IA-5(13) - AUTHENTICATOR MANAGEMENT | EXPIRATION OF CACHED AUTHENTICATORS,['high']
+IA-5(14),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-331",[],,,
+IA-5(15),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-332",[],,,
+IA-6,pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-333",[],"The information system obscures feedback of authentication information during the authentication process to protect the information from possible exploitation/use by unauthorized individuals.
+
+Supplemental Guidance:  The feedback from information systems does not provide information that would allow unauthorized individuals to compromise authentication mechanisms. For some types of information systems or system components, for example, desktops/notebooks with relatively large monitors, the threat (often referred to as shoulder surfing) may be significant. For other types of systems or components, for example, mobile devices with 2-4 inch screens, this threat may be less significant, and may need to be balanced against the increased likelihood of typographic input errors due to the small keyboards. Therefore, the means for obscuring the authenticator feedback is selected accordingly. Obscuring the feedback of authentication information includes, for example, displaying asterisks when users type passwords into input devices, or displaying feedback for a very limited time before fully obscuring it. Related control: PE-18.
+
+Control Enhancements:  None.
+
+References:  None.",IA-6 - AUTHENTICATOR FEEDBACK,"['high', 'moderate', 'low']"
+IA-7,automated,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-334",['enable_fips_mode'],"The information system implements mechanisms for authentication to a cryptographic module that meet the requirements of applicable federal laws, Executive Orders, directives, policies, regulations, standards, and guidance for such authentication.
+
+Supplemental Guidance:  Authentication mechanisms may be required within a cryptographic module to authenticate an operator accessing the module and to verify that the operator is authorized to assume the requested role and perform services within that role. Related controls: SC-12, SC-13.
+
+Control Enhancements:  None.
+
+References:  FIPS Publication 140; Web: csrc.nist.gov/groups/STM/cmvp/index.html.",IA-7 - CRYPTOGRAPHIC MODULE AUTHENTICATION,"['high', 'moderate', 'low']"
+IA-8,supported,A control response for IA-8 is planned.,[],"The information system uniquely identifies and authenticates non-organizational users (or processes acting on behalf of non-organizational users).
+
+Supplemental Guidance:  Non-organizational users include information system users other than organizational users explicitly covered by IA-2. These individuals are uniquely identified and authenticated for accesses other than those accesses explicitly identified and documented in AC-14. In accordance with the E-Authentication E-Government initiative, authentication of non- organizational users accessing federal information systems may be required to protect federal, proprietary, or privacy-related information (with exceptions noted for national security systems). Organizations use risk assessments to determine authentication needs and consider scalability, practicality, and security in balancing the need to ensure ease of use for access to federal information and information systems with the need to protect and adequately mitigate risk. IA-2 addresses identification and authentication requirements for access to information systems by organizational users. Related controls: AC-2, AC-14, AC-17, AC-18, IA-2, IA-4, IA-5, MA-4, RA-3, SA-12, SC-8.
+
+References: OMB Memoranda 04-04, 11-11, 10-06-2011; FICAM Roadmap and Implementation Guidance; FIPS Publication 201; NIST Special Publications 800-63, 800-116; National Strategy for Trusted Identities in Cyberspace; Web: http://idmanagement.gov.",IA-8 - IDENTIFICATION AND AUTHENTICATION (NON- ORGANIZATIONAL USERS),"['high', 'moderate', 'low']"
+IA-8(1),pending,"A control response is planned. Engineering progress can be tracked via:
+
+https://issues.redhat.com/browse/CMP-370",[],"The information system accepts and electronically verifies Personal Identity Verification (PIV) credentials from other federal agencies.
+
+Supplemental Guidance:  This control enhancement applies to logical access control systems (LACS) and physical access control systems (PACS). Personal Identity Verification (PIV) credentials are those credentials issued by federal agencies that conform to FIPS Publication 201 and supporting guidance documents. OMB Memorandum 11-11 requires federal agencies to continue implementing the requirements specified in HSPD-12 to enable agency-wide use of PIV credentials. Related controls: AU-2, PE-3, SA-4.",IA-8(1) - IDENTIFICATION AND AUTHENTICATION | ACCEPTANCE OF PIV CREDENTIALS FROM OTHER AGENCIES,"['high', 'moderate', 'low']"
+IA-8(2),not applicable,"Acceptance of FICAM-approved third-party credentials
+is outside the scope of CoreOS configuration.",[],"The information system accepts only FICAM-approved third-party credentials.
+
+Supplemental Guidance:  This control enhancement typically applies to organizational information systems that are accessible to the general public, for example, public-facing websites. Third-party credentials are those credentials issued by nonfederal government entities approved by the Federal Identity, Credential, and Access Management (FICAM) Trust Framework Solutions initiative. Approved third-party credentials meet or exceed the set of minimum federal government-wide technical, security, privacy, and organizational maturity requirements. This allows federal government relying parties to trust such credentials at their approved assurance levels. Related control: AU-2.",IA-8(2) - IDENTIFICATION AND AUTHENTICATION | ACCEPTANCE OF THIRD-PARTY CREDENTIALS,"['high', 'moderate', 'low']"

@@ -228,19 +228,45 @@ def sort_from_parent(input_data, prog_opts):
     return input_data
 
 
+def str_yaml_dumper(data, prog_opts):
+    """
+    Small StrYAML() dump wrapper.
+    """
+    yaml = StrYAML()
+    yaml.indent(
+        mapping=prog_opts['mapping'],
+        sequence=prog_opts['sequence'],
+        offset=prog_opts['offset'],
+    )
+    yaml.preserve_quotes = prog_opts['preserve_quotes']
+    return yaml.dump(data)
+
+
 def text_data_writer(outdata, prog_opts):
     """
-    Text data output with optional formatting (default is raw); uses config
-    setting for output format. Supports the same text file types supported
-    by the ``text_file_reader()`` input function.
+    Text data writer with optional formatting (default is raw); uses config
+    setting for output format. Supports the same text data formats supported
+    by the ``text_file_reader()`` input function:
+
+    * csv
+    * json
+    * yaml
+    * raw
+
+    Sends formatted data to stdout; redirect to a file as needed.
+
+    :param outdata: data written to stdout
+    :param prog_opts: configuration options
+    :type prog_opts: dict
     """
     out = ''
     csv_hdr = prog_opts['default_csv_hdr']
+    delim = prog_opts['csv_delimiter'] if prog_opts['csv_delimiter'] else ','
     fmt = prog_opts['output_format'] if prog_opts['output_format'] else 'raw'
 
     if fmt == 'csv' and isinstance(outdata, collections.abc.Sequence):
         field_names = csv_hdr if csv_hdr else list(outdata[0].keys())
-        w = csv.DictWriter(sys.stdout, field_names)
+        w = csv.DictWriter(sys.stdout, field_names, delimiter=delim)
         w.writeheader()
         w.writerows(outdata)
 
@@ -248,14 +274,7 @@ def text_data_writer(outdata, prog_opts):
         if fmt == 'json':
             out = json.dumps(outdata, indent=4, sort_keys=True)
         elif fmt == 'yaml':
-            yaml = StrYAML()
-            yaml.indent(
-                mapping=prog_opts['mapping'],
-                sequence=prog_opts['sequence'],
-                offset=prog_opts['offset'],
-            )
-            yaml.preserve_quotes = prog_opts['preserve_quotes']
-            out = yaml.dump(outdata)
+            out = str_yaml_dumper(outdata, prog_opts)
         else:
             out = repr(outdata)
 
@@ -264,25 +283,28 @@ def text_data_writer(outdata, prog_opts):
 
 def text_file_reader(filepath, prog_opts):
     """
-    Text file reader for specific data types plus raw text. Tries to handle
-    YAML, JSON, CSV, and plain old text. Read and parse the file data if
-    ``filepath`` is one of the expected types and return data objects. For
-    all supported types of data, return a list of objects.
+    Text file reader for specific data types including raw text. Tries to
+    handle YAML, JSON, CSV, and plain ASCII text. Read and parse the file data
+    if ``filepath`` is one of the expected types and return data objects. For
+    all supported types of data, return a dictionary (or a list if input is
+    a sequence).
 
-    :param filepath: filename/path as str
+    :param filepath: filename/path to read
+    :type filepath: str
     :param prog_opts: configuration options
     :type prog_opts: dict
-    :return object: file data as list
+    :return object: file data as dict or list
     :raises FileTypeError: if input file extension is not in EXTENSIONS
     """
     data_in = {}
     infile = Path(filepath)
+    delim = prog_opts['csv_delimiter'] if prog_opts['csv_delimiter'] else ','
 
     if infile.suffix not in EXTENSIONS:
         raise FileTypeError("FileTypeError: unknown input file extension")
     with infile.open("r", encoding=prog_opts['file_encoding']) as file:
         if infile.suffix == '.csv':
-            data_in = list(csv.DictReader(file))
+            data_in = list(csv.DictReader(file, delimiter=delim))
         elif infile.suffix == '.json':
             data_in = json.load(file)
         elif infile.suffix in {'.yaml', '.yml'}:

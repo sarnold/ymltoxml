@@ -31,7 +31,8 @@ Available modules, console commands, and scripts:
 * ``oscal`` (*WIP*) - ingest NIST 800-53 content in multiple formats
 
 Experimental "demo" scripts:
-* ``analyze_control_ids.py`` - analyze control ID sets with fuzzy match
+
+* ``analyze_control_ids.py`` - analyze control ID sets with optional fuzzy match
 * ``analyze_ssg_controls.py`` - analyze NIST controls from SSG content
 
 For the above "demo" scripts, check the top of the source file for any knobs
@@ -53,7 +54,7 @@ Install with pip
 This package is *not* yet published on PyPI, thus use one of the following
 to install yaml-tools on any platform. Install from the main branch::
 
-  $ https://github.com/sarnold/yaml-tools/archive/refs/heads/main.tar.gz
+  $ pip install https://github.com/sarnold/yaml-tools/archive/refs/heads/main.tar.gz
 
 or use this command to install a specific release version::
 

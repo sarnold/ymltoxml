@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pathlib import Path
 
 import xmltodict
@@ -11,6 +10,7 @@ class StrYAML(YAML):
     New API likes dumping straight to file/stdout, so we subclass and
     create 'inefficient' custom string dumper.  <shrug>
     """
+
     def dump(self, data, stream=None, **kw):
         inefficient = False
         if stream is None:

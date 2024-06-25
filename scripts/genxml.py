@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pathlib import Path
 
 import xmltodict
@@ -22,10 +21,7 @@ with infile.open() as yfile:
     data = yaml.load(yfile, Loader=yaml.Loader)
 
 outfile = Path('out.xml')
-xml = xmltodict.unparse(data,
-                        short_empty_elements=False,
-                        pretty=True,
-                        indent='  ')
+xml = xmltodict.unparse(data, short_empty_elements=False, pretty=True, indent='  ')
 
 new_xml = post_process(xml)
 

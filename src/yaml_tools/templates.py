@@ -2,6 +2,8 @@
 Template bits for generating SSG-style controls in YAML.
 """
 
+import re
+
 from .utils import pystache_render
 
 PROFILES = ['LOW', 'MODERATE', 'HIGH', 'PRIVACY']
@@ -52,20 +54,25 @@ def generate_control(context):
     return id_yaml
 
 
-def xform_id(string):
+def xform_id(string, strip_trailing_zeros=False):
     """
-    Transform control ID string:
+    Transform control ID strings, add leading zeros in forward direction:
 
-    AC-12(2) <==> ac-12.2
+    AC-12(2) <==> ac-12.02
     """
-    if '(' in string or string.isupper():
-        return string.replace('(', '.').replace(')', '').lower()
-
-    slist = string.upper().split('.')
-    if len(slist) == 1:
-        return slist[0]
-    if len(slist) == 2:
-        return f'{slist[0]}({slist[1]})'
-    if len(slist) == 3:
-        return f'{slist[0]}({slist[1]})({slist[2].lower()})'
-    return f'{slist[0]}({slist[1]})({slist[2].lower()})({slist[3]})'
+    if string[0].isupper():
+        idp = re.compile(r'[)(-]')  # regex character class id separators
+        slist = [x for x in idp.split(string) if x != '']
+        if strip_trailing_zeros:
+            slist = [x for x in idp.split(string) if x not in ('00', '')]
+        slist_with_dots = [slist[0].lower() + f"-{int(slist[1]):02d}"]
+        slist_with_dots += [
+            f".{s}" if s.isalpha() else f".{int(s):02d}" for s in slist[2:]
+        ]
+        new_id = ''.join(slist_with_dots)
+    else:
+        slist = string.upper().split('.')
+        slist_with_parens = [slist[0]]
+        slist_with_parens += [f"({s.lower()})" for s in slist[1:]]
+        new_id = ''.join(slist_with_parens)
+    return new_id
